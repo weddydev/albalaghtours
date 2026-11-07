@@ -1,14 +1,19 @@
 import { useEffect, useRef } from 'react'
-import { gsap, useGSAP } from '../../lib/gsap'
+import { gsap, loopsOnlyWhenVisible, useGSAP } from '../../lib/gsap'
 import { useAppReady } from '../../lib/appState'
-import { programmes } from '../../data/content'
+import { packages } from '../../data/content'
 import { ArchFrame } from '../ui/Ornaments'
 import Photo from '../ui/Photo'
 import Icon from '../ui/Icon'
 
 const FALLBACKS = [
-  'radial-gradient(90% 70% at 50% 25%, #3a4a5c 0%, #142233 50%, #050a10 100%)',
-  'radial-gradient(90% 70% at 50% 25%, #1f6b45 0%, #0d3b28 50%, #04150d 100%)',
+  'radial-gradient(90% 70% at 50% 25%, #4a3626 0%, #251a12 50%, #120c09 100%)',
+  'radial-gradient(90% 70% at 50% 25%, #6b4a2a 0%, #33241a 50%, #1a130e 100%)',
+]
+// the two cards: holidays + pilgrimage
+const CARDS = [
+  { id: 'holiday', badge: 'Tailor-made', name: 'Holidays worldwide', image: '/images/services/holiday.webp', icon: 'palm', rays: true },
+  { id: 'pilgrimage', badge: 'Hajj 2027 · Umrah', name: 'Pilgrimage programmes', image: packages.umrah.image, icon: 'globe' },
 ]
 // final fan position for each card: [xPercent, rotation, y]
 const FAN = [
@@ -22,14 +27,14 @@ const fanFor = (i) => {
   return [FAN[i][0] * k, FAN[i][1], FAN[i][2]]
 }
 
-/** Packages hero art: the two programmes fan out of a single stack, then float and lean toward the cursor. */
+/** Packages hero art: holidays + pilgrimage cards fan out of a single stack, then float and lean toward the cursor. */
 export default function TierFan() {
   const root = useRef(null)
   const tl = useRef(null)
   const ready = useAppReady()
   const readyRef = useRef(ready)
 
-  useGSAP(
+  const { context: gsapCtx } = useGSAP(
     () => {
       const q = gsap.utils.selector(root)
       const cards = q('.tf-card')
@@ -82,6 +87,8 @@ export default function TierFan() {
     },
     { scope: root },
   )
+  // ambient loops rest while this block is off-screen
+  useEffect(() => loopsOnlyWhenVisible(gsapCtx, root.current), [gsapCtx])
 
   useEffect(() => {
     readyRef.current = ready
@@ -92,21 +99,21 @@ export default function TierFan() {
     <div ref={root} className="relative mx-auto h-[360px] w-full max-w-[620px] sm:h-[470px]" aria-hidden="true">
       <div className="tf-glow invisible absolute left-1/2 top-1/2 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 scale-75 rounded-full bg-[radial-gradient(closest-side,rgb(246_214_130/0.22),transparent)] opacity-0" />
       <div className="tf-stage absolute inset-0">
-        {programmes.map((t, i) => (
+        {CARDS.map((t, i) => (
           <div
             key={t.id}
             className="tf-card absolute bottom-6 left-[calc(50%-80px)] h-[250px] w-[160px] sm:left-[calc(50%-112px)] sm:h-[350px] sm:w-[224px]"
             style={{ zIndex: i === 0 ? 3 : 2 }}
           >
             <div className="tf-float h-full w-full">
-              <ArchFrame className="h-full w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_10px_rgba(212,175,55,0.45)]">
-                <Photo src={t.image} fallback={FALLBACKS[i]} priority sizes="(max-width: 639px) 160px, 224px">
-                  <Icon name={t.type === 'umrah' ? 'mosque' : 'kaaba'} strokeWidth={0.6} className="absolute left-1/2 top-[34%] h-1/3 w-2/3 -translate-x-1/2 text-gold-200 opacity-25" />
+              <ArchFrame className="h-full w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_10px_rgba(200,150,62,0.45)]">
+                <Photo src={t.image} fallback={FALLBACKS[i]} priority sizes="(max-width: 639px) 160px, 224px" rays={t.rays ?? false}>
+                  <Icon name={t.icon} strokeWidth={0.6} className="absolute left-1/2 top-[34%] h-1/3 w-2/3 -translate-x-1/2 text-gold-200 opacity-25" />
                 </Photo>
                 <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-ink-950 to-transparent" />
                 <div className="tf-chip absolute inset-x-0 bottom-5 flex flex-col items-center gap-1 text-center">
                   <span className="text-[0.55rem] uppercase tracking-[0.2em] text-gold-200 sm:text-[0.62rem]">{t.badge}</span>
-                  <span className="px-3 font-display text-lg italic leading-tight text-cream-50 sm:text-2xl">{t.name}</span>
+                  <span className="px-3 font-display text-lg leading-tight text-cream-50 sm:text-2xl">{t.name}</span>
                 </div>
               </ArchFrame>
             </div>

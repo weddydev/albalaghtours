@@ -1,13 +1,13 @@
 import { useEffect, useRef } from 'react'
-import { gsap, useGSAP } from '../../lib/gsap'
+import { gsap, loopsOnlyWhenVisible, useGSAP } from '../../lib/gsap'
 import { useAppReady } from '../../lib/appState'
 import { destinations, hyderabadOnMap } from '../../data/content'
 
 const [HX, HY] = hyderabadOnMap
 // label offset [dx, dy, anchor] per destination so nearby names never collide
-// (arcs arrive from Hyderabad on the right, so the names sit to the left of their pins)
-const LABEL = { madinah: [-2, 1, 'end'], makkah: [-2, 1, 'end'], 'mina-arafat': [-2, 0.6, 'end'], badr: [-2, 1, 'end'], taif: [0, 4.2, 'middle'] }
-const arc = ([x, y]) => `M${HX} ${HY} Q${(HX + x) / 2} ${Math.min(HY, y) - 14} ${x} ${y}`
+// (by default a name sits centred above its pin)
+const LABEL = { europe: [2, 1, 'start'], 'makkah-madinah': [-2, 1, 'end'] }
+const arc = ([x, y]) => `M${HX} ${HY} Q${(HX + x) / 2} ${Math.max(Math.min(HY, y) - 14, -3)} ${x} ${y}`
 
 /** Destinations hero art: arcs draw from Hyderabad to each destination; a light travels each route. */
 export default function RouteMap() {
@@ -16,7 +16,7 @@ export default function RouteMap() {
   const ready = useAppReady()
   const readyRef = useRef(ready)
 
-  useGSAP(
+  const { context: gsapCtx } = useGSAP(
     () => {
       gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
         const q = gsap.utils.selector(root)
@@ -52,6 +52,8 @@ export default function RouteMap() {
     },
     { scope: root },
   )
+  // ambient loops rest while this block is off-screen
+  useEffect(() => loopsOnlyWhenVisible(gsapCtx, root.current), [gsapCtx])
 
   useEffect(() => {
     readyRef.current = ready
@@ -64,7 +66,7 @@ export default function RouteMap() {
         <svg viewBox="0 0 100 62" className="h-auto w-full overflow-visible">
           <defs>
             <pattern id="rm-grid" width="2.4" height="2.4" patternUnits="userSpaceOnUse">
-              <circle cx="1.2" cy="1.2" r="0.28" fill="#d4af37" />
+              <circle cx="1.2" cy="1.2" r="0.28" fill="#c8963e" />
             </pattern>
             <radialGradient id="rm-fade">
               <stop offset="0.55" stopColor="#fff" />
@@ -74,8 +76,8 @@ export default function RouteMap() {
               <rect width="100" height="62" fill="url(#rm-fade)" />
             </mask>
             <linearGradient id="rm-arc-g" x1="1" x2="0">
-              <stop offset="0" stopColor="#5fd28f" />
-              <stop offset="1" stopColor="#f3dc8f" />
+              <stop offset="0" stopColor="#e0b866" />
+              <stop offset="1" stopColor="#eed39a" />
             </linearGradient>
           </defs>
           <rect className="rm-dots" width="100" height="62" fill="url(#rm-grid)" opacity="0.35" mask="url(#rm-mask)" />
@@ -89,24 +91,24 @@ export default function RouteMap() {
 
           {destinations.map((d) => (
             <g key={d.slug}>
-              <circle className="rm-pin rm-pulse" cx={d.map[0]} cy={d.map[1]} r="1.1" fill="none" stroke="#e8cf7a" strokeWidth="0.25" />
-              <circle className="rm-pin" cx={d.map[0]} cy={d.map[1]} r="1.1" fill="#e8cf7a" />
-              <text className="rm-label" x={d.map[0] + (LABEL[d.slug]?.[0] ?? 0)} y={d.map[1] + (LABEL[d.slug]?.[1] ?? -2.4)} textAnchor={LABEL[d.slug]?.[2] ?? 'middle'} fontSize="2.5" fill="#f3e9cf" fontFamily="Cormorant Garamond, serif" fontStyle="italic">
+              <circle className="rm-pin rm-pulse" cx={d.map[0]} cy={d.map[1]} r="1.1" fill="none" stroke="#e6c285" strokeWidth="0.25" />
+              <circle className="rm-pin" cx={d.map[0]} cy={d.map[1]} r="1.1" fill="#e6c285" />
+              <text className="rm-label" x={d.map[0] + (LABEL[d.slug]?.[0] ?? 0)} y={d.map[1] + (LABEL[d.slug]?.[1] ?? -2.4)} textAnchor={LABEL[d.slug]?.[2] ?? 'middle'} fontSize="2.5" fill="#f3e9d8" fontFamily="Cormorant Garamond, serif">
                 {d.name}
               </text>
             </g>
           ))}
 
           <g className="rm-home">
-            <circle className="rm-pulse" cx={HX} cy={HY} r="1.6" fill="none" stroke="#5fd28f" strokeWidth="0.3" />
-            <circle cx={HX} cy={HY} r="1.6" fill="#3fbf74" stroke="#d7f8e2" strokeWidth="0.35" />
-            <text x={HX + 2} y={HY + 4.6} textAnchor="end" fontSize="2.6" fill="#8be0ab" fontFamily="Inter, sans-serif" letterSpacing="0.3">
+            <circle className="rm-pulse" cx={HX} cy={HY} r="1.6" fill="none" stroke="#e0b866" strokeWidth="0.3" />
+            <circle cx={HX} cy={HY} r="1.6" fill="#d9a84e" stroke="#f3e9d8" strokeWidth="0.35" />
+            <text x={HX + 2} y={HY + 4.6} textAnchor="end" fontSize="2.6" fill="#ecd3a0" fontFamily="Inter, sans-serif" letterSpacing="0.3">
               Hyderabad
             </text>
           </g>
         </svg>
-        <div className="rm-chip absolute right-4 top-4 rounded-full border border-gold-400/35 bg-ink-950/70 px-4 py-2 text-xs text-gold-100 backdrop-blur sm:right-6 sm:top-6">
-          {destinations.length} places on our programmes · from Hyderabad
+        <div className="rm-chip absolute right-4 top-4 rounded-full border border-gold-400/35 bg-ink-950/80 px-4 py-2 text-xs text-gold-100 sm:right-6 sm:top-6">
+          {destinations.length} destinations · from Hyderabad
         </div>
       </div>
     </div>

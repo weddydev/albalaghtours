@@ -16,7 +16,7 @@ export default function ProgrammeTimeline({ steps, label = 'Step', icon = 'bus' 
       const mm = gsap.matchMedia()
       mm.add('(prefers-reduced-motion: reduce)', () => {
         gsap.set(q('.pt-lit'), { opacity: 1 })
-        gsap.set(q('.pt-num'), { color: '#05190f' })
+        gsap.set(q('.pt-num'), { color: '#1f1510' })
       })
       mm.add({ motion: '(prefers-reduced-motion: no-preference)', desktop: '(min-width: 1024px)' }, (ctx) => {
         if (!ctx.conditions.motion) return
@@ -30,7 +30,7 @@ export default function ProgrammeTimeline({ steps, label = 'Step', icon = 'bus' 
           const at = Math.max(0, (i / Math.max(1, items.length - 1)) * 3 - 0.08)
           const card = item.querySelector('.pt-card')
           tl.to(item.querySelector('.pt-lit'), { opacity: 1, duration: 0.2 }, at)
-            .to(item.querySelector('.pt-num'), { color: '#05190f', duration: 0.2 }, at)
+            .to(item.querySelector('.pt-num'), { color: '#1f1510', duration: 0.2 }, at)
             .fromTo(card, { autoAlpha: 0.35, x: ctx.conditions.desktop && card.dataset.side === 'left' ? -18 : 18 }, { autoAlpha: 1, x: 0, duration: 0.3 }, at)
         })
       })
@@ -41,7 +41,7 @@ export default function ProgrammeTimeline({ steps, label = 'Step', icon = 'bus' 
   return (
     <div ref={root} className="relative">
       <div className="absolute bottom-7 left-[27px] top-7 w-px bg-gold-400/15 lg:left-1/2" aria-hidden="true">
-        <div className="pt-progress absolute inset-0 origin-top bg-linear-to-b from-gold-100 via-gold-300 to-gold-500 shadow-[0_0_14px_rgba(232,207,122,0.6)]" />
+        <div className="pt-progress absolute inset-0 origin-top bg-linear-to-b from-gold-100 via-gold-300 to-gold-500 shadow-[0_0_14px_rgba(230,194,133,0.6)]" />
       </div>
       <ol className="relative space-y-5 lg:space-y-3">
         {steps.map((s, i) => {
@@ -51,9 +51,9 @@ export default function ProgrammeTimeline({ steps, label = 'Step', icon = 'bus' 
               key={(s.title ?? s.from + s.to) + i}
               className="pt-step relative grid grid-cols-[56px_minmax(0,1fr)] items-center gap-4 lg:grid-cols-[minmax(0,1fr)_72px_minmax(0,1fr)] lg:gap-6"
             >
-              <span className="relative z-10 grid h-14 w-14 place-items-center rounded-full border border-gold-400/50 bg-ink-950 shadow-[0_0_24px_-8px_rgba(212,175,55,0.6)] lg:col-start-2 lg:row-start-1 lg:mx-auto">
+              <span className="relative z-10 grid h-14 w-14 place-items-center rounded-full border border-gold-400/50 bg-ink-950 shadow-[0_0_24px_-8px_rgba(200,150,62,0.6)] lg:col-start-2 lg:row-start-1 lg:mx-auto">
                 <span className="pt-lit absolute inset-0 rounded-full bg-linear-to-b from-gold-100 to-gold-500 opacity-0" aria-hidden="true" />
-                <span className="pt-num relative font-display text-2xl font-semibold italic text-gold-200">{i + 1}</span>
+                <span className="pt-num relative font-display text-2xl font-semibold text-gold-200">{i + 1}</span>
               </span>
               <div
                 data-side={left ? 'left' : 'right'}

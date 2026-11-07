@@ -1,14 +1,14 @@
 import { useEffect, useRef } from 'react'
-import { gsap, useGSAP } from '../../lib/gsap'
+import { gsap, loopsOnlyWhenVisible, useGSAP } from '../../lib/gsap'
 import { useAppReady } from '../../lib/appState'
 import { contact, waLink } from '../../data/content'
 import { ArchFrame } from '../ui/Ornaments'
 import Photo from '../ui/Photo'
 import Icon from '../ui/Icon'
 
-const FALLBACK = 'radial-gradient(90% 70% at 50% 30%, #1f6b45 0%, #0d3b28 50%, #04150d 100%)'
+const FALLBACK = 'radial-gradient(90% 70% at 50% 30%, #6b4a2a 0%, #33241a 50%, #1a130e 100%)'
 const CHIPS = [
-  { label: 'Haj & Umrah', icon: 'kaaba', pos: 'left-[-4%] top-[18%]' },
+  { label: 'Holidays', icon: 'palm', pos: 'left-[-4%] top-[18%]' },
   { label: 'Visas', icon: 'stamp', pos: 'right-[-6%] top-[34%]' },
   { label: 'Flights', icon: 'plane', pos: 'left-[-8%] top-[58%]' },
 ]
@@ -24,7 +24,7 @@ export default function PersonCard() {
     .map((p) => p[0])
     .join('')
 
-  useGSAP(
+  const { context: gsapCtx } = useGSAP(
     () => {
       gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
         const q = gsap.utils.selector(root)
@@ -42,6 +42,8 @@ export default function PersonCard() {
     },
     { scope: root },
   )
+  // ambient loops rest while this block is off-screen
+  useEffect(() => loopsOnlyWhenVisible(gsapCtx, root.current), [gsapCtx])
 
   useEffect(() => {
     readyRef.current = ready
@@ -52,12 +54,12 @@ export default function PersonCard() {
     <div ref={root} className="relative mx-auto w-full max-w-[380px]">
       <div className="absolute inset-[-14%] -z-10 rounded-full bg-[radial-gradient(closest-side,rgb(246_214_130/0.2),transparent)]" />
       <div className="relative aspect-[4/5] w-full">
-        <ArchFrame className="h-full w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_12px_rgba(212,175,55,0.45)]">
+        <ArchFrame className="h-full w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_12px_rgba(200,150,62,0.45)]">
           <div className="pc-reveal absolute inset-0">
             <div className="pc-zoom absolute inset-0">
               <Photo src={contact.photo} alt={`${contact.person}, ${contact.role} at Al Balagh Tours & Travels`} fallback={FALLBACK} width={800} height={1000}>
                 <div className="pattern-overlay absolute inset-0 opacity-[0.08]" />
-                <span className="absolute inset-0 grid place-items-center font-display text-[7rem] font-semibold italic text-gold-200/40">{initials}</span>
+                <span className="absolute inset-0 grid place-items-center font-display text-[7rem] font-semibold text-gold-200/40">{initials}</span>
               </Photo>
             </div>
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-ink-950/95 to-transparent" />
@@ -71,9 +73,9 @@ export default function PersonCard() {
         ))}
       </div>
       <div className="pc-name relative mt-6 text-center">
-        <p className="font-display text-4xl font-semibold italic text-cream-50">{contact.person}</p>
+        <p className="font-display text-4xl font-semibold text-cream-50">{contact.person}</p>
         <svg viewBox="0 0 260 16" className="mx-auto -mt-1 h-4 w-56" aria-hidden="true">
-          <path className="pc-sign" d="M4 10C50 3 120 2 180 6c26 2 50 5 76 9" fill="none" stroke="#d4af37" strokeWidth="2" strokeLinecap="round" />
+          <path className="pc-sign" d="M4 10C50 3 120 2 180 6c26 2 50 5 76 9" fill="none" stroke="#c8963e" strokeWidth="2" strokeLinecap="round" />
         </svg>
         <p className="mt-1 text-xs uppercase tracking-[0.24em] text-gold-300">{contact.role}</p>
         <div className="mt-4 flex justify-center gap-2">
@@ -81,7 +83,7 @@ export default function PersonCard() {
             <Icon name="phone" className="h-4 w-4" />
           </a>
           <a
-            href={waLink(`Assalamu Alaikum ${contact.person}, I would like some help with my travel plans.`)}
+            href={waLink(`Hello ${contact.person}, I would like some help with my travel plans.`)}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`WhatsApp ${contact.person}`}

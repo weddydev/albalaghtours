@@ -1,61 +1,7 @@
 @import 'tailwindcss';
 @import 'lenis/dist/lenis.css';
 
-/* ---------- Fonts (self-hosted Google Fonts, OFL — same files as fonts.googleapis.com, latin / latin-ext / arabic) ---------- */
-/* arabic */
-@font-face {
-  font-family: 'Amiri';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/amiri-400-arabic.woff2') format('woff2');
-  unicode-range: U+0600-06FF, U+0750-077F, U+0870-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC7, U+10EC9-10EEE, U+10EF0-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Amiri';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/amiri-400-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Amiri';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/amiri-400-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* arabic */
-@font-face {
-  font-family: 'Amiri';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/amiri-700-arabic.woff2') format('woff2');
-  unicode-range: U+0600-06FF, U+0750-077F, U+0870-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC7, U+10EC9-10EEE, U+10EF0-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Amiri';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/amiri-700-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Amiri';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/amiri-700-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
+/* ---------- Fonts (self-hosted Google Fonts, OFL — same files as fonts.googleapis.com, latin / latin-ext) ---------- */
 /* latin-ext */
 @font-face {
   font-family: 'Cormorant Garamond';
@@ -219,41 +165,49 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/*
+ * Palette — warm browns & candle gold.
+ *   Candle Gold #C8963E (primary) · Altar Gold #D9A84E (accent / hover)
+ *   Warm Cream #F3E9D8 (text) · Parchment #B9A88F (muted text)
+ *   Page Brown #33241A (surface) · Chapel Brown #271A13 (background)
+ *   Deep Brown #1F1510 (background 2) · Night #17110D (dark / overlays)
+ * Token names (ink / gold / jade / cream / mist) are kept so every component picks the palette up.
+ */
 @theme {
-  --color-ink-950: #03110b;
-  --color-ink-900: #05190f;
-  --color-ink-800: #082a1c;
-  --color-ink-700: #0d3b28;
-  --color-ink-600: #134a33;
+  --color-ink-950: #17110d;
+  --color-ink-900: #1f1510;
+  --color-ink-800: #271a13;
+  --color-ink-700: #33241a;
+  --color-ink-600: #3d2c20;
 
-  --color-gold-100: #f7ebc4;
-  --color-gold-200: #e8cf7a;
-  --color-gold-300: #dfc062;
-  --color-gold-400: #d4af37;
-  --color-gold-500: #b8932b;
-  --color-gold-600: #8f7020;
+  --color-gold-100: #f3e2bf;
+  --color-gold-200: #e6c285;
+  --color-gold-300: #d9a84e;
+  --color-gold-400: #c8963e;
+  --color-gold-500: #a87b30;
+  --color-gold-600: #7e5c24;
 
-  --color-jade-300: #8be0ab;
-  --color-jade-400: #3fbf74;
-  --color-jade-500: #2fa35f;
-  --color-jade-600: #1e8a4c;
-  --color-jade-700: #156b3a;
+  /* "jade" was the old green accent — now the warm altar-gold family */
+  --color-jade-300: #ecd3a0;
+  --color-jade-400: #d9a84e;
+  --color-jade-500: #c8963e;
+  --color-jade-600: #a87b30;
+  --color-jade-700: #8a6526;
 
-  --color-cream-50: #fbf6e8;
-  --color-cream-100: #f3e9cf;
-  --color-cream-200: #e8d9b0;
-  --color-cream-300: #d6c18e;
+  --color-cream-50: #f8f1e4;
+  --color-cream-100: #f3e9d8;
+  --color-cream-200: #e6d6ba;
+  --color-cream-300: #d4bf9a;
 
-  --color-mist-100: #e9e6da;
-  --color-mist-300: #b9c6bc;
-  --color-mist-500: #86998c;
+  --color-mist-100: #f3e9d8;
+  --color-mist-300: #b9a88f;
+  --color-mist-500: #8c7c66;
 
   /* Albania page only — small highlights, never a main colour */
   --color-alb-red: #b3171f;
 
   --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-arabic: 'Amiri', 'Scheherazade New', serif;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -268,11 +222,11 @@
   body {
     @apply font-sans text-mist-100 antialiased;
     min-height: 100svh;
-    background: #05190f;
+    background: var(--color-ink-900);
     overflow-x: clip;
   }
   ::selection {
-    background: rgb(212 175 55 / 0.35);
+    background: rgb(200 150 62 / 0.35);
     color: #fff;
   }
   :focus-visible {
@@ -286,9 +240,9 @@
 }
 
 @layer components {
-/* Islamic 8-point star lattice, used as a faint overlay */
+/* Faint map grid — dotted lat/long lines with small nodes, used as a subtle texture */
 .pattern-overlay {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23d4af37' stroke-width='0.8'%3E%3Cpath d='M48 20l8.5 19.5L76 48l-19.5 8.5L48 76l-8.5-19.5L20 48l19.5-8.5z'/%3E%3Cpath d='M28.2 28.2h39.6v39.6H28.2z' transform='rotate(45 48 48)'/%3E%3Cpath d='M28.2 28.2h39.6v39.6H28.2z'/%3E%3Ccircle cx='48' cy='48' r='6'/%3E%3Cpath d='M0 0l20 20M96 0L76 20M0 96l20-20M96 96L76 76'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23c8963e' stroke-width='0.6'%3E%3Cpath d='M0 48h96M48 0v96' stroke-dasharray='1 5'/%3E%3C/g%3E%3Cg fill='%23c8963e'%3E%3Ccircle cx='48' cy='48' r='1.4'/%3E%3Ccircle cx='0' cy='0' r='0.9'/%3E%3Ccircle cx='96' cy='0' r='0.9'/%3E%3Ccircle cx='0' cy='96' r='0.9'/%3E%3Ccircle cx='96' cy='96' r='0.9'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 96px 96px;
 }
 
@@ -298,32 +252,28 @@
 }
 
 /* ---------- Type ---------- */
-.text-grad-green {
-  background: linear-gradient(180deg, #b6f0c9 0%, #5fd28f 38%, #2fa35f 70%, #1e8a4c 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+/* Accent words: a warm candle-gold gradient (class names kept from the earlier green theme) */
+.text-grad-green,
 .text-grad-gold {
-  background: linear-gradient(180deg, #fbefc4 0%, #e8cf7a 40%, #d4af37 75%, #a8862a 100%);
+  background: linear-gradient(180deg, #f6e4bf 0%, #e6c285 38%, #d9a84e 68%, #b7863a 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
-/* Hero accent word: green gradient on each split char (vertical, so it reads as one word) */
+/* Hero accent word: gradient on each split char (vertical, so it reads as one word) */
 .h-accent .h-char,
 .h-accent:not(:has(.h-char)) {
-  background: linear-gradient(180deg, #f0fff4 0%, #a6f0c2 32%, #5fd893 66%, #35b56b 100%);
+  background: linear-gradient(180deg, #fbf3e4 0%, #f0d9a6 32%, #e0b45f 66%, #c8963e 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* Green accent on SplitText'd lines: the gradient goes on each split word (.gw),
+/* Accent on SplitText'd lines: the gradient goes on each split word (.gw),
    or on the element itself while it is not split (reduced motion). */
 .accent-split .gw,
 .accent-split:not(:has(.gw)) {
-  background: linear-gradient(180deg, #b6f0c9 0%, #5fd28f 38%, #2fa35f 70%, #1e8a4c 100%);
+  background: linear-gradient(180deg, #f6e4bf 0%, #e6c285 38%, #d9a84e 68%, #b7863a 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -331,42 +281,34 @@
 
 /* ---------- Surfaces ---------- */
 .glass {
-  background: linear-gradient(160deg, rgb(19 74 51 / 0.42), rgb(5 25 15 / 0.55));
-  backdrop-filter: blur(16px) saturate(130%);
-  -webkit-backdrop-filter: blur(16px) saturate(130%);
-  border: 1px solid rgb(212 175 55 / 0.28);
+  background: linear-gradient(160deg, rgb(51 36 26 / 0.55), rgb(31 21 16 / 0.62));
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid rgb(243 233 216 / 0.08);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.06),
-    inset 0 0 30px rgb(63 191 116 / 0.06),
+    inset 0 1px 0 rgb(255 255 255 / 0.05),
     0 20px 60px -20px rgb(0 0 0 / 0.6);
 }
 .glass-strong {
-  background: linear-gradient(160deg, rgb(13 59 40 / 0.72), rgb(3 17 11 / 0.78));
-  backdrop-filter: blur(22px) saturate(140%);
-  -webkit-backdrop-filter: blur(22px) saturate(140%);
-  border: 1px solid rgb(212 175 55 / 0.35);
+  background: linear-gradient(160deg, rgb(51 36 26 / 0.82), rgb(23 17 13 / 0.86));
+  backdrop-filter: blur(22px) saturate(125%);
+  -webkit-backdrop-filter: blur(22px) saturate(125%);
+  border: 1px solid rgb(243 233 216 / 0.1);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.08),
-    0 0 0 1px rgb(0 0 0 / 0.25),
-    0 30px 80px -30px rgb(0 0 0 / 0.8),
-    0 0 60px -20px rgb(212 175 55 / 0.25);
+    inset 0 1px 0 rgb(255 255 255 / 0.06),
+    0 30px 80px -30px rgb(0 0 0 / 0.8);
 }
 
-/* ---------- Eyebrow pill ---------- */
+/* ---------- Eyebrow: small gold caps, no pill (cleaner) ---------- */
 .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.45rem 1rem;
-  border-radius: 999px;
-  border: 1px solid rgb(63 191 116 / 0.45);
-  background: rgb(5 25 15 / 0.55);
-  box-shadow: inset 0 0 0 1px rgb(212 175 55 / 0.12), 0 0 24px -8px rgb(63 191 116 / 0.5);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--color-cream-100);
+  color: var(--color-gold-300);
 }
 
 /* ---------- Buttons ---------- */
@@ -382,21 +324,22 @@
   overflow: hidden;
   transition: box-shadow 0.4s var(--ease-out-expo);
 }
+/* Candle-gold pill with dark text and a dark arrow disc */
 .btn-primary {
   padding: 0.5rem 0.55rem 0.5rem 1.6rem;
-  color: #fff;
-  background: linear-gradient(180deg, #4fd083 0%, #2fa35f 45%, #1e8a4c 100%);
-  border: 1px solid rgb(232 207 122 / 0.55);
+  color: var(--color-ink-950);
+  font-weight: 600;
+  background: linear-gradient(180deg, #e2b862 0%, #d9a84e 45%, #c8963e 100%);
+  border: 1px solid rgb(246 228 191 / 0.45);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.35),
-    inset 0 -6px 14px rgb(0 0 0 / 0.18),
-    0 10px 30px -10px rgb(63 191 116 / 0.7);
+    0 10px 30px -12px rgb(200 150 62 / 0.6);
 }
 .btn-ghost {
   padding: 0.5rem 0.55rem 0.5rem 1.4rem;
   color: var(--color-cream-100);
-  background: rgb(5 25 15 / 0.45);
-  border: 1px solid rgb(212 175 55 / 0.4);
+  background: rgb(31 21 16 / 0.5);
+  border: 1px solid rgb(243 233 216 / 0.16);
   backdrop-filter: blur(10px);
 }
 .btn::before {
@@ -404,7 +347,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 0.45) 50%, transparent 70%);
+  background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 0.4) 50%, transparent 70%);
   transform: translateX(-120%);
   transition: transform 0.9s var(--ease-out-expo);
 }
@@ -413,9 +356,9 @@
 }
 .btn:hover {
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.35),
-    0 16px 40px -12px rgb(63 191 116 / 0.8),
-    0 0 0 4px rgb(212 175 55 / 0.12);
+    inset 0 1px 0 rgb(255 255 255 / 0.3),
+    0 16px 40px -14px rgb(217 168 78 / 0.7),
+    0 0 0 4px rgb(200 150 62 / 0.12);
 }
 .btn-arrow {
   display: grid;
@@ -424,12 +367,12 @@
   height: 2.4rem;
   border-radius: 999px;
   overflow: hidden;
-  background: rgb(3 17 11 / 0.35);
-  border: 1px solid rgb(255 255 255 / 0.25);
+  background: var(--color-ink-950);
+  color: var(--color-gold-300);
 }
 .btn-ghost .btn-arrow {
-  background: rgb(212 175 55 / 0.14);
-  border-color: rgb(212 175 55 / 0.45);
+  background: rgb(200 150 62 / 0.14);
+  border: 1px solid rgb(200 150 62 / 0.4);
   color: var(--color-gold-200);
 }
 .btn-arrow svg {
@@ -447,7 +390,7 @@
 
 /* ---------- Ornaments ---------- */
 .hairline-gold {
-  background: linear-gradient(90deg, transparent, rgb(212 175 55 / 0.7), transparent);
+  background: linear-gradient(90deg, transparent, rgb(200 150 62 / 0.7), transparent);
   height: 1px;
 }
 
@@ -463,26 +406,26 @@
 .lantern-chain {
   background: repeating-linear-gradient(
     180deg,
-    #f3dc8f 0px,
-    #b8932b 3px,
+    #eed39a 0px,
+    #a87b30 3px,
     rgb(0 0 0 / 0) 3px,
     rgb(0 0 0 / 0) 4px,
-    #d4af37 4px,
-    #8f7020 8px,
+    #c8963e 4px,
+    #7e5c24 8px,
     rgb(0 0 0 / 0) 8px,
     rgb(0 0 0 / 0) 9px
   );
 }
 
-/* Native select styling inside glass */
+/* Native select / input styling inside glass */
 .field-select {
   appearance: none;
   -webkit-appearance: none;
   background: transparent;
 }
 .field-select option {
-  background: #082a1c;
-  color: #f3e9cf;
+  background: #271a13;
+  color: #f3e9d8;
 }
 
 }
@@ -509,10 +452,10 @@
     backdrop-filter: none;
   }
   .glass {
-    background: linear-gradient(160deg, rgb(13 52 35 / 0.94), rgb(5 25 15 / 0.96));
+    background: linear-gradient(160deg, rgb(45 32 23 / 0.95), rgb(31 21 16 / 0.97));
   }
   .glass-strong {
-    background: linear-gradient(160deg, rgb(11 46 31 / 0.97), rgb(3 17 11 / 0.98));
+    background: linear-gradient(160deg, rgb(43 30 22 / 0.97), rgb(23 17 13 / 0.98));
   }
   .grain {
     display: none;

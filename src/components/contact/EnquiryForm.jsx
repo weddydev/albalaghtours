@@ -87,7 +87,7 @@ export default function EnquiryForm() {
       return
     }
     const lines = [
-      'Assalamu Alaikum, I would like to enquire.',
+      'Hello, I would like to enquire.',
       `Name: ${v.name.trim()}`,
       `Phone: ${v.phone.trim()}`,
       v.service && `Service: ${v.service}`,
@@ -107,7 +107,7 @@ export default function EnquiryForm() {
     <form ref={root} onSubmit={onSubmit} noValidate className="glass-strong relative h-full rounded-[32px] p-6 sm:p-10" aria-labelledby="ef-title">
       <div className="ef-head">
         <p className="eyebrow">Enquiry</p>
-        <h2 id="ef-title" className="mt-5 font-display text-[clamp(2.2rem,4vw,3.4rem)] font-semibold italic leading-none text-cream-50">
+        <h2 id="ef-title" className="mt-5 font-display text-[clamp(2.2rem,4vw,3.4rem)] font-semibold leading-none text-cream-50">
           Tell us about your <span className="text-grad-green pr-[0.05em]">trip</span>
         </h2>
         <p className="mt-3 text-sm text-mist-300">Fill in a few details and we will continue the conversation on WhatsApp.</p>

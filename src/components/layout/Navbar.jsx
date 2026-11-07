@@ -7,7 +7,7 @@ import Logo from '../ui/Logo'
 import Icon from '../ui/Icon'
 import { ServiceArt } from '../services/ServiceCard'
 
-const featured = serviceBySlug['haj-umrah']
+const featured = serviceBySlug['holiday-packages']
 
 /** Desktop mega-menu listing all services. */
 function MegaMenu({ open, onClose, panelRef }) {
@@ -34,11 +34,11 @@ function MegaMenu({ open, onClose, panelRef }) {
           className="mm-item group relative isolate flex min-h-[340px] flex-col justify-end overflow-hidden rounded-[22px] border border-gold-400/30 p-6"
         >
           <div className="absolute inset-0 -z-10 transition-transform duration-700 group-hover:scale-105">
-            <ServiceArt service={featured} />
+            <ServiceArt service={featured} rays />
           </div>
           <div className="absolute inset-0 -z-10 bg-linear-to-t from-ink-950 via-ink-950/60 to-transparent" />
           <span className="text-[0.62rem] uppercase tracking-[0.22em] text-gold-200">Featured</span>
-          <span className="mt-2 font-display text-3xl italic leading-none text-cream-50">{featured.title}</span>
+          <span className="mt-2 font-display text-3xl leading-none text-cream-50">{featured.title}</span>
           <span className="mt-2 text-sm text-mist-300">{featured.short}</span>
           <span className="mt-4 inline-flex items-center gap-2 text-sm text-gold-200">
             Explore packages <Icon name="arrowRight" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -52,7 +52,7 @@ function MegaMenu({ open, onClose, panelRef }) {
                 onClick={onClose}
                 className="group flex items-center gap-3 rounded-2xl px-3 py-2.5 transition-colors hover:bg-white/[0.04] focus-visible:bg-white/[0.06]"
               >
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-gold-400/35 text-gold-200 transition group-hover:border-gold-200 group-hover:shadow-[0_0_18px_-4px_rgba(232,207,122,0.7)]">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-gold-400/35 text-gold-200 transition group-hover:border-gold-200 group-hover:shadow-[0_0_18px_-4px_rgba(230,194,133,0.7)]">
                   <Icon name={s.icon} className="h-[1.1rem] w-[1.1rem]" />
                 </span>
                 <span className="min-w-0">
@@ -326,7 +326,7 @@ export default function Navbar({ show }) {
                         aria-expanded={svcOpen}
                         aria-controls="drawer-services"
                         onClick={() => setSvcOpen((v) => !v)}
-                        className="flex w-full items-baseline gap-4 py-4 text-left font-display text-4xl italic text-cream-50"
+                        className="flex w-full items-baseline gap-4 py-4 text-left font-display text-4xl text-cream-50"
                       >
                         <span className="font-sans text-xs not-italic tracking-[0.2em] text-gold-300">0{i + 1}</span>
                         {l.label}
@@ -350,7 +350,7 @@ export default function Navbar({ show }) {
                       to={l.to}
                       onClick={clickFor(l)}
                       aria-current={isActive(l) ? 'page' : undefined}
-                      className={`flex items-baseline gap-4 py-4 font-display text-4xl italic ${isActive(l) ? 'text-gold-200' : 'text-cream-50'}`}
+                      className={`flex items-baseline gap-4 py-4 font-display text-4xl ${isActive(l) ? 'text-gold-200' : 'text-cream-50'}`}
                     >
                       <span className="font-sans text-xs not-italic tracking-[0.2em] text-gold-300">0{i + 1}</span>
                       {l.label}

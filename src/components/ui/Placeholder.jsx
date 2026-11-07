@@ -1,12 +1,12 @@
 import { useId } from 'react'
 
-/* Generic elegant scene: night gradient, crescent, dome + minarets. */
+/* Generic elegant scene: warm dusk gradient, low sun, layered hills and a small plane. */
 function GenericScene({ id, tone = 'emerald', label }) {
   const tones = {
-    emerald: ['#04140c', '#0d3b28', '#2a5a3c'],
-    dusk: ['#0b1424', '#3a3550', '#b07a4a'],
+    emerald: ['#1a130e', '#33241a', '#6b4a2a'],
+    dusk: ['#1a120c', '#3b2a22', '#b07a4a'],
     sand: ['#1a140c', '#5a4126', '#c8995a'],
-    sky: ['#0a1a2a', '#2b5a7a', '#9cc0cf'],
+    sky: ['#1a120c', '#5a3f28', '#cdb48a'],
   }
   const [a, b, c] = tones[tone] || tones.emerald
   return (
@@ -19,16 +19,14 @@ function GenericScene({ id, tone = 'emerald', label }) {
         </linearGradient>
       </defs>
       <rect width="400" height="300" fill={`url(#g-${id})`} />
-      <path d="M318 62a18 18 0 11-19.5-24 14.4 14.4 0 1019.5 24z" fill="#f3dc8f" opacity="0.85" />
-      <g fill="#03110b" opacity="0.85">
-        <path d="M140 300v-70c0-34 30-50 60-66 30 16 60 32 60 66v70z" />
-        <rect x="104" y="150" width="12" height="150" />
-        <rect x="284" y="150" width="12" height="150" />
-        <path d="M104 150l6-22 6 22zM284 150l6-22 6 22z" />
-        <rect x="0" y="262" width="400" height="38" />
+      <circle cx="280" cy="196" r="34" fill="#eed39a" opacity="0.55" />
+      <path d="M96 70l14-2 6-7h3l-3 7 9-1 3-3h2l-1 4 1 4h-2l-3-3-9-1 3 7h-3l-6-7-14-2z" fill="#eed39a" opacity="0.7" />
+      <g fill="#17110d">
+        <path d="M0 236c60-30 120-34 180-14s120 10 220-24v102H0z" opacity="0.6" />
+        <path d="M0 262c80-22 150-18 220-4s120 4 180-10v52H0z" opacity="0.9" />
       </g>
       {label && (
-        <text x="200" y="288" textAnchor="middle" fill="#e8cf7a" opacity="0.55" fontSize="9" letterSpacing="2" fontFamily="Inter, sans-serif">
+        <text x="200" y="288" textAnchor="middle" fill="#e6c285" opacity="0.55" fontSize="9" letterSpacing="2" fontFamily="Inter, sans-serif">
           {label.toUpperCase()}
         </text>
       )}

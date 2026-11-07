@@ -54,7 +54,7 @@ export default function PillTabs({ tabs, value, onChange, idBase, label, classNa
                 ref={indicator}
                 data-flip-id={`${idBase}-indicator`}
                 aria-hidden="true"
-                className="absolute inset-0 rounded-full bg-linear-to-b from-jade-400 to-jade-600 shadow-[0_8px_24px_-8px_rgba(63,191,116,0.9),inset_0_1px_0_rgba(255,255,255,0.35)]"
+                className="absolute inset-0 rounded-full bg-linear-to-b from-jade-400 to-jade-600 shadow-[0_8px_24px_-8px_rgba(217,168,78,0.9),inset_0_1px_0_rgba(255,255,255,0.35)]"
               />
             )}
             {t.icon && <Icon name={t.icon} className="relative h-4 w-4" />}

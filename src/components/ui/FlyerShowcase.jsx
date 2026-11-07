@@ -7,7 +7,7 @@ import Photo from './Photo'
 import Icon from './Icon'
 import Lightbox from './Lightbox'
 
-const FALLBACK = 'radial-gradient(90% 70% at 50% 25%, #1f6b45 0%, #0d3b28 45%, #04150d 100%)'
+const FALLBACK = 'radial-gradient(90% 70% at 50% 25%, #6b4a2a 0%, #33241a 45%, #1a130e 100%)'
 
 /**
  * One flyer: the whole poster (never cropped — it carries text) centred on a soft, blurred
@@ -19,7 +19,7 @@ function FlyerCard({ f, onOpen, sizes }) {
       type="button"
       onClick={onOpen}
       aria-label={`Open flyer: ${f.caption}`}
-      className="group block w-full rounded-[28px] border border-gold-400/40 bg-ink-900/80 p-2 text-left shadow-[0_30px_70px_-35px_rgba(212,175,55,0.55)] transition-[border-color,transform] duration-500 hover:-translate-y-1 hover:border-gold-200/80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-200"
+      className="group block w-full rounded-[28px] border border-gold-400/40 bg-ink-900/80 p-2 text-left shadow-[0_30px_70px_-35px_rgba(200,150,62,0.55)] transition-[border-color,transform] duration-500 hover:-translate-y-1 hover:border-gold-200/80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-200"
     >
       <div className="relative aspect-[3/4] overflow-hidden rounded-[22px] bg-ink-950">
         <div className="absolute inset-0 scale-110 opacity-50 blur-2xl" aria-hidden="true">
@@ -27,13 +27,13 @@ function FlyerCard({ f, onOpen, sizes }) {
         </div>
         <div className="absolute inset-0 bg-ink-950/35" aria-hidden="true" />
         <div className="absolute inset-3 sm:inset-4">
-          <Photo src={f.src} alt={f.alt} fallback="transparent" width={f.w} height={f.h} sizes={sizes} imgClassName="!object-contain drop-shadow-[0_18px_30px_rgba(0,0,0,0.55)]">
+          <Photo src={f.src} alt={f.alt} fallback="transparent" width={f.w} height={f.h} sizes={sizes} warm={false} imgClassName="!object-contain drop-shadow-[0_18px_30px_rgba(0,0,0,0.55)]">
             <Icon name="camera" strokeWidth={0.8} className="absolute left-1/2 top-1/2 h-12 w-12 -translate-x-1/2 -translate-y-1/2 text-gold-200 opacity-30" />
           </Photo>
         </div>
       </div>
       <span className="flex items-center justify-between gap-3 px-3 pb-1.5 pt-3.5">
-        <span className="min-w-0 font-display text-lg font-semibold italic leading-tight text-cream-50 sm:text-xl">{f.caption}</span>
+        <span className="min-w-0 font-display text-lg font-semibold leading-tight text-cream-50 sm:text-xl">{f.caption}</span>
         <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-gold-400/40 px-3 py-1 text-[0.68rem] uppercase tracking-[0.16em] text-gold-100 transition-colors group-hover:border-gold-200">
           <Icon name="search" className="h-3.5 w-3.5" />
           View
@@ -84,7 +84,7 @@ export default function FlyerShowcase({ eyebrow, title, lead, items, whatsapp, l
 
   return (
     <section ref={root} className="relative py-20 sm:py-28">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-full bg-[radial-gradient(900px_480px_at_50%_520px,rgb(212_175_55/0.07),transparent)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-full bg-[radial-gradient(900px_480px_at_50%_520px,rgb(200_150_62/0.07),transparent)]" />
       <div className="relative mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-10">
         {single ? (
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">

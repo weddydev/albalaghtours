@@ -97,7 +97,7 @@ export default function HotelPicker() {
                   <label
                     className={`group relative flex cursor-pointer items-center gap-4 rounded-[24px] border p-3 pr-5 transition-all duration-500 sm:gap-6 ${
                       on
-                        ? 'border-gold-300/80 bg-ink-800/60 shadow-[0_20px_50px_-25px_rgba(212,175,55,0.6)]'
+                        ? 'border-gold-300/80 bg-ink-800/60 shadow-[0_20px_50px_-25px_rgba(200,150,62,0.6)]'
                         : 'border-gold-400/20 bg-ink-900/40 hover:border-gold-400/50'
                     } has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-gold-200`}
                   >
@@ -153,7 +153,7 @@ export default function HotelPicker() {
                 <Icon name="kaaba" className="h-5 w-5" />
               </span>
               <p className="min-w-0 text-sm text-mist-300">
-                <span className="block font-display text-lg italic text-cream-50">Hajj 2027</span>
+                <span className="block font-display text-lg text-cream-50">Hajj 2027</span>
                 {hotelsNote}
               </p>
             </li>
@@ -168,7 +168,7 @@ export default function HotelPicker() {
                 <Icon name="bed" strokeWidth={0.6} className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 text-gold-200 opacity-20" />
               </Photo>
               <div className="absolute inset-0 bg-linear-to-t from-ink-950/90 via-transparent to-transparent" />
-              <span className="absolute left-4 top-4 rounded-full border border-gold-400/40 bg-ink-950/60 px-3 py-1 text-[0.65rem] uppercase tracking-[0.2em] text-gold-100 backdrop-blur">
+              <span className="absolute left-4 top-4 rounded-full border border-gold-400/40 bg-ink-950/75 px-3 py-1 text-[0.65rem] uppercase tracking-[0.2em] text-gold-100">
                 Your selection
               </span>
               <span className="absolute bottom-3 right-3 rounded-full bg-ink-950/70 px-3 py-1 text-[0.6rem] uppercase tracking-[0.16em] text-mist-300">Representative image</span>
@@ -177,7 +177,7 @@ export default function HotelPicker() {
               <p className="hp-swap text-xs uppercase tracking-[0.22em] text-gold-300">
                 {cityName} · {GROUP}
               </p>
-              <h3 className="hp-swap mt-1 font-display text-3xl font-semibold italic text-cream-50">{selected.name}</h3>
+              <h3 className="hp-swap mt-1 font-display text-3xl font-semibold text-cream-50">{selected.name}</h3>
               <div className="hp-swap mt-2">
                 <Stars n={selected.stars} className="h-4 w-4" />
               </div>

@@ -8,17 +8,17 @@ import { servicePath } from '../../data/content'
 
 /* Fallback backgrounds while /images/services/*.jpg are missing */
 export const TONES = {
-  night: 'radial-gradient(90% 70% at 70% 20%, #2a3b4f 0%, #0f1a26 45%, #050a10 100%)',
-  sky: 'radial-gradient(90% 70% at 75% 15%, #46708a 0%, #1b3446 45%, #07131c 100%)',
-  dusk: 'radial-gradient(90% 70% at 70% 20%, #8a5a3e 0%, #3b2a3e 45%, #0d0b18 100%)',
-  emerald: 'radial-gradient(90% 70% at 70% 20%, #1f6b45 0%, #0d3b28 45%, #04150d 100%)',
+  night: 'radial-gradient(90% 70% at 70% 20%, #3a2a1e 0%, #1f1510 45%, #120c09 100%)',
+  sky: 'radial-gradient(90% 70% at 75% 15%, #6b4a2e 0%, #33241a 45%, #17110d 100%)',
+  dusk: 'radial-gradient(90% 70% at 70% 20%, #8a5a3e 0%, #3b2418 45%, #17110d 100%)',
+  emerald: 'radial-gradient(90% 70% at 70% 20%, #6b4a2a 0%, #33241a 45%, #1a130e 100%)',
   sand: 'radial-gradient(90% 70% at 70% 20%, #9b7a45 0%, #4a3820 45%, #120d06 100%)',
 }
 
 /** Gradient + oversized faint line icon, used under every service image. */
-export function ServiceArt({ service, iconClassName = '', priority = false }) {
+export function ServiceArt({ service, iconClassName = '', priority = false, rays = false }) {
   return (
-    <Photo src={service.image} fallback={TONES[service.tone] || TONES.emerald} width={1200} height={900} priority={priority}>
+    <Photo src={service.image} fallback={TONES[service.tone] || TONES.emerald} width={1200} height={900} priority={priority} rays={rays}>
       <div className="pattern-overlay absolute inset-0 opacity-[0.07]" />
       <Icon
         name={service.icon}
@@ -117,23 +117,23 @@ export default function ServiceCard({ service, size = 'md', className = '' }) {
     >
       {/* imagery */}
       <div className="sc-img absolute inset-0 -z-10">
-        <ServiceArt service={service} />
+        <ServiceArt service={service} rays={featured} />
       </div>
-      {/* emerald grade so every photo sits in the palette, then the legibility gradient
+      {/* warm brown grade so every photo sits in the palette, then the legibility gradient
           (stronger on touch, where the subs list is always shown over the photo) */}
       <div className="absolute inset-0 -z-10 bg-ink-700/45 mix-blend-multiply" />
       <div className="absolute inset-0 -z-10 bg-linear-to-t from-ink-950 via-ink-950/75 to-ink-950/5 pointer-coarse:via-ink-950/88 pointer-coarse:to-ink-950/25" />
       <div className="sc-dim absolute inset-0 -z-10 bg-ink-950/65 opacity-0" />
       <div className="sc-spot pointer-events-none absolute left-0 top-0 -z-10 h-0 w-0">
-        <div className="sc-glow absolute left-[-190px] top-[-190px] h-[380px] w-[380px] rounded-full bg-[radial-gradient(closest-side,rgb(232_207_122/0.3),rgb(212_175_55/0.08)_55%,transparent)] opacity-0" />
+        <div className="sc-glow absolute left-[-190px] top-[-190px] h-[380px] w-[380px] rounded-full bg-[radial-gradient(closest-side,rgb(230_194_133/0.3),rgb(200_150_62/0.08)_55%,transparent)] opacity-0" />
       </div>
-      <div className="sc-glow pointer-events-none absolute inset-0 rounded-[26px] opacity-0 shadow-[inset_0_0_0_1px_rgba(232,207,122,0.75),0_30px_70px_-25px_rgba(212,175,55,0.45)]" />
+      <div className="sc-glow pointer-events-none absolute inset-0 rounded-[26px] opacity-0 shadow-[inset_0_0_0_1px_rgba(230,194,133,0.75),0_30px_70px_-25px_rgba(200,150,62,0.45)]" />
 
-      <span className="sc-arrow absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full border border-gold-400/50 bg-ink-950/50 text-gold-200 backdrop-blur sm:right-5 sm:top-5">
+      <span className="sc-arrow absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full border border-gold-400/50 bg-ink-950/70 text-gold-200 sm:right-5 sm:top-5">
         <Icon name="arrowUpRight" className="h-4 w-4" />
       </span>
       {featured && (
-        <span className="absolute left-6 top-6 rounded-full border border-gold-400/40 bg-ink-950/50 px-3 py-1.5 text-[0.62rem] uppercase tracking-[0.22em] text-gold-200 backdrop-blur pointer-fine:left-9 pointer-fine:top-9">
+        <span className="absolute left-6 top-6 rounded-full border border-gold-400/40 bg-ink-950/70 px-3 py-1.5 text-[0.62rem] uppercase tracking-[0.22em] text-gold-200 pointer-fine:left-9 pointer-fine:top-9">
           {service.kicker}
         </span>
       )}
@@ -155,21 +155,21 @@ export default function ServiceCard({ service, size = 'md', className = '' }) {
 
       <div className="relative">
         <span
-          className={`sc-icon grid place-items-center rounded-full border border-gold-400/50 bg-ink-950/40 text-gold-200 shadow-[0_0_24px_-6px_rgba(212,175,55,0.5)] backdrop-blur ${
+          className={`sc-icon grid place-items-center rounded-full border border-gold-400/50 bg-ink-950/65 text-gold-200 shadow-[0_0_24px_-6px_rgba(200,150,62,0.5)] ${
             featured ? 'h-14 w-14' : 'h-10 w-10 sm:h-11 sm:w-11'
           }`}
         >
           <Icon name={service.icon} className={featured ? 'h-7 w-7' : 'h-5 w-5'} />
         </span>
         {service.isNew && (
-          <span className="absolute left-14 top-2 inline-flex items-center gap-1.5 rounded-full bg-linear-to-b from-gold-100 to-gold-400 px-2.5 py-0.5 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-ink-900 shadow-[0_8px_20px_-6px_rgba(212,175,55,0.7)] sm:left-16 sm:top-2.5">
+          <span className="absolute left-14 top-2 inline-flex items-center gap-1.5 rounded-full bg-linear-to-b from-gold-100 to-gold-400 px-2.5 py-0.5 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-ink-900 shadow-[0_8px_20px_-6px_rgba(200,150,62,0.7)] sm:left-16 sm:top-2.5">
             <span className="h-1.5 w-1.5 rounded-full bg-alb-red" aria-hidden="true" />
             New
           </span>
         )}
         <h3
           className={`mt-3 font-display font-semibold leading-[1.05] text-cream-50 sm:mt-4 ${
-            featured ? 'text-[2rem] italic sm:text-5xl' : wide ? 'text-xl sm:text-[1.7rem]' : 'text-lg sm:text-[1.45rem]'
+            featured ? 'text-[2rem] sm:text-5xl' : wide ? 'text-xl sm:text-[1.7rem]' : 'text-lg sm:text-[1.45rem]'
           }`}
         >
           {service.title}

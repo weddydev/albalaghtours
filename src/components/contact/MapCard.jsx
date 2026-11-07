@@ -31,7 +31,7 @@ export default function MapCard() {
     <div ref={root} className="glass-strong flex h-full flex-col overflow-hidden rounded-[32px] p-3">
       <div className="relative overflow-hidden rounded-[24px] bg-ink-950/70">
         <svg viewBox="0 0 400 300" className="h-auto w-full" role="img" aria-label="Illustrative map of our office location in Mehdipatnam">
-          <g fill="#0d3b28" opacity="0.6">
+          <g fill="#33241a" opacity="0.6">
             {[
               [30, 30, 80, 50], [130, 20, 70, 60], [240, 26, 120, 44], [24, 112, 90, 56], [250, 100, 60, 70], [320, 96, 60, 60],
               [40, 210, 100, 60], [170, 200, 60, 70], [270, 210, 110, 60],
@@ -39,7 +39,7 @@ export default function MapCard() {
               <rect key={i} className="mc-block" x={x} y={y} width={w} height={h} rx="6" />
             ))}
           </g>
-          <g fill="none" stroke="#d4af37" strokeLinecap="round">
+          <g fill="none" stroke="#c8963e" strokeLinecap="round">
             <path className="mc-street" d="M-10 180C90 170 200 150 410 120" strokeWidth="7" strokeOpacity="0.35" />
             <path className="mc-street" d="M-10 180C90 170 200 150 410 120" strokeWidth="1.2" strokeOpacity="0.9" strokeDasharray="6 6" />
             <path className="mc-street" d="M150 -10C160 80 170 200 180 310" strokeWidth="4" strokeOpacity="0.3" />
@@ -49,22 +49,22 @@ export default function MapCard() {
           </g>
           {/* landmark opposite */}
           <g className="mc-label">
-            <rect x="196" y="186" width="10" height="10" rx="2" fill="#e8cf7a" opacity="0.7" />
-            <text x="212" y="195" fontSize="10" fill="#b9c6bc" fontFamily="Inter, sans-serif">
+            <rect x="196" y="186" width="10" height="10" rx="2" fill="#e6c285" opacity="0.7" />
+            <text x="212" y="195" fontSize="10" fill="#b9a88f" fontFamily="Inter, sans-serif">
               Old Prince Hotel
             </text>
           </g>
-          <text className="mc-label" x="22" y="164" fontSize="11" fill="#e8cf7a" fontFamily="Inter, sans-serif" letterSpacing="2">
+          <text className="mc-label" x="22" y="164" fontSize="11" fill="#e6c285" fontFamily="Inter, sans-serif" letterSpacing="2">
             MEHDIPATNAM
           </text>
           <g transform="translate(200 146)">
-            <circle className="mc-ripple" r="14" fill="none" stroke="#5fd28f" strokeWidth="1.5" />
-            <circle className="mc-ripple" r="14" fill="none" stroke="#5fd28f" strokeWidth="1" />
+            <circle className="mc-ripple" r="14" fill="none" stroke="#e0b866" strokeWidth="1.5" />
+            <circle className="mc-ripple" r="14" fill="none" stroke="#e0b866" strokeWidth="1" />
             <g className="mc-pin">
-              <path d="M0 0c-8-10-14-17-14-25a14 14 0 0128 0c0 8-6 15-14 25z" transform="translate(0 -2)" fill="#3fbf74" stroke="#d7f8e2" strokeWidth="1.5" />
-              <circle cy="-27" r="5" fill="#05190f" />
-              <rect x="-38" y="-70" width="76" height="22" rx="11" fill="#05190f" stroke="#d4af37" strokeOpacity="0.6" />
-              <text y="-55" textAnchor="middle" fontSize="12" fill="#f3e9cf" fontFamily="Cormorant Garamond, serif" fontStyle="italic">
+              <path d="M0 0c-8-10-14-17-14-25a14 14 0 0128 0c0 8-6 15-14 25z" transform="translate(0 -2)" fill="#d9a84e" stroke="#f3e9d8" strokeWidth="1.5" />
+              <circle cy="-27" r="5" fill="#1f1510" />
+              <rect x="-38" y="-70" width="76" height="22" rx="11" fill="#1f1510" stroke="#c8963e" strokeOpacity="0.6" />
+              <text y="-55" textAnchor="middle" fontSize="12" fill="#f3e9d8" fontFamily="Cormorant Garamond, serif" fontStyle="italic">
                 Al Balagh
               </text>
             </g>
@@ -74,7 +74,7 @@ export default function MapCard() {
       </div>
       <div className="flex flex-1 flex-col px-4 pb-4 pt-5">
         <p className="text-xs uppercase tracking-[0.22em] text-gold-300">Our Hyderabad office</p>
-        <p className="mt-1 font-display text-2xl italic text-cream-50">Mawin Zam Zam Plaza</p>
+        <p className="mt-1 font-display text-2xl text-cream-50">Mawin Zam Zam Plaza</p>
         <address className="mt-2 text-sm not-italic leading-relaxed text-mist-300">{contact.address.full}</address>
         <dl className="mt-5 divide-y divide-gold-400/15 border-y border-gold-400/15 text-sm">
           {[

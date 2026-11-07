@@ -8,7 +8,7 @@ import Icon from '../ui/Icon'
 
 const FALLBACKS = [
   'radial-gradient(90% 70% at 60% 25%, #6b5a3a 0%, #2a2216 50%, #0a0805 100%)',
-  'radial-gradient(90% 70% at 60% 25%, #1f6b45 0%, #0d3b28 45%, #04150d 100%)',
+  'radial-gradient(90% 70% at 60% 25%, #6b4a2a 0%, #33241a 45%, #1a130e 100%)',
 ]
 
 /** Contact page: office photos in arches beside the Hyderabad address, phones and map link. */
@@ -34,9 +34,9 @@ export default function OfficeVisit() {
         <div className="relative mx-auto flex w-full max-w-[460px] items-end gap-4 lg:col-span-6">
           {officePhotos.map((p, i) => (
             <div key={p.src} className={`ov-arch ${i ? 'mb-10 w-[44%]' : 'w-[56%]'}`}>
-              <ArchFrame className="aspect-[3/4] w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_10px_rgba(212,175,55,0.4)]" finial={i === 0}>
+              <ArchFrame className="aspect-[3/4] w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_10px_rgba(200,150,62,0.4)]" finial={i === 0}>
                 <Photo src={p.src} alt={p.alt} fallback={FALLBACKS[i % 2]} sizes="(max-width: 1023px) 50vw, 260px">
-                  <Icon name="mosque" strokeWidth={0.6} className="absolute left-1/2 top-[36%] h-1/3 w-1/2 -translate-x-1/2 text-gold-200 opacity-25" />
+                  <Icon name="globe" strokeWidth={0.6} className="absolute left-1/2 top-[36%] h-1/3 w-1/2 -translate-x-1/2 text-gold-200 opacity-25" />
                 </Photo>
               </ArchFrame>
             </div>
@@ -45,7 +45,7 @@ export default function OfficeVisit() {
 
         <div className="ov-copy min-w-0 lg:col-span-6">
           <p className="eyebrow">Visit our office</p>
-          <h2 id="ov-title" className="mt-5 font-display text-[clamp(2.2rem,4vw,3.4rem)] font-semibold italic leading-none text-cream-50">
+          <h2 id="ov-title" className="mt-5 font-display text-[clamp(2.2rem,4vw,3.4rem)] font-semibold leading-none text-cream-50">
             Come and <span className="text-grad-green pr-[0.05em]">meet us</span>
           </h2>
           <address className="mt-6 not-italic leading-relaxed text-mist-300">

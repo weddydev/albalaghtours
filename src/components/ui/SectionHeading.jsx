@@ -33,7 +33,7 @@ export default function SectionHeading({ id, eyebrow, title, lead, align = 'cent
       {eyebrow && <p className={`eyebrow ${light ? '!text-ink-800 !bg-cream-50/60 !border-gold-500/50' : ''}`}>{eyebrow}</p>}
       <Tag
         id={id}
-        className={`sh-title mt-5 font-display text-[clamp(2.5rem,5.4vw,4.75rem)] font-semibold italic leading-[1] ${
+        className={`sh-title mt-5 font-display text-[clamp(2.5rem,5.4vw,4.75rem)] font-semibold leading-[1] ${
           light ? 'text-ink-800' : 'text-cream-50'
         }`}
       >

@@ -1,8 +1,6 @@
 import { useMemo, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Icon from '../ui/Icon'
-import { enquiryText, waLink } from '../../data/content'
-import { scrollToTarget } from '../../lib/lenis'
+import { tripTypes, tripEnquiry, waLink } from '../../data/content'
 import { useMagnetic } from '../../hooks/useMagnetic'
 
 function upcomingMonths(count = 14) {
@@ -13,70 +11,78 @@ function upcomingMonths(count = 14) {
   })
 }
 
+/**
+ * Hero trip planner: where to, what kind of trip, when and how many.
+ * "Plan my trip" opens WhatsApp with everything the visitor chose, written as a short message.
+ */
 export default function SearchBar() {
-  const [type, setType] = useState('Umrah')
+  const [destination, setDestination] = useState('')
+  const [type, setType] = useState(tripTypes[0].id)
   const [month, setMonth] = useState('')
   const [travellers, setTravellers] = useState(2)
   const months = useMemo(() => upcomingMonths(), [])
   const btn = useRef(null)
-  const navigate = useNavigate()
   useMagnetic(btn, 0.2)
 
-  // the departure month is optional and only mentioned when chosen
-  const message = enquiryText(type.toLowerCase(), { month, travellers })
+  const message = tripEnquiry({ destination, type, month, travellers })
 
-  // preselect the programme in Featured Journeys: on this page if it is here, otherwise on /packages
   const onSubmit = (e) => {
     e.preventDefault()
-    window.dispatchEvent(new CustomEvent('albalagh:search', { detail: { type, month, travellers } }))
-    if (scrollToTarget('#packages')) return
-    const t = type.toLowerCase()
-    navigate(`/packages?type=${t}`, { state: { search: { type: t, month, travellers } } })
+    window.open(waLink(message), '_blank', 'noopener,noreferrer')
   }
+
+  const field = 'relative flex items-center gap-3 rounded-full px-5 py-2.5 transition-colors hover:bg-white/[0.03] max-lg:border max-lg:border-cream-100/10'
+  const label = 'text-[0.62rem] uppercase tracking-[0.22em] text-mist-500'
 
   return (
     <form
       onSubmit={onSubmit}
-      aria-label="Find a Hajj or Umrah package"
-      className="hero-search glass-strong relative mx-auto flex w-full max-w-[1120px] flex-col gap-2 rounded-[28px] p-2.5 lg:flex-row lg:items-stretch lg:rounded-full"
+      aria-label="Plan a trip"
+      className="hero-search glass-strong relative mx-auto flex text-left w-full max-w-[1180px] flex-col gap-2 rounded-[28px] p-2.5 lg:flex-row lg:items-stretch lg:rounded-full"
     >
-      {/* Umrah / Hajj toggle */}
-      <div role="radiogroup" aria-label="Journey type" className="relative grid grid-cols-2 rounded-full bg-ink-950/60 p-1 lg:w-[250px]">
-        <span
-          aria-hidden="true"
-          className="absolute inset-y-1 left-1 w-[calc(50%-4px)] rounded-full bg-linear-to-b from-jade-400 to-jade-600 shadow-[0_6px_20px_-6px_rgba(63,191,116,0.9),inset_0_1px_0_rgba(255,255,255,0.35)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-          style={{ transform: type === 'Hajj' ? 'translateX(100%)' : 'translateX(0)' }}
-        />
-        {['Umrah', 'Hajj'].map((t) => (
-          <button
-            key={t}
-            type="button"
-            role="radio"
-            aria-checked={type === t}
-            onClick={() => setType(t)}
-            className={`relative z-10 flex items-center justify-center gap-2 rounded-full py-3 text-sm font-medium transition-colors ${
-              type === t ? 'text-white' : 'text-mist-300 hover:text-cream-100'
-            }`}
-          >
-            <Icon name={t === 'Umrah' ? 'mosque' : 'kaaba'} className="h-4 w-4" />
-            {t}
-          </button>
-        ))}
-      </div>
+      {/* Where to */}
+      <label className={`${field} lg:flex-[1.3]`}>
+        <Icon name="mapPin" className="h-5 w-5 shrink-0 text-gold-300" />
+        <span className="flex min-w-0 flex-1 flex-col">
+          <span className={label}>Where to?</span>
+          <input
+            type="text"
+            value={destination}
+            onChange={(e) => setDestination(e.target.value)}
+            placeholder="Dubai, Istanbul, Bali…"
+            maxLength={60}
+            className="w-full bg-transparent text-sm text-cream-100 outline-none placeholder:text-mist-500"
+          />
+        </span>
+      </label>
 
-      <span className="hidden w-px self-stretch bg-gold-400/20 lg:block" aria-hidden="true" />
+      <span className="hidden w-px self-stretch bg-cream-100/10 lg:block" aria-hidden="true" />
+
+      {/* Trip type */}
+      <label className={`${field} lg:flex-1`}>
+        <Icon name={tripTypes.find((t) => t.id === type)?.icon ?? 'globe'} className="h-5 w-5 shrink-0 text-gold-300" />
+        <span className="flex min-w-0 flex-1 flex-col">
+          <span className={label}>Trip</span>
+          <select value={type} onChange={(e) => setType(e.target.value)} className="field-select w-full cursor-pointer truncate pr-6 text-sm text-cream-100 outline-none">
+            {tripTypes.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.label}
+              </option>
+            ))}
+          </select>
+        </span>
+        <Icon name="chevronDown" className="pointer-events-none absolute right-5 h-4 w-4 text-gold-300" />
+      </label>
+
+      <span className="hidden w-px self-stretch bg-cream-100/10 lg:block" aria-hidden="true" />
 
       {/* Departure month */}
-      <label className="relative flex flex-1 items-center gap-3 rounded-full px-5 py-2.5 transition-colors hover:bg-white/[0.03] max-lg:border max-lg:border-gold-400/20">
-        <Icon name="calendar" className="h-5 w-5 shrink-0 text-gold-200" />
+      <label className={`${field} lg:flex-1`}>
+        <Icon name="calendar" className="h-5 w-5 shrink-0 text-gold-300" />
         <span className="flex min-w-0 flex-1 flex-col">
-          <span className="text-[0.62rem] uppercase tracking-[0.22em] text-mist-500">Departure</span>
-          <select
-            value={month}
-            onChange={(e) => setMonth(e.target.value)}
-            className="field-select w-full cursor-pointer truncate pr-6 text-sm text-cream-100 outline-none"
-          >
-            <option value="">Any month (optional)</option>
+          <span className={label}>Departure</span>
+          <select value={month} onChange={(e) => setMonth(e.target.value)} className="field-select w-full cursor-pointer truncate pr-6 text-sm text-cream-100 outline-none">
+            <option value="">Any month</option>
             {months.map((m) => (
               <option key={m} value={m}>
                 {m}
@@ -84,18 +90,18 @@ export default function SearchBar() {
             ))}
           </select>
         </span>
-        <Icon name="chevronDown" className="pointer-events-none absolute right-5 h-4 w-4 text-gold-200" />
+        <Icon name="chevronDown" className="pointer-events-none absolute right-5 h-4 w-4 text-gold-300" />
       </label>
 
-      <span className="hidden w-px self-stretch bg-gold-400/20 lg:block" aria-hidden="true" />
+      <span className="hidden w-px self-stretch bg-cream-100/10 lg:block" aria-hidden="true" />
 
       {/* Travellers stepper */}
-      <div className="flex items-center gap-3 rounded-full px-5 py-2.5 max-lg:border max-lg:border-gold-400/20 lg:w-[250px]">
-        <Icon name="users" className="h-5 w-5 shrink-0 text-gold-200" />
+      <div className="flex items-center gap-3 rounded-full px-5 py-2.5 max-lg:border max-lg:border-cream-100/10 lg:w-[220px]">
+        <Icon name="users" className="h-5 w-5 shrink-0 text-gold-300" />
         <span className="flex flex-1 flex-col">
-          <span className="text-[0.62rem] uppercase tracking-[0.22em] text-mist-500">Travellers</span>
+          <span className={label}>Travellers</span>
           <span className="text-sm text-cream-100" aria-live="polite">
-            {travellers} {travellers > 1 ? 'pilgrims' : 'pilgrim'}
+            {travellers} {travellers > 1 ? 'people' : 'person'}
           </span>
         </span>
         <button
@@ -117,23 +123,12 @@ export default function SearchBar() {
         </button>
       </div>
 
-      <div className="flex items-center gap-2">
-        <button ref={btn} type="submit" className="btn btn-primary flex-1 justify-between py-2 pl-6 lg:flex-none">
-          <span className="whitespace-nowrap">Search Packages</span>
-          <span className="btn-arrow">
-            <Icon name="search" className="h-4 w-4" />
-          </span>
-        </button>
-        <a
-          href={waLink(message)}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Ask about this ${type} trip on WhatsApp`}
-          className="grid h-[54px] w-[54px] shrink-0 place-items-center rounded-full border border-gold-400/40 bg-ink-950/50 text-jade-300 transition hover:border-jade-400 hover:text-jade-400 hover:shadow-[0_0_24px_-4px_rgba(63,191,116,0.7)]"
-        >
-          <Icon name="whatsapp" className="h-6 w-6" />
-        </a>
-      </div>
+      <button ref={btn} type="submit" className="btn btn-primary justify-between py-2 pl-6 lg:flex-none">
+        <span className="whitespace-nowrap">Plan my trip</span>
+        <span className="btn-arrow">
+          <Icon name="whatsapp" className="h-4 w-4" />
+        </span>
+      </button>
     </form>
   )
 }

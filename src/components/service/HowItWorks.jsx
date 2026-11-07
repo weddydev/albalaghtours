@@ -11,14 +11,14 @@ function Medallion({ n }) {
       <svg viewBox="0 0 80 100" className="absolute inset-0 h-full w-full overflow-visible" aria-hidden="true">
         <defs>
           <linearGradient id={`hw-g-${n}`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#f6e3a3" />
-            <stop offset="1" stopColor="#b8932b" />
+            <stop offset="0" stopColor="#f1d9a6" />
+            <stop offset="1" stopColor="#a87b30" />
           </linearGradient>
         </defs>
-        <path d={ARCH} fill="#05190f" stroke="#d4af37" strokeOpacity="0.5" strokeWidth="1.2" />
+        <path d={ARCH} fill="#1f1510" stroke="#c8963e" strokeOpacity="0.5" strokeWidth="1.2" />
         <path className="hw-lit" d={ARCH} fill={`url(#hw-g-${n})`} opacity="0" />
       </svg>
-      <span className="hw-num relative mt-4 font-display text-3xl font-semibold italic text-gold-200">{n}</span>
+      <span className="hw-num relative mt-4 font-display text-3xl font-semibold text-gold-200">{n}</span>
     </span>
   )
 }
@@ -45,7 +45,7 @@ export default function HowItWorks({ service }) {
         medals.forEach((m, i) => {
           const at = (i / (medals.length - 1)) * 3 - 0.05
           tl.to(m.querySelector('.hw-lit'), { opacity: 1, duration: 0.25 }, Math.max(0, at))
-            .to(m.querySelector('.hw-num'), { color: '#05190f', duration: 0.25 }, Math.max(0, at))
+            .to(m.querySelector('.hw-num'), { color: '#1f1510', duration: 0.25 }, Math.max(0, at))
             .fromTo(m.querySelectorAll('.hw-copy > *'), { autoAlpha: 0.25, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.35, stagger: 0.05 }, Math.max(0, at))
         })
       }
@@ -64,7 +64,7 @@ export default function HowItWorks({ service }) {
         <div className="hw-track-wrap relative mt-16 lg:mt-20">
           {/* track: horizontal on desktop, vertical on mobile */}
           <div className="absolute bottom-10 left-[34px] top-10 w-px bg-gold-400/15 lg:bottom-auto lg:left-[12.5%] lg:right-[12.5%] lg:top-[44px] lg:h-px lg:w-auto">
-            <div className="hw-progress absolute inset-0 origin-top bg-linear-to-b from-gold-100 via-gold-300 to-gold-500 shadow-[0_0_14px_rgba(232,207,122,0.6)] lg:origin-left lg:bg-linear-to-r" />
+            <div className="hw-progress absolute inset-0 origin-top bg-linear-to-b from-gold-100 via-gold-300 to-gold-500 shadow-[0_0_14px_rgba(230,194,133,0.6)] lg:origin-left lg:bg-linear-to-r" />
           </div>
 
           <ol className="relative grid gap-10 lg:grid-cols-4 lg:gap-6">

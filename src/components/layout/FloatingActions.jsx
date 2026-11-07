@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getLenis } from '../../lib/lenis'
+import { ScrollTrigger } from '../../lib/gsap'
 import { waLink } from '../../data/content'
 import Icon from '../ui/Icon'
 
@@ -8,14 +9,9 @@ export default function FloatingActions() {
   const [showTop, setShowTop] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setShowTop(window.scrollY > 900)
-    // first check on the next frame: reading scrollY during mount would force an extra full layout
-    const id = requestAnimationFrame(onScroll)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => {
-      cancelAnimationFrame(id)
-      window.removeEventListener('scroll', onScroll)
-    }
+    // ScrollTrigger already tracks the scroll position, so this costs no extra reads per scroll event
+    const st = ScrollTrigger.create({ start: 900, end: 'max', onToggle: (self) => setShowTop(self.isActive) })
+    return () => st.kill()
   }, [])
 
   const toTop = () => {
@@ -41,7 +37,7 @@ export default function FloatingActions() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with Al Balagh on WhatsApp"
-        className="relative grid h-14 w-14 place-items-center rounded-full border border-gold-300/60 bg-linear-to-b from-jade-400 to-jade-600 text-white shadow-[0_12px_30px_-8px_rgba(63,191,116,0.8)] transition-transform hover:scale-105"
+        className="relative grid h-14 w-14 place-items-center rounded-full border border-gold-300/60 bg-linear-to-b from-jade-400 to-jade-600 text-white shadow-[0_12px_30px_-8px_rgba(217,168,78,0.8)] transition-transform hover:scale-105"
       >
         <span className="absolute inset-0 animate-ping rounded-full bg-jade-400/40 motion-reduce:hidden" aria-hidden="true" />
         <Icon name="whatsapp" className="relative h-7 w-7" />

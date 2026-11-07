@@ -7,7 +7,7 @@ import Photo from '../ui/Photo'
 import Icon from '../ui/Icon'
 import SectionHeading from '../ui/SectionHeading'
 
-const FALLBACK = 'radial-gradient(90% 70% at 50% 25%, #3a4a5c 0%, #142233 50%, #050a10 100%)'
+const FALLBACK = 'radial-gradient(90% 70% at 50% 25%, #4a3626 0%, #251a12 50%, #120c09 100%)'
 
 /** A fact from the programme gets a tick; anything not in the client's programme reads "Contact office". */
 function Value({ v, align = 'center' }) {
@@ -21,7 +21,7 @@ function Value({ v, align = 'center' }) {
     <span className={`inline-flex min-w-0 items-start gap-2 text-[0.85rem] leading-snug text-cream-50 ${align === 'center' ? 'justify-center text-left' : 'text-right'}`}>
       <span className="mt-px inline-grid h-5 w-5 shrink-0 place-items-center rounded-full border border-jade-400/50 bg-jade-500/10" aria-hidden="true">
         <svg viewBox="0 0 24 24" className="h-3 w-3">
-          <path className="cp-tick" d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#5fd28f" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+          <path className="cp-tick" d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#e0b866" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </span>
       <span className="min-w-0">{v}</span>
@@ -130,7 +130,7 @@ export default function ComparePackages() {
           {columns.map((c, ci) => (
             <article key={c.id} className="cp-card glass relative w-[86%] shrink-0 snap-center rounded-[26px] p-5">
               <p className="text-[0.62rem] uppercase tracking-[0.22em] text-gold-300">{c.season}</p>
-              <h3 className="mt-1 font-display text-2xl italic text-cream-50">{c.name}</h3>
+              <h3 className="mt-1 font-display text-2xl text-cream-50">{c.name}</h3>
               <dl className="mt-4 divide-y divide-gold-400/15">
                 {rows.map((r) => (
                   <div key={r.label} className="grid grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] items-start gap-3 py-3 text-sm">

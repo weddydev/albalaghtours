@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from 'react'
-import { gsap, ScrollTrigger } from '../lib/gsap'
+import { gsap, loopsOnlyWhenVisible, ScrollTrigger } from '../lib/gsap'
 
 /*
  * Deferred GSAP setup for below-the-fold sections.
@@ -86,7 +86,15 @@ export function useNearGSAP(setup, { scope }) {
     const el = scope.current
     if (!el) return
     let ctx = null
-    const job = { el, done: false, run: () => (ctx = gsap.context(() => fn.current(), el)) }
+    let stopLoops = null
+    const job = {
+      el,
+      done: false,
+      run: () => {
+        ctx = gsap.context(() => fn.current(), el)
+        stopLoops = loopsOnlyWhenVisible(ctx, el) // ambient loops rest while the section is off-screen
+      },
+    }
     jobs.add(job)
     observer().observe(el)
     drain() // later pages: their sections queue up and drain in idle time too
@@ -94,6 +102,7 @@ export function useNearGSAP(setup, { scope }) {
       job.done = true
       jobs.delete(job)
       io?.unobserve(el)
+      stopLoops?.()
       ctx?.revert()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

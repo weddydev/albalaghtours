@@ -1,20 +1,22 @@
 import { useEffect, useRef } from 'react'
-import { gsap, ScrollTrigger, SplitText, useGSAP } from '../../lib/gsap'
+import { gsap, ScrollTrigger, SplitText, loopsOnlyWhenVisible, useGSAP } from '../../lib/gsap'
 import { getLenis, scrollToTarget } from '../../lib/lenis'
 import { useReducedMotion } from '../../hooks/useMediaQuery'
 import { useMagnetic } from '../../hooks/useMagnetic'
-import { hero, heroMedia, trustBadges, waLink } from '../../data/content'
+import { hero, trustBadges, waLink } from '../../data/content'
 import Icon from '../ui/Icon'
-import Photo from '../ui/Photo'
 import HeroHeadline from './HeroHeadline'
 import SecretLayer from './SecretLayer'
-import DoorScene from './DoorScene'
+import WindowScene from './WindowScene'
 import LanternAccent from './LanternAccent'
 import { FinaleBackdrop, FinaleContent, RouteLine } from './HeroFinale'
 
 // --spot is set per breakpoint on the stage
-const MASK = `radial-gradient(circle var(--spot) at 50% 50%, transparent 0%, rgb(0 0 0 / 0.5) 55%, #000 100%)`
-const MASK_STYLE = { maskImage: MASK, WebkitMaskImage: MASK, maskRepeat: 'no-repeat', WebkitMaskRepeat: 'no-repeat' }
+// Darkness with a soft circular hole for the lantern light. It used to be a CSS mask moved with
+// mask-position every frame (a full-screen repaint per frame); now it is a 2×-viewport layer with the
+// hole baked into its gradient, moved with a GPU transform — same picture, no repaint.
+const HOLE = 'radial-gradient(circle var(--spot) at 50% 50%, transparent 0%, rgb(23 17 13 / 0.5) 55%, rgb(23 17 13) 100%)'
+const HOLE_STYLE = { background: HOLE, willChange: 'transform' }
 
 // Layout offset of `el` inside `root`, ignoring transforms.
 function offsetWithin(el, root) {
@@ -27,7 +29,7 @@ function offsetWithin(el, root) {
   return { x, y }
 }
 
-function IntroUI({ onExplore, cue = 'Scroll to open the door' }) {
+function IntroUI({ onExplore, cue = 'Scroll to take off' }) {
   const a = useRef(null)
   const b = useRef(null)
   useMagnetic(a, 0.25)
@@ -73,10 +75,10 @@ function IntroUI({ onExplore, cue = 'Scroll to open the door' }) {
 
 /**
  * "Lantern Light Journey".
- * Stage 1 — a dark room; a lantern light (cursor, or auto-roaming on touch) reveals the
- * photo-filled headline and hidden gold calligraphy.
- * Stage 2 — a sticky, scroll-scrubbed journey: the headline parts, the door opens onto
- * Madinah, we fly through cloud and arrive at the Kaaba with the search bar.
+ * Stage 1 — a dark cabin; a lantern light (cursor, or auto-roaming on touch) reveals the
+ * gold headline and a hidden compass-and-map layer.
+ * Stage 2 — a sticky, scroll-scrubbed journey: the headline parts, the aircraft window's shade
+ * lifts onto a sunset over the wing, we push through into the clouds and arrive at the search bar.
  */
 export default function Hero({ start }) {
   const reduced = useReducedMotion()
@@ -94,7 +96,7 @@ export default function Hero({ start }) {
     lenis ? lenis.scrollTo(end, { duration: 2.6 }) : window.scrollTo({ top: end, behavior: 'smooth' })
   }
 
-  useGSAP(
+  const { context: gsapCtx } = useGSAP(
     () => {
       if (reduced) return
       const q = gsap.utils.selector(root)
@@ -106,7 +108,7 @@ export default function Hero({ start }) {
         const { fine, desktop } = ctx.conditions
         const split = SplitText.create(q('.h-word'), { type: 'chars', charsClass: 'h-char' })
         const chars = split.chars
-        const darks = q('.h-dark')
+        const holes = q('.h-hole')
         const glow = q('.h-glow')[0]
 
         /* ---------- Lantern light ---------- */
@@ -131,7 +133,10 @@ export default function Hero({ start }) {
         const measure = () => {
           W = stage.clientWidth
           H = stage.clientHeight
-          darks.forEach((d) => (d.style.maskSize = d.style.webkitMaskSize = `${W * 2}px ${H * 2}px`))
+          holes.forEach((h) => {
+            h.style.width = `${W * 2}px`
+            h.style.height = `${H * 2}px`
+          })
           centers = chars.map((c) => {
             const o = offsetWithin(c, stage)
             return { x: o.x + c.offsetWidth / 2, y: o.y + c.offsetHeight / 2 }
@@ -150,11 +155,8 @@ export default function Hero({ start }) {
             lx(nx)
             ly(ny)
           }
-          const pos = `${light.x - W}px ${light.y - H}px`
-          for (const d of darks) {
-            d.style.maskPosition = pos
-            d.style.webkitMaskPosition = pos
-          }
+          const tr = `translate3d(${light.x - W}px, ${light.y - H}px, 0)`
+          for (const h of holes) h.style.transform = tr
           gx(light.x)
           gy(light.y)
           if (!pushOn) return
@@ -243,15 +245,8 @@ export default function Hero({ start }) {
           if (Math.abs(off) < head.offsetWidth * 0.08) return i % 2 ? 1 : -1
           return off < 0 ? -1 : 1
         }
-        const doorScale = () => Math.max(W / door.offsetWidth, H / (0.55 * door.offsetHeight)) * 1.12
-        const video = q('[data-hero-video]')[0]
-        let inView = true
-        const syncVideo = (p) => {
-          if (!video) return
-          const want = inView && p > 0.04 && p < 0.8
-          if (want && video.paused && video.readyState >= 2) video.play().catch(() => {})
-          else if (!want && !video.paused) video.pause()
-        }
+        // push far enough that the window's rounded opening (not the cabin wall) fills the screen
+        const doorScale = () => Math.max(W / (0.6 * door.offsetWidth), H / (0.42 * door.offsetHeight)) * 1.15
 
         gsap.set(q('.h-final-item, .h-route'), { autoAlpha: 0 })
         gsap.set(q('.h-route-line'), { drawSVG: '0%' })
@@ -265,21 +260,14 @@ export default function Hero({ start }) {
             end: 'bottom bottom',
             scrub: desktop ? 1.1 : 0.8,
             invalidateOnRefresh: true,
-            onUpdate: (self) => {
-              setStage1(self.progress < (desktop ? 0.1 : 0.02))
-              syncVideo(self.progress)
-            },
-            onToggle: (self) => {
-              inView = self.isActive
-              syncVideo(self.progress)
-            },
+            onUpdate: (self) => setStage1(self.progress < (desktop ? 0.1 : 0.02)),
           },
         })
         const lightPin = (i, t) =>
           s
             .to(q(`.h-pin-${i} .h-pin-glow`), { autoAlpha: 1, scale: 1, duration: 0.5, ease: 'back.out(2)' }, t)
             .to(q(`.h-pin-${i} .h-pin-core`), { opacity: 1, duration: 0.3 }, t)
-            .to(q(`.h-pin-label-${i}`), { color: '#f3dc8f', duration: 0.4 }, t)
+            .to(q(`.h-pin-label-${i}`), { color: '#eed39a', duration: 0.4 }, t)
 
         s.to(q('.h-dark'), { autoAlpha: 0, duration: 1.1, ease: 'power1.in' }, 0)
           .to(q('.h-secret'), { autoAlpha: 0, duration: 0.9 }, 0)
@@ -291,8 +279,8 @@ export default function Hero({ start }) {
           .to(q('.h-route-line'), { drawSVG: '100%', duration: 6.6 }, 0.4)
           .to(q('.h-word'), { x: (i, el) => wordDir(i, el) * W * 0.62, duration: 3, ease: 'power2.in' }, 0.5)
           .to(q('.h-word'), { autoAlpha: 0, duration: 1 }, 2.6)
-          .to(q('.h-panel-left'), { rotationY: -112, duration: 2.6, ease: 'power2.inOut' }, 1.0)
-          .to(q('.h-panel-right'), { rotationY: 112, duration: 2.6, ease: 'power2.inOut' }, 1.0)
+          .to(q('.h-shade'), { yPercent: -101, duration: 2.6, ease: 'power2.inOut' }, 1.0)
+          .fromTo(q('.h-plane'), { xPercent: 0, autoAlpha: 0 }, { xPercent: 560, autoAlpha: 1, duration: 3.4, ease: 'power1.inOut' }, 1.6)
           .fromTo(q('.h-door-view'), { scale: 1.3 }, { scale: 1, duration: 5 }, 1.0)
           .to(q('.h-door-blur'), { autoAlpha: 0, duration: 2.4 }, 2.8)
           .to(q('.h-lantern-out'), { autoAlpha: 0, y: -60, duration: 1 }, 2.2)
@@ -322,6 +310,8 @@ export default function Hero({ start }) {
     },
     { scope: root, dependencies: [reduced], revertOnUpdate: true },
   )
+  // ambient loops rest while this block is off-screen
+  useEffect(() => loopsOnlyWhenVisible(gsapCtx, root.current), [gsapCtx])
 
   useEffect(() => {
     if (!start) return
@@ -353,21 +343,18 @@ export default function Hero({ start }) {
   return (
     <section id="home" ref={root} aria-label="Welcome" className="relative h-[200vh] lg:h-[300vh]">
       <div ref={stageRef} className="sticky top-0 isolate h-svh overflow-hidden bg-ink-950 [--spot:190px] lg:[--spot:320px]">
-        <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_40%,rgb(13_59_40/0.55),transparent_70%)]" />
-        <DoorScene />
+        <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_40%,rgb(51_36_26/0.55),transparent_70%)]" />
+        <WindowScene />
         <SecretLayer />
         {/* deep darkness: hides the hidden layer almost completely */}
-        <div className="h-dark h-dark-deep pointer-events-none absolute inset-0 z-[3]" style={MASK_STYLE}>
-          <div className="absolute inset-0 bg-ink-950 opacity-[0.97]" />
+        <div className="h-dark h-dark-deep pointer-events-none absolute inset-0 z-[3] overflow-hidden">
+          <div className="h-hole absolute left-0 top-0 h-[200%] w-[200%] opacity-[0.97]" style={HOLE_STYLE} />
         </div>
         <HeroHeadline />
 
         {/* darkness with a lantern-shaped hole */}
-        <div
-          className="h-dark pointer-events-none absolute inset-0 z-[4]"
-          style={MASK_STYLE}
-        >
-          <div className="h-dark-fill absolute inset-0 bg-ink-950" />
+        <div className="h-dark pointer-events-none absolute inset-0 z-[4] overflow-hidden">
+          <div className="h-hole h-dark-fill absolute left-0 top-0 h-[200%] w-[200%]" style={HOLE_STYLE} />
         </div>
         <div className="h-glow pointer-events-none absolute left-0 top-0 z-[5] lg:mix-blend-screen">
           <div
@@ -378,7 +365,6 @@ export default function Hero({ start }) {
 
         {/* flying through cloud */}
         <div className="h-clouds pointer-events-none invisible absolute inset-0 z-[6]">
-          <Photo src={heroMedia.clouds} fallback="transparent" width={2400} height={1600} imgClassName="opacity-75" />
           {[
             ['-20%', '55%', '95vw', 0.55],
             ['40%', '62%', '100vw', 0.5],

@@ -18,7 +18,7 @@ import AfterFirstPaint from '../components/ui/AfterFirstPaint'
 import FlyerShowcase from '../components/ui/FlyerShowcase'
 
 const SERVICE = serviceBySlug['albania-work-visa']
-const GALLERY_FALLBACK = 'radial-gradient(90% 70% at 60% 20%, #1f6b45 0%, #0d3b28 45%, #04150d 100%)'
+const GALLERY_FALLBACK = 'radial-gradient(90% 70% at 60% 20%, #6b4a2a 0%, #33241a 45%, #1a130e 100%)'
 
 /** "Why Albania": glass cards that rise in and light their icon on hover. */
 function WhyAlbania() {
@@ -47,10 +47,10 @@ function WhyAlbania() {
             <li key={c.title} className="wa-card glass group relative min-w-0 overflow-hidden rounded-[24px] p-6 sm:p-7">
               <span className="absolute inset-x-6 top-0 h-px bg-linear-to-r from-gold-200 via-gold-400/60 to-transparent" />
               <div className="flex items-start justify-between">
-                <span className="grid h-14 w-12 place-items-center rounded-t-full border border-gold-400/45 bg-ink-950/40 text-gold-200 shadow-[0_0_24px_-8px_rgba(212,175,55,0.6)] transition-colors duration-500 group-hover:text-cream-50">
+                <span className="grid h-14 w-12 place-items-center rounded-t-full border border-gold-400/45 bg-ink-950/40 text-gold-200 shadow-[0_0_24px_-8px_rgba(200,150,62,0.6)] transition-colors duration-500 group-hover:text-cream-50">
                   <Icon name={c.icon} className="h-5 w-5" />
                 </span>
-                <span className="font-display text-4xl italic leading-none text-gold-400/25">{String(i + 1).padStart(2, '0')}</span>
+                <span className="font-display text-4xl leading-none text-gold-400/25">{String(i + 1).padStart(2, '0')}</span>
               </div>
               <h3 className="mt-6 font-display text-[1.45rem] font-semibold leading-tight text-cream-50">{c.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-mist-300">{c.text}</p>

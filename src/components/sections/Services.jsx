@@ -9,8 +9,8 @@ import TransfersTeaser from './TransfersTeaser'
 
 // Bento placement (4 cols on desktop, 2 on mobile). Order + grid-flow-dense fills every cell.
 const LAYOUT = {
-  'haj-umrah': { cls: 'col-span-2 lg:row-span-2', size: 'xl' },
-  'holiday-packages': { cls: 'lg:col-span-2', size: 'wide' },
+  'holiday-packages': { cls: 'col-span-2 lg:row-span-2', size: 'xl' },
+  'haj-umrah': { cls: 'lg:col-span-2', size: 'wide' },
   'immigration-services': { cls: 'lg:col-span-2', size: 'wide' },
   'vfs-appointments': { cls: 'col-span-2', size: 'wide' },
   'albania-work-visa': { cls: 'col-span-2', size: 'wide' },
@@ -62,7 +62,7 @@ export default function Services() {
   return (
     <section id="services" ref={root} aria-labelledby="services-title" className="relative isolate overflow-hidden py-24 sm:py-32 lg:py-40">
       <div className="pattern-overlay pointer-events-none absolute inset-0 -z-10 opacity-[0.035]" />
-      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[620px] w-[1100px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(30_138_76/0.16),transparent)]" />
+      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[620px] w-[1100px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(200_150_62/0.16),transparent)]" />
 
       <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-10">
         <div className="grid items-end gap-10 lg:grid-cols-12">
@@ -75,13 +75,13 @@ export default function Services() {
           />
           <div className="svc-aside lg:col-span-5 lg:pb-3">
             <p className="text-[1.02rem] leading-relaxed text-mist-300">
-              {COUNT} services under one roof in Mehdipatnam — from your Umrah to your passport renewal.{' '}
+              {COUNT} services under one roof in Mehdipatnam — from your next holiday to your passport renewal.{' '}
               <span className="pointer-coarse:hidden">Hover a card to see what is inside, then click for the full details.</span>
               <span className="hidden pointer-coarse:inline">Tap any card for the full details.</span>
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
               <span className="flex items-center gap-2 text-gold-200">
-                <span className="font-display text-3xl italic text-cream-50">{services.length}</span> services
+                <span className="font-display text-3xl text-cream-50">{services.length}</span> services
               </span>
               <span className="h-6 w-px bg-gold-400/30" aria-hidden="true" />
               <a href={waLink()} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2 text-jade-300 hover:text-jade-400">

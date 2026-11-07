@@ -13,16 +13,16 @@ import AfterFirstPaint from '../components/ui/AfterFirstPaint'
 export default function DestinationsPage() {
   useDocumentMeta(
     'Top Destinations',
-    'Madinah, Makkah, Taif, Mina & Arafat and Badr — the places on the Hajj 2027 and Ziyarath Special Umrah programmes of Al Balagh Tours & Travels.',
+    'Dubai, Türkiye, the Maldives, Thailand, Malaysia & Singapore, Azerbaijan, Europe and Makkah & Madinah — trips planned end to end by Al Balagh Tours & Travels, Hyderabad.',
   )
 
   return (
     <>
       <PageHero
         crumb="Destinations"
-        kicker="Hajj 2027 · Ziyarath Special Umrah"
-        lines={['Explore top', 'Destinations']}
-        intro="The places our Hajj and Umrah programmes take you — the two Holy Cities, Taif, the days of Hajj at Mina and Arafat, and Badr on the Madinah Ziyarath."
+        kicker="Holidays · Pilgrimage · Worldwide"
+        lines={['Where to', 'next?']}
+        intro="City breaks, island escapes, classic tours and pilgrimage — flights, visas, hotels and sightseeing arranged together, from one desk in Hyderabad."
         actions={
           <>
             <button type="button" onClick={() => scrollToTarget('#dest-grid')} className="btn btn-primary">
@@ -31,8 +31,8 @@ export default function DestinationsPage() {
                 <Icon name="arrowRight" className="h-4 w-4" />
               </span>
             </button>
-            <a href={waLink('Assalamu Alaikum Al Balagh Tours. I would like to know more about your Hajj and Umrah programmes.')} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
-              Ask about the programmes
+            <a href={waLink('Hello Al Balagh Tours. I would like help choosing a destination for my next trip.')} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+              Help me choose
               <span className="btn-arrow">
                 <Icon name="whatsapp" className="h-4 w-4" />
               </span>
@@ -44,7 +44,7 @@ export default function DestinationsPage() {
       <AfterFirstPaint>
         <section id="dest-grid" className="relative py-20 sm:py-28">
           <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-10">
-            <SectionHeading eyebrow="On our programmes" title={['Places that ', { accent: 'call' }, ' to the heart']} lead="Tap a place to read how it features in the programme." />
+            <SectionHeading eyebrow="Popular destinations" title={['Places worth the ', { accent: 'journey' }]} lead="Tap a destination to read more — every trip is tailor-made around your dates and budget." />
             <div className="mt-12">
               <DestinationBento />
             </div>
@@ -59,8 +59,8 @@ export default function DestinationsPage() {
         <CtaBand
           prefix="Dreaming of"
           accent="somewhere else"
-          whatsapp="Assalamu Alaikum, I would like to plan a trip to a destination not listed on your website."
-          lead="Beyond Hajj & Umrah, our holiday packages cover other trips too. Tell us where you would like to go."
+          whatsapp="Hello, I would like to plan a trip to a destination not listed on your website."
+          lead="These are just a few favourites. Tell us where you would like to go and we will plan the rest."
         />
       </AfterFirstPaint>
     </>

@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { gsap, ScrollTrigger, useGSAP } from '../../lib/gsap'
 import { getLenis, scrollToTarget } from '../../lib/lenis'
-import { destinations, enquiry, waLink } from '../../data/content'
+import { Link } from 'react-router-dom'
+import { destinations, waLink } from '../../data/content'
 import { TONES } from '../services/ServiceCard'
 import { ArchFrame } from '../ui/Ornaments'
 import Photo from '../ui/Photo'
@@ -11,20 +12,20 @@ function Story({ d, i }) {
   return (
     <article id={`dest-${d.slug}`} className="ds-panel relative grid shrink-0 items-center gap-8 lg:h-full lg:w-[min(84vw,1120px)] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
       <div className="relative mx-auto h-[420px] w-full max-w-[340px] lg:h-[min(64vh,560px)] lg:max-w-[400px]">
-        <ArchFrame className="h-full w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_12px_rgba(212,175,55,0.45)]">
+        <ArchFrame className="h-full w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_12px_rgba(200,150,62,0.45)]">
           <div className="ds-img absolute inset-[-10%]">
-            <Photo src={d.image} fallback={TONES[d.tone]}>
+            <Photo src={d.image} fallback={TONES[d.tone]} rays={d.rays}>
               <div className="pattern-overlay absolute inset-0 opacity-[0.08]" />
-              <Icon name="mosque" strokeWidth={0.5} className="absolute left-1/2 top-[34%] h-1/3 w-2/3 -translate-x-1/2 text-gold-200 opacity-20" />
+              <Icon name={d.icon ?? 'globe'} strokeWidth={0.5} className="absolute left-1/2 top-[34%] h-1/3 w-2/3 -translate-x-1/2 text-gold-200 opacity-20" />
             </Photo>
           </div>
           <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-ink-950/90 to-transparent" />
         </ArchFrame>
-        <span className="absolute -left-2 top-10 font-display text-7xl italic leading-none text-gold-400/30 sm:-left-8 sm:text-8xl">{String(i + 1).padStart(2, '0')}</span>
+        <span className="absolute -left-2 top-10 font-display text-7xl leading-none text-gold-400/30 sm:-left-8 sm:text-8xl">{String(i + 1).padStart(2, '0')}</span>
       </div>
       <div>
         <p className="text-xs uppercase tracking-[0.26em] text-gold-300">{d.region}</p>
-        <h3 className="mt-3 font-display text-[clamp(2.8rem,5.6vw,5.4rem)] font-semibold italic leading-[0.92] text-cream-50">
+        <h3 className="mt-3 font-display text-[clamp(2.8rem,5.6vw,5.4rem)] font-semibold leading-[0.92] text-cream-50">
           {d.name}
           <span className="mt-2 block text-[0.38em] not-italic text-mist-300">{d.full !== d.name ? d.full : d.tagline}</span>
         </h3>
@@ -45,17 +46,22 @@ function Story({ d, i }) {
           ))}
         </div>
         {d.note && <p className="mt-4 text-xs italic text-mist-500">{d.note}</p>}
-        <a
-          href={waLink(enquiry[d.programme] ?? 'Assalamu Alaikum Al Balagh Tours. I would like to know more about your Hajj and Umrah programmes.')}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-primary mt-8"
-        >
-          Enquire on WhatsApp
-          <span className="btn-arrow">
-            <Icon name="whatsapp" className="h-4 w-4" />
-          </span>
-        </a>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <a href={waLink(d.whatsapp)} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+            Plan this trip
+            <span className="btn-arrow">
+              <Icon name="whatsapp" className="h-4 w-4" />
+            </span>
+          </a>
+          {d.link && (
+            <Link to={d.link} className="btn btn-ghost">
+              View programmes
+              <span className="btn-arrow">
+                <Icon name="arrowRight" className="h-4 w-4" />
+              </span>
+            </Link>
+          )}
+        </div>
       </div>
     </article>
   )
@@ -141,7 +147,7 @@ export default function DestinationStories() {
           ))}
         </div>
         <div className="absolute inset-x-[8vw] bottom-10 hidden h-px bg-gold-400/20 lg:block" aria-hidden="true">
-          <div className="ds-bar h-full origin-left bg-linear-to-r from-jade-400 via-gold-300 to-gold-200 shadow-[0_0_12px_rgba(232,207,122,0.6)]" />
+          <div className="ds-bar h-full origin-left bg-linear-to-r from-jade-400 via-gold-300 to-gold-200 shadow-[0_0_12px_rgba(230,194,133,0.6)]" />
         </div>
       </div>
     </section>

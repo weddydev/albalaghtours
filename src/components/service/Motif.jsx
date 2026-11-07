@@ -1,7 +1,7 @@
-import { useRef } from 'react'
-import { gsap, useGSAP } from '../../lib/gsap'
+import { useRef, useEffect } from 'react'
+import { gsap, loopsOnlyWhenVisible, useGSAP } from '../../lib/gsap'
 
-const S = { fill: 'none', stroke: '#e8cf7a', strokeWidth: 1.6, strokeLinecap: 'round', strokeLinejoin: 'round' }
+const S = { fill: 'none', stroke: '#e6c285', strokeWidth: 1.6, strokeLinecap: 'round', strokeLinejoin: 'round' }
 
 /* Each motif: SVG (64×64) with `.m-a` / `.m-b` parts that its loop animates. */
 const ART = {
@@ -19,7 +19,7 @@ const ART = {
       <g className="m-b">
         <path d="M16 24l16-7 16 7v20l-16 7-16-7z" />
         <path d="M16 24l16 7 16-7M32 31v20" />
-        <path d="M16 29l16 7 16-7" stroke="#f3dc8f" strokeWidth="2.2" />
+        <path d="M16 29l16 7 16-7" stroke="#eed39a" strokeWidth="2.2" />
         <path d="M37 38v7" />
       </g>
     </g>
@@ -31,13 +31,13 @@ const ART = {
         <path d="M33 54c.5-9 0-17-2.5-25" />
         <path d="M30.5 29c-4-6-10-7-15-4 5 .4 9 2 11 5M30.5 29c2-6 8-9 14-7.5-4.8 1.4-8 3.6-10 7.2M30.5 29c6.8-1.4 12.8 1.6 15 7.6-4-1.8-8.4-3.2-12.8-2.8M30.5 29c-6 .4-11 4-12.8 9.6 4-3 7.8-4.6 12-5" />
       </g>
-      <circle className="m-a" cx="48" cy="14" r="5" stroke="#f3dc8f" />
+      <circle className="m-a" cx="48" cy="14" r="5" stroke="#eed39a" />
     </g>
   ),
   stamp: (
     <g {...S}>
       <rect x="14" y="40" width="36" height="16" rx="2" strokeOpacity="0.5" />
-      <circle className="m-a" cx="32" cy="48" r="6" stroke="#3fbf74" strokeWidth="2" />
+      <circle className="m-a" cx="32" cy="48" r="6" stroke="#d9a84e" strokeWidth="2" />
       <g className="m-b">
         <path d="M26 8h12l-2 14h-8z" />
         <path d="M20 30a4 4 0 014-4h16a4 4 0 014 4v4H20z" />
@@ -49,7 +49,7 @@ const ART = {
       <circle cx="32" cy="32" r="22" />
       <path d="M10 32h44M14 21h36M14 43h36" strokeOpacity="0.6" />
       <ellipse className="m-a" cx="32" cy="32" rx="10" ry="22" />
-      <circle className="m-b" cx="50" cy="16" r="3" fill="#f3dc8f" stroke="none" />
+      <circle className="m-b" cx="50" cy="16" r="3" fill="#eed39a" stroke="none" />
     </g>
   ),
   passport: (
@@ -59,13 +59,13 @@ const ART = {
         <circle cx="32" cy="28" r="7" />
         <path d="M25 28h14M32 21c2 2 3 4.4 3 7s-1 5-3 7c-2-2-3-4.4-3-7s1-5 3-7zM24 44h16" />
       </g>
-      <circle className="m-a" cx="46" cy="46" r="8" stroke="#3fbf74" strokeWidth="2" />
+      <circle className="m-a" cx="46" cy="46" r="8" stroke="#d9a84e" strokeWidth="2" />
     </g>
   ),
   shield: (
     <g {...S}>
       <path className="m-b" d="M32 8l18 7v13c0 12-7.6 21-18 25-10.4-4-18-13-18-25V15z" />
-      <path className="m-a" d="M23 31l6 6 12-13" stroke="#f3dc8f" strokeWidth="2.4" />
+      <path className="m-a" d="M23 31l6 6 12-13" stroke="#eed39a" strokeWidth="2.4" />
     </g>
   ),
   hotel: (
@@ -75,7 +75,7 @@ const ART = {
         <path d="M18 44a14 14 0 0128 0z" />
         <path d="M32 30v-4M28 24h8" />
       </g>
-      <path className="m-a" d="M44 18l3-3M47 24h4M42 14v-4" stroke="#f3dc8f" />
+      <path className="m-a" d="M44 18l3-3M47 24h4M42 14v-4" stroke="#eed39a" />
     </g>
   ),
   certificate: (
@@ -83,8 +83,8 @@ const ART = {
       <rect x="8" y="12" width="40" height="30" rx="2" />
       <path d="M15 21h26M15 28h18" strokeOpacity="0.6" />
       <g className="m-b">
-        <circle cx="44" cy="40" r="9" stroke="#f3dc8f" />
-        <path d="M44 33l2 4.4 4.6.6-3.4 3.2.8 4.6-4-2.2-4 2.2.8-4.6-3.4-3.2 4.6-.6z" fill="#d4af37" fillOpacity="0.4" />
+        <circle cx="44" cy="40" r="9" stroke="#eed39a" />
+        <path d="M44 33l2 4.4 4.6.6-3.4 3.2.8 4.6-4-2.2-4 2.2.8-4.6-3.4-3.2 4.6-.6z" fill="#c8963e" fillOpacity="0.4" />
       </g>
       <path className="m-a" d="M40 48l-2 8 6-3 6 3-2-8" />
     </g>
@@ -105,10 +105,10 @@ const ART = {
       <rect x="10" y="14" width="44" height="40" rx="4" />
       <path d="M10 24h44M22 8v10M42 8v10" />
       <g className="m-b" style={{ transformOrigin: '32px 24px' }}>
-        <rect x="14" y="27" width="36" height="23" rx="2" fill="#082a1c" />
+        <rect x="14" y="27" width="36" height="23" rx="2" fill="#271a13" />
         <path d="M20 34h6M30 34h6M40 34h4M20 42h6M30 42h6" strokeOpacity="0.7" />
       </g>
-      <circle className="m-a" cx="42" cy="42" r="3.4" fill="#3fbf74" stroke="none" />
+      <circle className="m-a" cx="42" cy="42" r="3.4" fill="#d9a84e" stroke="none" />
     </g>
   ),
 }
@@ -153,7 +153,7 @@ const LOOPS = {
 export default function Motif({ type, className = '' }) {
   const ref = useRef(null)
 
-  useGSAP(
+  const { context: gsapCtx } = useGSAP(
     () => {
       gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
         const q = gsap.utils.selector(ref)
@@ -164,10 +164,12 @@ export default function Motif({ type, className = '' }) {
     },
     { scope: ref },
   )
+  // ambient loops rest while this block is off-screen
+  useEffect(() => loopsOnlyWhenVisible(gsapCtx, ref.current), [gsapCtx])
 
   return (
     <div ref={ref} className={className} aria-hidden="true">
-      <div className="m-float glass grid h-full w-full place-items-center rounded-full shadow-[0_0_50px_-10px_rgba(212,175,55,0.55)]">
+      <div className="m-float glass grid h-full w-full place-items-center rounded-full shadow-[0_0_50px_-10px_rgba(200,150,62,0.55)]">
         <svg viewBox="0 0 64 64" className="h-[58%] w-[58%] overflow-visible">
           {ART[type] || ART.kaaba}
         </svg>

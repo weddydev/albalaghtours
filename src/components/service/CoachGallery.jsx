@@ -50,7 +50,7 @@ export default function CoachGallery({ service }) {
                     <span className="grid h-6 w-6 place-items-center rounded-full border border-gold-300 bg-ink-900">
                       <span className="h-2 w-2 rounded-full bg-gold-200" />
                     </span>
-                    <span className="font-display text-lg italic text-cream-50">{r}</span>
+                    <span className="font-display text-lg text-cream-50">{r}</span>
                   </li>
                 ))}
               </ol>
@@ -71,7 +71,7 @@ export default function CoachGallery({ service }) {
             <Icon name="kaaba" className="h-6 w-6" />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block font-display text-2xl font-semibold italic text-cream-50">Hajj 2027 private bus transfers</span>
+            <span className="block font-display text-2xl font-semibold text-cream-50">Hajj 2027 private bus transfers</span>
             <span className="mt-1 block text-sm text-mist-300">Private buses during the 5 days of Hajj — from your Makkah hotel to Mina, Arafat, Muzdalifah, Jamarat and back.</span>
           </span>
           <span className="inline-flex items-center gap-2 text-sm font-medium text-gold-200">

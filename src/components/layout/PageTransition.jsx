@@ -17,31 +17,43 @@ function afterSwap() {
   window.dispatchEvent(new Event('albalagh:page'))
 }
 
-function DoorPanel({ side }) {
+function Panel({ side }) {
   const left = side === 'left'
   return (
     <div
       className={`wipe-${side} absolute inset-y-0 w-1/2 overflow-hidden ${left ? 'left-0' : 'right-0'}`}
-      style={{ background: `linear-gradient(${left ? 90 : 270}deg, #03110b 0%, #082a1c 70%, #0d3b28 100%)` }}
+      style={{ background: `linear-gradient(${left ? 90 : 270}deg, #17110d 0%, #1f1510 60%, #2a1c14 100%)` }}
     >
-      <div className="pattern-overlay absolute inset-0 opacity-[0.07]" />
-      <div className={`absolute inset-y-[6%] w-px bg-gold-400/30 ${left ? 'right-10' : 'left-10'}`} />
+      <div className="pattern-overlay absolute inset-0 opacity-[0.05]" />
       <div
-        className={`absolute inset-y-0 w-[3px] bg-linear-to-b from-gold-100 via-gold-300 to-gold-500 shadow-[0_0_30px_6px_rgba(232,207,122,0.45)] ${
+        className={`absolute inset-y-0 w-[2px] bg-linear-to-b from-transparent via-gold-300 to-transparent shadow-[0_0_24px_4px_rgba(200,150,62,0.35)] ${
           left ? 'right-0' : 'left-0'
         }`}
       />
-      <div className={`absolute top-1/2 h-8 w-8 -translate-y-1/2 rounded-full border-2 border-gold-300/80 ${left ? 'right-6' : 'left-6'}`} />
     </div>
   )
 }
 
+/** Airliner silhouette, nose to the right (the path is drawn nose-left, then mirrored). */
+function Plane({ className = '' }) {
+  return (
+    <svg viewBox="0 0 64 24" className={className} aria-hidden="true">
+      <path
+        transform="translate(64 0) scale(-1 1)"
+        d="M2 12.2c0-1 1-1.6 2.4-1.6H24L35 1h4.4L33.6 10.6H50l4.6-5.2h3.2L55.4 12l2.4 6.6h-3.2L50 13.4H33.6L39.4 23H35L24 13.4H4.4C3 13.4 2 13 2 12.2z"
+        fill="#e6c285"
+      />
+    </svg>
+  )
+}
+
 /**
- * Renders the routes for a "shown" location that lags the real one, so a pair of gold
- * doors can close over the old page, the route swaps (scroll reset + ScrollTrigger refresh),
- * and the doors open on the new page. ~0.8s. Same-path changes (hash only) swap instantly.
- * Lazy pages: the chunk starts loading as the doors close; if it is not in yet (it is normally
- * prefetched), the doors simply stay closed until it is.
+ * Renders the routes for a "shown" location that lags the real one, so two panels can close
+ * over the old page while a plane crosses the seam, the route swaps (scroll reset +
+ * ScrollTrigger refresh), and the panels open on the new page. ~0.9s.
+ * Same-path changes (hash only) swap instantly.
+ * Lazy pages: the chunk starts loading as the panels close; if it is not in yet (it is normally
+ * prefetched), the panels simply stay closed until it is.
  */
 export default function PageTransition({ children }) {
   const location = useLocation()
@@ -74,22 +86,32 @@ export default function PageTransition({ children }) {
     tl.current = gsap
       .timeline({ defaults: { ease: 'power3.inOut' } })
       .set(root.current, { autoAlpha: 1 })
+      .set(q('.wipe-trail'), { autoAlpha: 1 })
       .fromTo(q('.wipe-left'), { xPercent: -101 }, { xPercent: 0, duration: 0.36 }, 0)
       .fromTo(q('.wipe-right'), { xPercent: 101 }, { xPercent: 0, duration: 0.36 }, 0)
+      // the plane crosses the whole screen, its contrail drawing behind it
+      .fromTo(q('.wipe-plane'), { x: () => -0.15 * window.innerWidth, y: 26 }, { x: () => 1.1 * window.innerWidth, y: -26, duration: 0.95, ease: 'power1.inOut' }, 0)
+      .fromTo(q('.wipe-trail'), { scaleX: 0 }, { scaleX: 1, duration: 0.95, ease: 'power1.inOut' }, 0)
       .fromTo(q('.wipe-mark'), { autoAlpha: 0, scale: 0.85 }, { autoAlpha: 1, scale: 1, duration: 0.22, ease: 'power2.out' }, 0.2)
-      .call(() => {
-        if (isRouteReady(location.pathname)) return swap()
-        const t = tl.current
-        t.pause()
-        chunk.then(() => {
-          if (tl.current !== t) return // a newer navigation took over
-          swap()
-          t.play()
-        }, hardLoad)
-      })
-      .to(q('.wipe-mark'), { autoAlpha: 0, scale: 1.1, duration: 0.18, ease: 'power2.in' }, '+=0.04')
-      .to(q('.wipe-left'), { xPercent: -101, duration: 0.4 }, '<0.06')
-      .to(q('.wipe-right'), { xPercent: 101, duration: 0.4 }, '<')
+      .fromTo(q('.wipe-orbit'), { rotation: -40 }, { rotation: 140, duration: 0.9, ease: 'power2.inOut' }, 0.1)
+      .call(
+        () => {
+          if (isRouteReady(location.pathname)) return swap()
+          const t = tl.current
+          t.pause()
+          chunk.then(() => {
+            if (tl.current !== t) return // a newer navigation took over
+            swap()
+            t.play()
+          }, hardLoad)
+        },
+        null,
+        0.42,
+      )
+      .to(q('.wipe-mark'), { autoAlpha: 0, scale: 1.1, duration: 0.18, ease: 'power2.in' }, 0.46)
+      .to(q('.wipe-trail'), { autoAlpha: 0, duration: 0.3 }, 0.62)
+      .to(q('.wipe-left'), { xPercent: -101, duration: 0.4 }, 0.52)
+      .to(q('.wipe-right'), { xPercent: 101, duration: 0.4 }, 0.52)
       .set(root.current, { autoAlpha: 0 })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
@@ -97,21 +119,26 @@ export default function PageTransition({ children }) {
   return (
     <>
       {children(shown)}
-      <div ref={root} aria-hidden="true" className="pointer-events-none invisible fixed inset-0 z-[85]">
-        <DoorPanel side="left" />
-        <DoorPanel side="right" />
+      <div ref={root} aria-hidden="true" className="pointer-events-none invisible fixed inset-0 z-[85] overflow-hidden">
+        <Panel side="left" />
+        <Panel side="right" />
+
+        {/* dashed contrail, slightly tilted to follow the plane's climb */}
+        <div className="absolute inset-x-0 top-1/2 -rotate-[2.5deg]">
+          <div className="wipe-trail h-px w-full origin-left [background:repeating-linear-gradient(90deg,rgb(230_194_133/0.6)_0_10px,transparent_10px_18px)]" />
+        </div>
+        <div className="wipe-plane absolute left-0 top-1/2 -mt-4 w-16 -rotate-[2.5deg] sm:w-20">
+          <Plane className="w-full drop-shadow-[0_0_14px_rgba(230,194,133,0.55)]" />
+        </div>
+
         <div className="wipe-mark absolute inset-0 grid place-items-center">
-          <div className="relative grid h-44 w-32 place-items-center">
-            <svg viewBox="0 0 100 140" className="absolute inset-0 h-full w-full" aria-hidden="true">
-              <path
-                d="M4 138V52C4 32 30 24 42 14 47 10 49 6 50 2c1 4 3 8 8 12 12 10 38 18 38 38v86"
-                fill="#05190f"
-                stroke="#e8cf7a"
-                strokeWidth="1.5"
-              />
-              <path d="M12 138V55c0-16 22-24 32-32 4-3 5-6 6-9 1 3 2 6 6 9 10 8 32 16 32 32v83" fill="none" stroke="#d4af37" strokeOpacity="0.5" />
-            </svg>
-            <LogoMark className="relative mt-6 h-14 w-14" />
+          <div className="relative grid h-36 w-36 place-items-center rounded-full border border-gold-400/40 bg-ink-950/90 shadow-[0_0_60px_-10px_rgba(200,150,62,0.45)]">
+            <div className="absolute inset-2 rounded-full border border-dashed border-gold-400/25" />
+            {/* a tiny plane orbiting the globe */}
+            <div className="wipe-orbit absolute inset-0">
+              <Plane className="absolute -top-2 left-1/2 w-7 -translate-x-1/2" />
+            </div>
+            <LogoMark className="relative h-16 w-16" />
           </div>
         </div>
       </div>

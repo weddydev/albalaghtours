@@ -19,7 +19,7 @@ function BlockTitle({ eyebrow, children }) {
   return (
     <div className="pp-in">
       {eyebrow && <p className="text-[0.68rem] font-medium uppercase tracking-[0.24em] text-gold-300">{eyebrow}</p>}
-      <h3 className="mt-2 flex items-center gap-3 font-display text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold italic leading-tight text-cream-50">
+      <h3 className="mt-2 flex items-center gap-3 font-display text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold leading-tight text-cream-50">
         <span className="h-px w-8 shrink-0 bg-gold-400/60" aria-hidden="true" />
         {children}
       </h3>
@@ -36,8 +36,8 @@ function Programme({ pkg }) {
       <div className="pp-in glass-strong grid gap-8 overflow-hidden rounded-[32px] p-6 sm:p-10 lg:grid-cols-12 lg:gap-10">
         <div className="min-w-0 lg:col-span-7">
           <p className="text-xs uppercase tracking-[0.24em] text-gold-300">{pkg.season}</p>
-          <h3 className="mt-2 font-display text-[clamp(2.4rem,5vw,3.8rem)] font-semibold italic leading-[1] text-cream-50">{pkg.name}</h3>
-          <p className="mt-3 font-display text-xl italic text-gold-100">{pkg.tagline}</p>
+          <h3 className="mt-2 font-display text-[clamp(2.4rem,5vw,3.8rem)] font-semibold leading-[1] text-cream-50">{pkg.name}</h3>
+          <p className="mt-3 font-display text-xl text-gold-100">{pkg.tagline}</p>
           <p className="mt-4 max-w-xl leading-relaxed text-mist-300">{pkg.intro}</p>
           {pkg.route && <RouteChip route={pkg.route} className="mt-5" />}
         </div>
@@ -79,17 +79,17 @@ function Programme({ pkg }) {
           {pkg.inclusions.map((inc, i) => (
             <li key={inc.title} className="pp-card glass relative min-w-0 overflow-hidden rounded-[24px] p-6">
               <div className="flex items-start justify-between">
-                <span className="grid h-14 w-12 place-items-center rounded-t-full border border-gold-400/45 bg-ink-950/40 text-gold-200 shadow-[0_0_24px_-8px_rgba(212,175,55,0.6)]">
+                <span className="grid h-14 w-12 place-items-center rounded-t-full border border-gold-400/45 bg-ink-950/40 text-gold-200 shadow-[0_0_24px_-8px_rgba(200,150,62,0.6)]">
                   <Icon name={inc.icon} className="h-5 w-5" />
                 </span>
-                <span className="font-display text-4xl italic leading-none text-gold-400/25">{String(i + 1).padStart(2, '0')}</span>
+                <span className="font-display text-4xl leading-none text-gold-400/25">{String(i + 1).padStart(2, '0')}</span>
               </div>
               <h4 className="mt-5 font-display text-[1.45rem] font-semibold leading-tight text-cream-50">{inc.title}</h4>
               <p className="mt-2 text-sm leading-relaxed text-mist-300">{inc.text}</p>
             </li>
           ))}
           {pkg.cta && (
-            <li className="pp-card relative flex min-w-0 flex-col overflow-hidden rounded-[24px] border border-gold-300/60 bg-linear-to-b from-gold-400/15 to-ink-950/40 p-6 shadow-[0_0_40px_-14px_rgba(212,175,55,0.55)]">
+            <li className="pp-card relative flex min-w-0 flex-col overflow-hidden rounded-[24px] border border-gold-300/60 bg-linear-to-b from-gold-400/15 to-ink-950/40 p-6 shadow-[0_0_40px_-14px_rgba(200,150,62,0.55)]">
               <Icon name="sparkle" className="h-7 w-7 text-gold-200" />
               <h4 className="mt-5 font-display text-[1.45rem] font-semibold leading-tight text-cream-50">{pkg.cta.title}</h4>
               <p className="mt-2 text-sm leading-relaxed text-mist-300">{pkg.cta.text}</p>
@@ -131,7 +131,7 @@ function Programme({ pkg }) {
             <Icon name="mosque" className="h-6 w-6" />
           </span>
           <div className="min-w-0">
-            <h4 className="font-display text-2xl font-semibold italic text-cream-50">Riyazul Jannah arrangements</h4>
+            <h4 className="font-display text-2xl font-semibold text-cream-50">Riyazul Jannah arrangements</h4>
             <p className="mt-1 text-sm leading-relaxed text-mist-300">{pkg.riyazulJannah}</p>
           </div>
         </div>
@@ -206,7 +206,7 @@ export default function PilgrimProgrammes() {
 
   return (
     <section ref={root} id="programmes" className="relative py-20 sm:py-28">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-full bg-[radial-gradient(900px_480px_at_50%_520px,rgb(212_175_55/0.08),transparent)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-full bg-[radial-gradient(900px_480px_at_50%_520px,rgb(200_150_62/0.08),transparent)]" />
       <div className="relative mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-10">
         <SectionHeading
           eyebrow="Our programmes"

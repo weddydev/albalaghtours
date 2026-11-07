@@ -33,7 +33,7 @@ export default function Documents({ service }) {
             <span className="mx-auto grid h-14 w-14 place-items-center rounded-full border border-gold-500/50 bg-cream-50 text-gold-600">
               <Icon name="certificate" className="h-6 w-6" />
             </span>
-            <h2 className="mt-4 font-display text-4xl font-semibold italic text-ink-800 sm:text-5xl">{service.documentsTitle ?? 'Documents you may need'}</h2>
+            <h2 className="mt-4 font-display text-4xl font-semibold text-ink-800 sm:text-5xl">{service.documentsTitle ?? 'Documents you may need'}</h2>
             <p className="mx-auto mt-3 inline-flex items-center gap-2 rounded-full border border-gold-500/40 bg-cream-50/70 px-4 py-1.5 text-xs font-medium text-ink-700">
               <Icon name="shield" className="h-3.5 w-3.5 text-jade-600" />
               {service.documentsNote ?? 'Requirements vary — contact us to confirm.'}
@@ -43,8 +43,8 @@ export default function Documents({ service }) {
             {service.documents.map((d) => (
               <li key={d} className="dc-item flex items-start gap-3 border-b border-gold-500/20 pb-4 text-[0.95rem] leading-snug text-ink-800">
                 <svg viewBox="0 0 24 24" className="mt-0.5 h-6 w-6 shrink-0" aria-hidden="true">
-                  <circle cx="12" cy="12" r="10.5" fill="none" stroke="#1e8a4c" strokeOpacity="0.35" />
-                  <path className="dc-tick" d="M7 12.5l3.2 3.2L17 8.8" fill="none" stroke="#1e8a4c" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="12" cy="12" r="10.5" fill="none" stroke="#a87b30" strokeOpacity="0.35" />
+                  <path className="dc-tick" d="M7 12.5l3.2 3.2L17 8.8" fill="none" stroke="#a87b30" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 {d}
               </li>
@@ -52,7 +52,7 @@ export default function Documents({ service }) {
           </ul>
           <div className="relative mt-8 text-center">
             <a
-              href={waLink(`Assalamu Alaikum, could you confirm the documents I need for ${service.title}?`)}
+              href={waLink(`Hello, could you confirm the documents I need for ${service.title}?`)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex min-h-[44px] items-center gap-2 text-sm font-medium text-jade-700 underline-offset-4 hover:underline"

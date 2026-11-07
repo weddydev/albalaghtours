@@ -42,7 +42,7 @@ export default function PageHero({ crumb, kicker, lines, accent = 1, intro, acti
 
   return (
     <section ref={root} aria-labelledby="page-title" className="relative isolate overflow-hidden pb-16 pt-28 sm:pt-32 lg:flex lg:min-h-[86vh] lg:items-center lg:pb-20 lg:pt-36">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_75%_40%,rgb(30_138_76/0.22),transparent_70%),radial-gradient(45%_45%_at_0%_70%,rgb(13_59_40/0.6),transparent_70%)]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_75%_40%,rgb(200_150_62/0.22),transparent_70%),radial-gradient(45%_45%_at_0%_70%,rgb(51_36_26/0.6),transparent_70%)]" />
       <div className="pattern-overlay absolute inset-0 -z-10 opacity-[0.04]" />
       <div className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-linear-to-b from-transparent to-ink-900" />
 
@@ -63,7 +63,7 @@ export default function PageHero({ crumb, kicker, lines, accent = 1, intro, acti
           </nav>
           <div className="ph-rule mt-6 h-px w-48 origin-left bg-linear-to-r from-gold-300 via-gold-200 to-transparent" />
           <p className="ph-fade mt-6 text-xs font-medium uppercase tracking-[0.28em] text-gold-300">{kicker}</p>
-          <h1 id="page-title" className="mt-3 font-display text-[clamp(3.1rem,8.4vw,7.6rem)] font-semibold italic leading-[0.9] tracking-[-0.01em] text-cream-50">
+          <h1 id="page-title" className="mt-3 font-display text-[clamp(3.1rem,8.4vw,7.6rem)] font-semibold leading-[0.9] tracking-[-0.01em] text-cream-50">
             {lines.map((l, i) => (
               <span key={l} className={`ph-line block pb-[0.06em] ${i === accent ? 'accent-split pr-[0.08em]' : ''} ${i === 1 ? 'lg:pl-[0.5em]' : ''}`}>
                 {l}

@@ -27,7 +27,7 @@ export default function ZiyarathGrid({ places }) {
           key={p}
           className="zg-item glass flex min-w-0 items-center gap-3 rounded-2xl px-4 py-3.5 transition-[border-color] duration-500 hover:!border-gold-300/60"
         >
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-gold-400/40 font-display text-sm italic text-gold-200">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-gold-400/40 font-display text-sm text-gold-200">
             {String(i + 1).padStart(2, '0')}
           </span>
           <span className="min-w-0 break-words text-[0.95rem] leading-snug text-cream-50">{p}</span>

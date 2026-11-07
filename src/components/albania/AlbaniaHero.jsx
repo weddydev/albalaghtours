@@ -10,8 +10,8 @@ import Icon from '../ui/Icon'
 import RiderScene from './RiderScene'
 
 const FALLBACKS = [
-  'radial-gradient(90% 70% at 60% 20%, #1f6b45 0%, #0d3b28 45%, #04150d 100%)',
-  'radial-gradient(90% 70% at 60% 20%, #46708a 0%, #1b3446 45%, #07131c 100%)',
+  'radial-gradient(90% 70% at 60% 20%, #6b4a2a 0%, #33241a 45%, #1a130e 100%)',
+  'radial-gradient(90% 70% at 60% 20%, #6b4a2e 0%, #33241a 45%, #17110d 100%)',
   'radial-gradient(90% 70% at 60% 20%, #6b2a2e 0%, #2a1416 50%, #0a0505 100%)',
 ]
 // arch layout on the right: [position classes, parallax distance]
@@ -66,7 +66,7 @@ export default function AlbaniaHero() {
 
   return (
     <section ref={root} aria-labelledby="albania-title" className="relative isolate overflow-hidden pt-28 sm:pt-32 lg:pt-36">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_75%_35%,rgb(30_138_76/0.22),transparent_70%),radial-gradient(45%_45%_at_0%_70%,rgb(13_59_40/0.6),transparent_70%)]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_75%_35%,rgb(200_150_62/0.22),transparent_70%),radial-gradient(45%_45%_at_0%_70%,rgb(51_36_26/0.6),transparent_70%)]" />
       <div className="pattern-overlay absolute inset-0 -z-10 opacity-[0.04]" />
 
       <div className="mx-auto grid w-full max-w-[1320px] items-center gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:px-10">
@@ -96,7 +96,7 @@ export default function AlbaniaHero() {
             <span className="h-2 w-2 shrink-0 rotate-45 bg-alb-red" aria-hidden="true" />
             {hero.kicker}
           </p>
-          <h1 id="albania-title" className="mt-3 font-display text-[clamp(3rem,7.6vw,7.2rem)] font-semibold italic leading-[0.92] tracking-[-0.01em] text-cream-50">
+          <h1 id="albania-title" className="mt-3 font-display text-[clamp(3rem,7.6vw,7.2rem)] font-semibold leading-[0.92] tracking-[-0.01em] text-cream-50">
             <span className="ah-line block pb-[0.06em]">{hero.lines[0]}</span>
             <span className="ah-line accent-split block pb-[0.06em] pr-[0.08em] lg:pl-[0.5em]">{hero.lines[1]}</span>
           </h1>
@@ -129,12 +129,12 @@ export default function AlbaniaHero() {
           {hero.photos.map((p, i) => (
             <div key={p.src} className={`ah-arch absolute ${ARCHES[i][0]}`}>
               <div className="ah-par h-full w-full" data-depth={ARCHES[i][1]}>
-                <ArchFrame className="h-full w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_10px_rgba(212,175,55,0.45)]" finial={i === 0}>
+                <ArchFrame className="h-full w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_10px_rgba(200,150,62,0.45)]" finial={i === 0}>
                   <Photo src={p.src} alt={p.alt} fallback={FALLBACKS[i]} priority={i === 0} sizes="(max-width: 1023px) 60vw, 300px">
                     <Icon name={i === 2 ? 'mapPin' : 'globe'} strokeWidth={0.6} className="absolute left-1/2 top-[36%] h-1/3 w-1/3 -translate-x-1/2 text-gold-200 opacity-25" />
                   </Photo>
                   <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-ink-950/80 to-transparent" />
-                  <span className="absolute inset-x-0 bottom-4 px-3 text-center font-display text-base italic text-cream-50 sm:text-lg">{p.caption}</span>
+                  <span className="absolute inset-x-0 bottom-4 px-3 text-center font-display text-base text-cream-50 sm:text-lg">{p.caption}</span>
                 </ArchFrame>
               </div>
             </div>

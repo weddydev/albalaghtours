@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { gsap, useGSAP } from '../../lib/gsap'
+import { gsap, loopsOnlyWhenVisible, useGSAP } from '../../lib/gsap'
 import { useAppReady } from '../../lib/appState'
 import { hotels } from '../../data/content'
 
@@ -28,7 +28,7 @@ export default function DistanceRings() {
   const ready = useAppReady()
   const readyRef = useRef(ready)
 
-  useGSAP(
+  const { context: gsapCtx } = useGSAP(
     () => {
       gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
         const q = gsap.utils.selector(root)
@@ -47,6 +47,8 @@ export default function DistanceRings() {
     },
     { scope: root },
   )
+  // ambient loops rest while this block is off-screen
+  useEffect(() => loopsOnlyWhenVisible(gsapCtx, root.current), [gsapCtx])
 
   useEffect(() => {
     readyRef.current = ready
@@ -61,38 +63,38 @@ export default function DistanceRings() {
 
   return (
     <div ref={root} className="relative mx-auto aspect-square w-full max-w-[520px]" aria-hidden="true">
-      <div className="absolute inset-[4%] rounded-full bg-[radial-gradient(closest-side,rgb(30_138_76/0.18),transparent)]" />
+      <div className="absolute inset-[4%] rounded-full bg-[radial-gradient(closest-side,rgb(200_150_62/0.18),transparent)]" />
       {/* sweeping beam */}
       <div className="absolute inset-[4%] overflow-hidden rounded-full">
-        <div className="dr-sweep absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,rgb(232_207_122/0.28),rgb(232_207_122/0.06)_40deg,transparent_70deg)]" />
+        <div className="dr-sweep absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,rgb(230_194_133/0.28),rgb(230_194_133/0.06)_40deg,transparent_70deg)]" />
       </div>
       <svg viewBox="0 0 400 400" className="absolute inset-0 h-full w-full overflow-visible">
         {RINGS.map((ring, i) => (
           <g key={ring.label}>
-            <circle className="dr-ring" cx={C} cy={C} r={ring.r} fill="none" stroke="#d4af37" strokeOpacity={0.75 - i * 0.12} strokeWidth="1" strokeDasharray={i === 3 ? '2 5' : undefined} />
-            <text className="dr-label" x={C} y={C - ring.r - 6} textAnchor="middle" fill="#e8cf7a" fontSize="10" letterSpacing="2" fontFamily="Inter, sans-serif">
+            <circle className="dr-ring" cx={C} cy={C} r={ring.r} fill="none" stroke="#c8963e" strokeOpacity={0.75 - i * 0.12} strokeWidth="1" strokeDasharray={i === 3 ? '2 5' : undefined} />
+            <text className="dr-label" x={C} y={C - ring.r - 6} textAnchor="middle" fill="#e6c285" fontSize="10" letterSpacing="2" fontFamily="Inter, sans-serif">
               {ring.label}
             </text>
           </g>
         ))}
         {/* Kaaba at the centre */}
         <g className="dr-core">
-          <circle cx={C} cy={C} r="26" fill="#05190f" stroke="#e8cf7a" strokeWidth="1.2" />
-          <g transform={`translate(${C - 12} ${C - 12})`} fill="none" stroke="#f3dc8f" strokeWidth="1.4" strokeLinejoin="round">
+          <circle cx={C} cy={C} r="26" fill="#1f1510" stroke="#e6c285" strokeWidth="1.2" />
+          <g transform={`translate(${C - 12} ${C - 12})`} fill="none" stroke="#eed39a" strokeWidth="1.4" strokeLinejoin="round">
             <path d="M4 8.5L12 5l8 3.5v10L12 22l-8-3.5z" />
             <path d="M4 8.5L12 12l8-3.5M12 12v10M4 11.5l8 3.5 8-3.5" />
           </g>
         </g>
         {dots.map((d) => (
           <g key={d.id} className="dr-dot">
-            <circle className="dr-pulse" cx={d.x} cy={d.y} r="6" fill="none" stroke="#5fd28f" strokeWidth="1" />
-            <circle cx={d.x} cy={d.y} r="6" fill="#3fbf74" stroke="#d7f8e2" strokeWidth="1.5" />
+            <circle className="dr-pulse" cx={d.x} cy={d.y} r="6" fill="none" stroke="#e0b866" strokeWidth="1" />
+            <circle cx={d.x} cy={d.y} r="6" fill="#d9a84e" stroke="#f3e9d8" strokeWidth="1.5" />
           </g>
         ))}
       </svg>
       <div className="dr-chip glass absolute bottom-[10%] right-[2%] rounded-2xl px-4 py-3 text-xs sm:right-[6%]">
         <p className="text-[0.6rem] uppercase tracking-[0.2em] text-gold-300">Umrah group · Makkah</p>
-        <p className="mt-1 font-display text-lg italic text-cream-50">{hotels.makkah[0].name}</p>
+        <p className="mt-1 font-display text-lg text-cream-50">{hotels.makkah[0].name}</p>
         <p className="text-mist-300">
           {hotels.makkah[0].stars}-star · {hotels.makkah[0].distance}&nbsp;m from {hotels.makkah[0].from}
         </p>

@@ -71,9 +71,9 @@ export default function ArchCarousel({ items, label, fallback, icon = 'camera', 
               type="button"
               onClick={() => setOpen(i)}
               aria-label={`Open photo: ${it.caption || it.alt}`}
-              className="group block w-full text-left outline-none focus-visible:[&_.arch-borders]:drop-shadow-[0_0_10px_rgba(232,207,122,0.9)]"
+              className="group block w-full text-left outline-none focus-visible:[&_.arch-borders]:drop-shadow-[0_0_10px_rgba(230,194,133,0.9)]"
             >
-              <ArchFrame className="aspect-[3/4] w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_8px_rgba(212,175,55,0.35)]">
+              <ArchFrame className="aspect-[3/4] w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_8px_rgba(200,150,62,0.35)]">
                 <div className="ac-par absolute inset-[-8%]">
                   <div className="absolute inset-0 transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105">
                     <Photo src={it.src} alt={it.alt} fallback={fallback} sizes="(max-width: 639px) 68vw, (max-width: 1023px) 40vw, 300px">

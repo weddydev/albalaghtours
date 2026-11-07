@@ -36,7 +36,7 @@ function Amenities() {
       <ul className="mx-auto grid max-w-[860px] gap-3 px-5 sm:grid-cols-2 sm:px-8 lg:gap-5 lg:px-10">
         {hotelAmenities.map((a) => (
           <li key={a.title} className="am-card glass rounded-[24px] p-5 text-center sm:p-7">
-            <span className="mx-auto grid h-16 w-16 place-items-center rounded-full border border-gold-400/40 bg-ink-950/50 text-gold-200 shadow-[0_0_30px_-8px_rgba(212,175,55,0.5)]">
+            <span className="mx-auto grid h-16 w-16 place-items-center rounded-full border border-gold-400/40 bg-ink-950/50 text-gold-200 shadow-[0_0_30px_-8px_rgba(200,150,62,0.5)]">
               <Icon name={a.icon} strokeWidth={1.3} className="am-icon h-7 w-7" />
             </span>
             <h3 className="mt-4 font-display text-xl font-semibold text-cream-50 sm:text-2xl">{a.title}</h3>
@@ -69,7 +69,7 @@ function Worldwide() {
         <div className="ww-card glass-strong relative grid items-center gap-10 overflow-hidden rounded-[36px] p-7 sm:p-12 lg:grid-cols-2">
           <div>
             <p className="eyebrow">Beyond the Haramain</p>
-            <h2 className="mt-5 font-display text-[clamp(2.4rem,4.6vw,4rem)] font-semibold italic leading-none text-cream-50">
+            <h2 className="mt-5 font-display text-[clamp(2.4rem,4.6vw,4rem)] font-semibold leading-none text-cream-50">
               Hotels <span className="text-grad-green pr-[0.05em]">worldwide</span>, too
             </h2>
             <p className="mt-5 max-w-md text-mist-300">City breaks, business trips and family holidays — ask us about hotel stays for your journey.</p>
@@ -86,7 +86,7 @@ function Worldwide() {
                 {[...CITIES, ...CITIES].map((c, i) => (
                   <span
                     key={i}
-                    className={`whitespace-nowrap rounded-full border px-5 py-2.5 font-display text-2xl italic ${
+                    className={`whitespace-nowrap rounded-full border px-5 py-2.5 font-display text-2xl ${
                       (i + r) % 3 === 0 ? 'border-gold-300/60 text-gold-100' : 'border-gold-400/20 text-mist-300'
                     }`}
                   >
@@ -149,7 +149,7 @@ export default function HotelsPage() {
         <CtaBand
           prefix="Looking for"
           accent="the right stay"
-          whatsapp="Assalamu Alaikum, please help me with a hotel stay for my trip."
+          whatsapp="Hello, please help me with a hotel stay for my trip."
           lead="For Hajj, the office shares the Makkah and Madinah hotel details at booking. For other trips, tell us your dates and we will look at options."
         />
       </AfterFirstPaint>

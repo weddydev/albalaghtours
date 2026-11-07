@@ -10,9 +10,9 @@ import Dialog from '../ui/Dialog'
 import Lightbox from '../ui/Lightbox'
 
 const FALLBACKS = [
-  'radial-gradient(90% 70% at 50% 20%, #1f6b45 0%, #0d3b28 45%, #04150d 100%)',
+  'radial-gradient(90% 70% at 50% 20%, #6b4a2a 0%, #33241a 45%, #1a130e 100%)',
   'radial-gradient(90% 70% at 50% 20%, #6b5a3a 0%, #2a2216 50%, #0a0805 100%)',
-  'radial-gradient(90% 70% at 50% 20%, #3a4a5c 0%, #142233 45%, #050a10 100%)',
+  'radial-gradient(90% 70% at 50% 20%, #4a3626 0%, #251a12 45%, #120c09 100%)',
 ]
 const ASPECTS = ['aspect-[4/5]', 'aspect-square', 'aspect-[3/4]', 'aspect-[4/3]', 'aspect-[4/5]', 'aspect-[3/4]']
 const byline = (r) => [r.name, r.city].filter(Boolean).join(' · ')
@@ -34,7 +34,7 @@ function VideoModal({ review, onClose }) {
             <div className="absolute inset-0 grid place-items-center p-6 text-center">
               <div>
                 <Icon name="play" strokeWidth={1} className="mx-auto h-12 w-12 text-gold-200 opacity-60" />
-                <p className="mt-3 font-display text-2xl italic text-cream-50">Video coming soon</p>
+                <p className="mt-3 font-display text-2xl text-cream-50">Video coming soon</p>
               </div>
             </div>
           ) : (
@@ -63,12 +63,12 @@ function VideoModal({ review, onClose }) {
 
 function VideoCard({ r, i, onPlay }) {
   const inner = (
-    <ArchFrame className="aspect-[3/4.4] w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_8px_rgba(212,175,55,0.35)]">
+    <ArchFrame className="aspect-[3/4.4] w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_8px_rgba(200,150,62,0.35)]">
       <div className="absolute inset-0 transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105">
         {r ? <Photo src={r.poster} fallback={FALLBACKS[i % 3]} sizes="(max-width: 639px) 62vw, 260px" /> : <div className="absolute inset-0" style={{ background: FALLBACKS[0] }} />}
       </div>
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-ink-950/90 to-transparent" />
-      <span className="absolute left-1/2 top-[44%] grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-gold-300/70 bg-ink-950/60 text-gold-100 shadow-[0_0_30px_-6px_rgba(212,175,55,0.7)] backdrop-blur transition-transform duration-500 group-hover:scale-110">
+      <span className="absolute left-1/2 top-[44%] grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-gold-300/70 bg-ink-950/75 text-gold-100 shadow-[0_0_30px_-6px_rgba(200,150,62,0.7)] transition-transform duration-500 group-hover:scale-110">
         <Icon name="play" strokeWidth={1.6} className="ml-1 h-6 w-6 fill-gold-200/80" />
       </span>
       <span className="absolute inset-x-0 bottom-5 flex flex-col items-center gap-1.5 px-3 text-center">
@@ -80,7 +80,7 @@ function VideoCard({ r, i, onPlay }) {
   return (
     <li className="ge-video w-[62%] shrink-0 snap-center sm:w-[36%] lg:w-[calc((100%-60px)/4)]">
       {r ? (
-        <button type="button" onClick={() => onPlay(r)} aria-label={`Play video review — ${byline(r)}`} className="group block w-full outline-none focus-visible:[&_.arch-borders]:drop-shadow-[0_0_10px_rgba(232,207,122,0.9)]">
+        <button type="button" onClick={() => onPlay(r)} aria-label={`Play video review — ${byline(r)}`} className="group block w-full outline-none focus-visible:[&_.arch-borders]:drop-shadow-[0_0_10px_rgba(230,194,133,0.9)]">
           {inner}
         </button>
       ) : (
@@ -192,12 +192,12 @@ export default function GuestExperiences() {
 
   return (
     <section ref={root} id="reviews" aria-labelledby="reviews-title" className="relative py-24 sm:py-32">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-full bg-[radial-gradient(900px_480px_at_50%_520px,rgb(212_175_55/0.08),transparent)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-full bg-[radial-gradient(900px_480px_at_50%_520px,rgb(200_150_62/0.08),transparent)]" />
       <div className="relative mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-10">
         <SectionHeading id="reviews-title" eyebrow="Guest Experiences" title={['Stories from our ', { accent: 'guests' }]} lead="Videos, photos and words from the people we travel with." />
 
         {/* video reviews */}
-        <h3 className="mt-16 flex items-center gap-3 font-display text-2xl italic text-cream-50">
+        <h3 className="mt-16 flex items-center gap-3 font-display text-2xl text-cream-50">
           <Icon name="play" className="h-5 w-5 text-gold-300" />
           Video reviews
         </h3>
@@ -208,7 +208,7 @@ export default function GuestExperiences() {
         {/* photo reviews */}
         {photos.length > 0 && (
           <>
-            <h3 className="mt-14 flex items-center gap-3 font-display text-2xl italic text-cream-50">
+            <h3 className="mt-14 flex items-center gap-3 font-display text-2xl text-cream-50">
               <Icon name="camera" className="h-5 w-5 text-gold-300" />
               Photos from our guests
             </h3>
@@ -246,7 +246,7 @@ export default function GuestExperiences() {
 
         <p className="mt-10 text-center text-sm text-mist-300">
           Travelled with us?{' '}
-          <a href={waLink('Assalamu Alaikum Al Balagh Tours. I would like to share my travel experience.')} target="_blank" rel="noopener noreferrer" className="text-jade-300 underline-offset-4 hover:underline">
+          <a href={waLink('Hello Al Balagh Tours. I would like to share my travel experience.')} target="_blank" rel="noopener noreferrer" className="text-jade-300 underline-offset-4 hover:underline">
             Share your experience on WhatsApp
           </a>
         </p>

@@ -25,7 +25,7 @@ export default function TransfersTeaser() {
       </span>
       <span className="min-w-0 flex-1">
         <span className="block text-[0.65rem] uppercase tracking-[0.22em] text-gold-300">{s.routes.join(' · ')}</span>
-        <span className="mt-1 block font-display text-2xl font-semibold italic leading-tight text-cream-50 sm:text-3xl">Luxury AC coaches</span>
+        <span className="mt-1 block font-display text-2xl font-semibold leading-tight text-cream-50 sm:text-3xl">Luxury AC coaches</span>
         <span className="mt-1 block text-sm text-mist-300 max-sm:hidden">{s.features.map((f) => f.label).join(' · ')}</span>
       </span>
       <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gold-400/50 text-gold-200 transition-transform duration-500 group-hover:rotate-45">

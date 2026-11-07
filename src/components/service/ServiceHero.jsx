@@ -51,7 +51,7 @@ export default function ServiceHero({ service }) {
 
   return (
     <section ref={root} aria-labelledby="service-title" className="relative isolate overflow-hidden pb-16 pt-28 sm:pt-32 lg:flex lg:min-h-[86vh] lg:items-center lg:pb-20 lg:pt-36">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_75%_40%,rgb(30_138_76/0.22),transparent_70%),radial-gradient(45%_45%_at_0%_70%,rgb(13_59_40/0.6),transparent_70%)]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_75%_40%,rgb(200_150_62/0.22),transparent_70%),radial-gradient(45%_45%_at_0%_70%,rgb(51_36_26/0.6),transparent_70%)]" />
       <div className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-linear-to-b from-transparent to-ink-900" />
       <div className="pattern-overlay absolute inset-0 -z-10 opacity-[0.04]" />
 
@@ -79,7 +79,7 @@ export default function ServiceHero({ service }) {
           <div className="svh-rule mt-6 h-px w-48 origin-left bg-linear-to-r from-gold-300 via-gold-200 to-transparent" />
 
           <p className="svh-fade mt-6 text-xs font-medium uppercase tracking-[0.28em] text-gold-300">{service.kicker}</p>
-          <h1 id="service-title" className="mt-3 font-display text-[clamp(3.2rem,9vw,8.2rem)] font-semibold italic leading-[0.9] tracking-[-0.01em] text-cream-50">
+          <h1 id="service-title" className="mt-3 font-display text-[clamp(3.2rem,9vw,8.2rem)] font-semibold leading-[0.9] tracking-[-0.01em] text-cream-50">
             {lines.map((l, i) => (
               <span key={l} className={`svh-line block pb-[0.06em] ${i === accent ? 'accent-split pr-[0.08em]' : ''} ${i === 1 ? 'lg:pl-[0.6em]' : ''}`}>
                 {l}
@@ -106,7 +106,7 @@ export default function ServiceHero({ service }) {
 
         <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[400px] lg:col-span-5 lg:max-w-[440px]">
           <div className="absolute inset-[-12%] -z-10 rounded-full bg-[radial-gradient(closest-side,rgb(246_214_130/0.22),transparent)]" />
-          <ArchFrame className="aspect-[4/5] w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_12px_rgba(212,175,55,0.45)]">
+          <ArchFrame className="aspect-[4/5] w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_12px_rgba(200,150,62,0.45)]">
             <div className="svh-reveal absolute inset-0">
               <div className="svh-zoom absolute inset-0">
                 <ServiceArt service={service} priority iconClassName="!h-[60%] !w-[60%] !right-[20%] !top-[12%]" />

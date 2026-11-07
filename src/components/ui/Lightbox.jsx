@@ -3,7 +3,7 @@ import { gsap } from '../../lib/gsap'
 import Dialog from './Dialog'
 import Icon from './Icon'
 
-const FALLBACK = 'radial-gradient(90% 80% at 50% 25%, #1f6b45 0%, #0d3b28 45%, #04150d 100%)'
+const FALLBACK = 'radial-gradient(90% 80% at 50% 25%, #6b4a2a 0%, #33241a 45%, #1a130e 100%)'
 
 /**
  * Full-screen photo viewer: ← / → keys, prev / next buttons, horizontal swipe, counter + caption.
@@ -47,7 +47,7 @@ export default function Lightbox({ items, start = 0, label = 'Photo viewer', onC
             <div className="absolute inset-0 grid place-items-center text-center">
               <div>
                 <Icon name="camera" strokeWidth={1} className="mx-auto h-14 w-14 text-gold-200 opacity-60" />
-                <p className="mt-3 font-display text-2xl italic text-cream-50">Photo coming soon</p>
+                <p className="mt-3 font-display text-2xl text-cream-50">Photo coming soon</p>
               </div>
             </div>
           ) : (

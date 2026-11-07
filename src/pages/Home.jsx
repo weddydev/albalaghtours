@@ -14,7 +14,7 @@ export default function Home() {
   const { hash } = useLocation()
   useDocumentMeta(
     null,
-    'Al Balagh Tours & Travels, Mehdipatnam, Hyderabad — Haj & Umrah packages, air ticketing, visa, passport, immigration, attestation, VFS appointments, hotels and holiday packages.',
+    'Al Balagh Tours & Travels, Mehdipatnam, Hyderabad — tailor-made holidays worldwide, air ticketing, visas, hotels, travel insurance, passport and immigration services, and Hajj & Umrah packages.',
   )
 
   // arriving from another page with /#section: scroll once the doors have opened

@@ -47,7 +47,7 @@ export default function Preloader({ onDone }) {
         <div className="pre-glow invisible absolute left-1/2 top-12 h-72 w-72 -translate-x-1/2 -translate-y-1/2 scale-50 rounded-full bg-[radial-gradient(closest-side,rgb(246_214_130/0.35),transparent)] opacity-0" />
         <LogoMark className="relative h-24 w-24" />
         <div className="mt-6 overflow-hidden">
-          <p className="pre-word font-display text-4xl font-semibold italic text-cream-50">Al Balagh</p>
+          <p className="pre-word font-display text-4xl font-semibold text-cream-50">Al Balagh</p>
         </div>
         <div className="overflow-hidden">
           <p className="pre-word mt-1 text-[0.65rem] tracking-[0.5em] text-gold-200">TOURS &amp; TRAVELS</p>

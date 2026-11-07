@@ -1,6 +1,6 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { gsap, useGSAP } from '../lib/gsap'
+import { gsap, loopsOnlyWhenVisible, useGSAP } from '../lib/gsap'
 import { servicePath, services } from '../data/content'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { ArchFrame, LanternSVG } from '../components/ui/Ornaments'
@@ -10,7 +10,7 @@ export default function NotFound() {
   const root = useRef(null)
   useDocumentMeta('Page not found', 'This page could not be found. Explore Al Balagh Tours & Travels services in Hyderabad.')
 
-  useGSAP(
+  const { context: gsapCtx } = useGSAP(
     () => {
       gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
         const q = gsap.utils.selector(root)
@@ -25,16 +25,18 @@ export default function NotFound() {
     },
     { scope: root },
   )
+  // ambient loops rest while this block is off-screen
+  useEffect(() => loopsOnlyWhenVisible(gsapCtx, root.current), [gsapCtx])
 
   return (
     <section ref={root} className="relative isolate flex min-h-svh items-center overflow-hidden pb-24 pt-36">
       <div className="pattern-overlay absolute inset-0 -z-10 opacity-[0.04]" />
-      <div className="absolute left-1/2 top-1/2 -z-10 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(30_138_76/0.2),transparent)]" />
+      <div className="absolute left-1/2 top-1/2 -z-10 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(200_150_62/0.2),transparent)]" />
       <div className="mx-auto grid w-full max-w-[1100px] items-center gap-14 px-5 sm:px-8 lg:grid-cols-2">
         <div className="relative mx-auto h-[420px] w-[300px]">
-          <ArchFrame className="h-full w-full" innerClassName="bg-[radial-gradient(80%_60%_at_50%_30%,#0d3b28,#03110b)]">
+          <ArchFrame className="h-full w-full" innerClassName="bg-[radial-gradient(80%_60%_at_50%_30%,#33241a,#17110d)]">
             <div className="nf-reveal absolute inset-0 flex items-end justify-center pb-12">
-              <p className="flex overflow-hidden font-display text-[8.5rem] font-semibold italic leading-none">
+              <p className="flex overflow-hidden font-display text-[8.5rem] font-semibold leading-none">
                 {['4', '0', '4'].map((d, i) => (
                   <span key={i} className="nf-digit text-grad-gold inline-block px-1">
                     {d}
@@ -52,7 +54,7 @@ export default function NotFound() {
         </div>
         <div className="text-center lg:text-left">
           <p className="nf-fade eyebrow">Page not found</p>
-          <h1 className="nf-fade mt-5 font-display text-5xl font-semibold italic leading-none text-cream-50 sm:text-6xl">
+          <h1 className="nf-fade mt-5 font-display text-5xl font-semibold leading-none text-cream-50 sm:text-6xl">
             This path isn’t on <span className="text-grad-green">our map</span>
           </h1>
           <p className="nf-fade mt-5 text-mist-300">The page may have moved. Let us guide you back — or straight to the service you need.</p>

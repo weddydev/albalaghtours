@@ -33,7 +33,7 @@ export default function Channels() {
     <span className="relative grid h-16 w-16 place-items-center">
       <span className={`ch-ripple absolute inset-0 rounded-full border ${green ? 'border-jade-400/60' : 'border-gold-300/60'}`} aria-hidden="true" />
       <span
-        className={`relative grid h-16 w-16 place-items-center rounded-full border bg-ink-950/60 shadow-[0_0_30px_-8px_rgba(212,175,55,0.5)] ${
+        className={`relative grid h-16 w-16 place-items-center rounded-full border bg-ink-950/60 shadow-[0_0_30px_-8px_rgba(200,150,62,0.5)] ${
           green ? 'border-jade-400/60 text-jade-300' : 'border-gold-400/50 text-gold-200'
         }`}
       >
@@ -47,7 +47,7 @@ export default function Channels() {
       <ul className="mx-auto grid max-w-[1180px] gap-4 px-5 sm:px-8 md:grid-cols-3 lg:gap-6 lg:px-10">
         <li className="ch-card glass rounded-[28px] p-7">
           <Medallion icon="phone" />
-          <h2 className="mt-6 font-display text-3xl italic text-cream-50">Call us</h2>
+          <h2 className="mt-6 font-display text-3xl text-cream-50">Call us</h2>
           <p className="mt-1 text-sm text-mist-500">Speak to {contact.person} or our team.</p>
           <ul className="mt-5 space-y-2">
             {contact.phones.map((p) => (
@@ -62,7 +62,7 @@ export default function Channels() {
         </li>
         <li className="ch-card glass rounded-[28px] p-7">
           <Medallion icon="whatsapp" green />
-          <h2 className="mt-6 font-display text-3xl italic text-cream-50">WhatsApp</h2>
+          <h2 className="mt-6 font-display text-3xl text-cream-50">WhatsApp</h2>
           <p className="mt-1 text-sm text-mist-500">Send your questions and documents list any time.</p>
           <p className="mt-5 text-xl text-cream-100">{contact.phones[0].label}</p>
           <a href={waLink()} target="_blank" rel="noopener noreferrer" className="btn btn-primary mt-5 py-1.5 pl-5 text-sm">
@@ -74,7 +74,7 @@ export default function Channels() {
         </li>
         <li className="ch-card glass rounded-[28px] p-7">
           <Medallion icon="mapPin" />
-          <h2 className="mt-6 font-display text-3xl italic text-cream-50">Visit us</h2>
+          <h2 className="mt-6 font-display text-3xl text-cream-50">Visit us</h2>
           <address className="mt-3 text-sm not-italic leading-relaxed text-mist-300">
             {contact.address.lines.map((l) => (
               <span key={l} className="block">

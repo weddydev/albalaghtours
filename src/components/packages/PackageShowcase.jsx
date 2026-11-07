@@ -8,7 +8,7 @@ import Icon from '../ui/Icon'
 import PackageModal from './PackageModal'
 import { RouteChip } from './ProgrammeBits'
 
-const FALLBACK = 'radial-gradient(90% 70% at 50% 25%, #3a4a5c 0%, #142233 45%, #050a10 100%)'
+const FALLBACK = 'radial-gradient(90% 70% at 50% 25%, #4a3626 0%, #251a12 45%, #120c09 100%)'
 const TABS = [
   { id: 'hajj', label: 'Hajj 2027', icon: 'kaaba' },
   { id: 'umrah', label: 'Umrah', icon: 'mosque' },
@@ -17,7 +17,7 @@ const TABS = [
 /** One programme as a large card: arch photo, badge, highlights, route, "contact for price". */
 export function PackageCard({ pkg, onDetails, search }) {
   return (
-    <article className="pk-card glass group relative grid overflow-hidden rounded-[32px] p-3 transition-shadow duration-500 hover:shadow-[0_30px_70px_-30px_rgba(212,175,55,0.5)] lg:grid-cols-12 lg:gap-4">
+    <article className="pk-card glass group relative grid overflow-hidden rounded-[32px] p-3 transition-shadow duration-500 hover:shadow-[0_30px_70px_-30px_rgba(200,150,62,0.5)] lg:grid-cols-12 lg:gap-4">
       <div className="relative h-60 sm:h-80 lg:col-span-5 lg:h-auto lg:min-h-[480px]">
         <ArchFrame className="h-full w-full" innerClassName="bg-ink-900" finial={false}>
           <div className="absolute inset-0 transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105">
@@ -27,7 +27,7 @@ export function PackageCard({ pkg, onDetails, search }) {
           </div>
           <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-ink-950/80 to-transparent" />
         </ArchFrame>
-        <span className="absolute bottom-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-linear-to-b from-gold-100 to-gold-400 px-3 py-1 text-xs font-semibold text-ink-900 shadow-[0_8px_20px_-6px_rgba(212,175,55,0.7)]">
+        <span className="absolute bottom-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-linear-to-b from-gold-100 to-gold-400 px-3 py-1 text-xs font-semibold text-ink-900 shadow-[0_8px_20px_-6px_rgba(200,150,62,0.7)]">
           <Icon name="star" strokeWidth={2} className="h-3 w-3" />
           {pkg.badge}
         </span>
@@ -36,7 +36,7 @@ export function PackageCard({ pkg, onDetails, search }) {
       <div className="flex min-w-0 flex-col px-3 pb-3 pt-6 sm:px-6 lg:col-span-7 lg:py-8 lg:pr-8">
         <p className="text-[0.65rem] font-medium uppercase tracking-[0.22em] text-gold-300">{pkg.season}</p>
         <h3 className="mt-2 font-display text-[2.1rem] font-semibold leading-[1.05] text-cream-50 sm:text-[2.7rem]">{pkg.name}</h3>
-        <p className="mt-2 font-display text-lg italic text-gold-100 sm:text-xl">{pkg.tagline}</p>
+        <p className="mt-2 font-display text-lg text-gold-100 sm:text-xl">{pkg.tagline}</p>
         <p className="mt-3 max-w-xl text-sm leading-relaxed text-mist-300 sm:text-[0.95rem]">{pkg.intro}</p>
         {pkg.route && <RouteChip route={pkg.route} className="mt-5 self-start" />}
 
@@ -74,7 +74,7 @@ export function PackageCard({ pkg, onDetails, search }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Enquire about ${pkg.name} on WhatsApp`}
-              className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-gold-300/60 bg-linear-to-b from-jade-400 to-jade-600 text-white shadow-[0_10px_24px_-8px_rgba(63,191,116,0.8)] transition-transform hover:scale-105"
+              className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-gold-300/60 bg-linear-to-b from-jade-400 to-jade-600 text-white shadow-[0_10px_24px_-8px_rgba(217,168,78,0.8)] transition-transform hover:scale-105"
             >
               <Icon name="whatsapp" className="h-5 w-5" />
             </a>
@@ -201,7 +201,7 @@ export default function PackageShowcase({ initial = 'hajj', search: initialSearc
                   ref={indicator}
                   data-flip-id="pk-indicator"
                   aria-hidden="true"
-                  className="absolute inset-0 -z-0 rounded-full bg-linear-to-b from-jade-400 to-jade-600 shadow-[0_8px_24px_-8px_rgba(63,191,116,0.9),inset_0_1px_0_rgba(255,255,255,0.35)]"
+                  className="absolute inset-0 -z-0 rounded-full bg-linear-to-b from-jade-400 to-jade-600 shadow-[0_8px_24px_-8px_rgba(217,168,78,0.9),inset_0_1px_0_rgba(255,255,255,0.35)]"
                 />
               )}
               <Icon name={t.icon} className="relative h-4 w-4" />

@@ -27,23 +27,45 @@ export const contact = {
   photo: '/images/team-shafi.jpg',
   // second office — no street address or extra numbers until the client provides them
   branch: { city: 'Vijayawada', area: 'Panja Center', note: 'Also at our Vijayawada office (Panja Center)' },
-  since: 'Serving pilgrims since 2016', // TODO: confirm with client (applies to Hyderabad office too?)
+  since: 'Serving travellers since 2016', // TODO: confirm with client (applies to Hyderabad office too?)
 }
 
-export const waLink = (text = 'Assalamu Alaikum, I would like to enquire about your services.') =>
+export const waLink = (text = 'Hello, I would like to enquire about your services.') =>
   `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent(text)}`
 
 // Prefilled WhatsApp text for the two pilgrimage programmes (client wording).
 export const enquiry = {
-  hajj: 'Assalamu Alaikum Al Balagh Tours. Please share the Hajj 2027 package details, total price, dates and hotel arrangements.',
+  hajj: 'Hello Al Balagh Tours. Please share the Hajj 2027 package details, total price, dates and hotel arrangements.',
   umrah:
-    'Assalamu Alaikum. Please share details of your Ziyarath Special Umrah group, including departure dates, duration, price, availability and Riyazul Jannah arrangements.',
+    'Hello. Please share details of your Ziyarath Special Umrah group, including departure dates, duration, price, availability and Riyazul Jannah arrangements.',
 }
 
 /** Programme enquiry text; the hero search choices are appended only when the visitor gave them. */
 export const enquiryText = (type, { month, travellers } = {}) =>
   [enquiry[type], month && `Preferred departure month: ${month}.`, travellers && `Travellers: ${travellers}.`].filter(Boolean).join(' ')
 
+/* Hero trip planner: the kinds of trip a visitor can ask about. */
+export const tripTypes = [
+  { id: 'holiday', label: 'Holiday package', icon: 'palm' },
+  { id: 'flights', label: 'Flights only', icon: 'plane' },
+  { id: 'visa', label: 'Visa assistance', icon: 'stamp' },
+  { id: 'hotel', label: 'Hotel stay', icon: 'bed' },
+  { id: 'business', label: 'Business trip', icon: 'briefcase' },
+  { id: 'umrah', label: 'Umrah / Hajj', icon: 'globe' },
+]
+
+/** WhatsApp text from the hero trip planner; only the details the visitor gave are mentioned. */
+export const tripEnquiry = ({ destination, type, month, travellers } = {}) => {
+  const kind = tripTypes.find((t) => t.id === type)?.label.toLowerCase() ?? 'trip'
+  const where = destination?.trim()
+  return [
+    `Hello Al Balagh Tours. I would like help planning a ${kind}${where ? ` to ${where}` : ''}.`,
+    month && `Preferred departure: ${month}.`,
+    travellers && `Travellers: ${travellers}.`,
+  ]
+    .filter(Boolean)
+    .join(' ')
+}
 export const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   'Mawin Zam Zam Plaza, Opposite Old Prince Hotel, Mehdipatnam, Hyderabad, Telangana 500028',
 )}`
@@ -52,9 +74,8 @@ export const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encod
 export const nav = [
   { label: 'Home', to: '/' },
   { label: 'Services', to: '/#services', mega: true },
-  { label: 'Packages', to: '/packages' },
-  { label: 'Hotels', to: '/hotels' },
   { label: 'Destinations', to: '/destinations' },
+  { label: 'Packages', to: '/packages' },
   { label: 'Guest Experiences', short: 'Reviews', to: '/#reviews' }, // `short` is used where the bar is narrow
   { label: 'Contact', to: '/contact' },
 ]
@@ -63,10 +84,11 @@ export const nav = [
  * SERVICES — one object per service; drives the home Services grid AND /services/:slug pages.
  * `title` uses the client's business-card wording. Copy is deliberately generic: no fees,
  * processing times, success rates or approvals are promised anywhere.
- * `heading.lines` + `heading.accent` (index of the green line) build the detail-page title.
+ * `heading.lines` + `heading.accent` (index of the gold accent line) build the detail-page title.
+ * Display order is set by SERVICE_ORDER below the list.
  * `motif` picks the floating SVG on the detail page; `tone` tints the image fallback.
  * ---------------------------------------------------------------------------------------- */
-export const services = [
+const SERVICE_LIST = [
   {
     slug: 'haj-umrah',
     title: 'Haj & Umrah Packages',
@@ -76,7 +98,6 @@ export const services = [
     motif: 'kaaba',
     tone: 'night',
     image: '/images/services/haj-umrah.webp',
-    featured: true,
     kicker: 'Hajj 2027 · Ziyarath Special Umrah',
     heading: { lines: ['Haj &', 'Umrah'], accent: 1 },
     intro:
@@ -113,7 +134,7 @@ export const services = [
       },
     ],
     related: ['air-ticketing', 'visa-services', 'hotel-bookings'],
-    whatsapp: 'Assalamu Alaikum Al Balagh Tours. Please share details of your Hajj 2027 and Ziyarath Special Umrah programmes.',
+    whatsapp: 'Hello Al Balagh Tours. Please share details of your Hajj 2027 and Ziyarath Special Umrah programmes.',
   },
   {
     // Has its own page (`path`) — the rest of the page copy lives in the `albania` block below.
@@ -127,19 +148,19 @@ export const services = [
     icon: 'briefcase',
     motif: 'globe',
     tone: 'emerald',
-    image: '/images/albania/tirana.jpg',
+    image: '/images/albania/tirana.webp',
     kicker: 'Albania · Work permit & job visa',
     heading: { lines: ['Albania', 'Work Visa'], accent: 1 },
     intro: 'Details coming soon — contact our team.',
     related: ['visa-services', 'attestation-of-certificates', 'air-ticketing'],
-    whatsapp: 'Assalamu Alaikum Al Balagh Tours. I would like to enquire about the Albania work permit & job visa.',
+    whatsapp: 'Hello Al Balagh Tours. I would like to enquire about the Albania work permit & job visa.',
   },
   {
     slug: 'air-ticketing',
     // TODO: confirm with client — service scope and wording (generic copy; no fees, timelines or approvals promised)
     title: 'Domestic & International Air Ticketing',
     short: 'Domestic and international flights, booked with the right fares and routes for you.',
-    subs: ['Domestic & international fares', 'Group & family bookings', 'Date changes & re-issues', 'Umrah & Hajj flight support'],
+    subs: ['Domestic & international fares', 'Group & family bookings', 'Date changes & re-issues', 'Student & business travel'],
     icon: 'plane',
     motif: 'plane',
     tone: 'sky',
@@ -154,7 +175,7 @@ export const services = [
     offer: [
       { icon: 'plane', title: 'Domestic flights', text: 'Quick bookings across Indian cities, including last-minute travel.' },
       { icon: 'globe', title: 'International flights', text: 'Routes to the Gulf, Europe, the Americas, Asia and beyond.' },
-      { icon: 'users', title: 'Group bookings', text: 'Families, weddings, Umrah groups and corporate travel.' },
+      { icon: 'users', title: 'Group bookings', text: 'Families, weddings, tour groups and corporate travel.' },
       { icon: 'calendar', title: 'Changes & re-issues', text: 'Help with date changes, cancellations and re-issues as per fare rules.' },
       { icon: 'search', title: 'Fare comparison', text: 'Options across airlines explained clearly, so you can choose.' },
       { icon: 'headset', title: 'Travel support', text: 'Reach us on WhatsApp or phone before and during your trip.' },
@@ -173,35 +194,36 @@ export const services = [
     ],
     faqs: [
       { q: 'Can you find cheaper fares than the airline websites?', a: 'We compare options across airlines and explain the fare rules, so you can choose the best value for your trip. Fares depend on availability at the time of booking.' },
-      { q: 'Do you book group tickets?', a: 'Yes — families, wedding parties, Umrah groups and corporate teams. Share the group size and dates and we will look at options.' },
+      { q: 'Do you book group tickets?', a: 'Yes — families, wedding parties, tour and pilgrimage groups, and corporate teams. Share the group size and dates and we will look at options.' },
       { q: 'Can you help if I need to change my date?', a: 'Yes. Changes depend on the airline’s fare rules; we check what is possible and handle the re-issue for you.' },
     ],
     related: ['visa-services', 'travel-insurance', 'hotel-bookings'],
-    whatsapp: 'Assalamu Alaikum, I would like to book a flight. Please help me with fares.',
+    whatsapp: 'Hello, I would like to book a flight. Please help me with fares.',
   },
   {
     slug: 'holiday-packages',
     // TODO: confirm with client — service scope and wording (generic copy; no fees, timelines or approvals promised)
     title: 'Holiday Package',
-    short: 'Family-friendly domestic and international holidays, planned end to end.',
-    subs: ['Domestic & international trips', 'Family & honeymoon holidays', 'Hotels, transfers & sightseeing', 'Halal-friendly planning'],
+    // TODO: confirm with client — destination examples
+    short: 'Tailor-made holidays worldwide — Dubai, Türkiye, Southeast Asia, the Maldives and beyond — planned end to end.',
+    subs: ['Domestic & international trips', 'Family & honeymoon holidays', 'Hotels, transfers & sightseeing', 'Visas & insurance in one plan'],
     icon: 'palm',
     motif: 'palm',
     tone: 'dusk',
     image: '/images/services/holiday.webp',
-    kicker: 'Domestic & International',
-    heading: { lines: ['Holiday', 'Package'], accent: 0 },
-    intro: 'Holidays shaped around your family — the places, the pace and the food you are comfortable with.',
+    kicker: 'Tailor-made · Worldwide',
+    heading: { lines: ['Holiday', 'Packages'], accent: 0 },
+    intro: 'Holidays shaped around you — the places, the pace and the food you are comfortable with.',
     long: [
       'Whether it is a family break, a honeymoon or a trip with friends, we put together holidays with flights, hotels, transfers and sightseeing in one plan. We listen to how you like to travel and build the itinerary around it.',
-      'We can keep halal food, prayer times and family needs in mind while planning, and adjust the plan until it feels right.',
+      'We keep food preferences, family needs and the pace you enjoy in mind while planning, and adjust the plan until it feels right.',
     ],
     offer: [
       { icon: 'palm', title: 'Curated itineraries', text: 'Day-by-day plans for popular domestic and international destinations.' },
       { icon: 'bed', title: 'Hotels & stays', text: 'Family-friendly hotels selected for location and comfort.' },
       { icon: 'bus', title: 'Transfers & sightseeing', text: 'Airport transfers and guided or private sightseeing.' },
       { icon: 'heart', title: 'Honeymoon trips', text: 'Thoughtful plans for couples, at a relaxed pace.' },
-      { icon: 'utensils', title: 'Halal-friendly planning', text: 'Food and prayer needs considered while planning.' },
+      { icon: 'utensils', title: 'Food preferences', text: 'Halal, vegetarian and other food needs considered while planning.' },
       { icon: 'headset', title: 'On-trip support', text: 'A team to call if anything changes while you travel.' },
     ],
     steps: [
@@ -222,7 +244,7 @@ export const services = [
       { q: 'Which destinations do you cover?', a: 'Popular domestic and international destinations. Tell us your idea and we will suggest options.' }, // TODO: confirm with client — destination list
     ],
     related: ['air-ticketing', 'hotel-bookings', 'travel-insurance'],
-    whatsapp: 'Assalamu Alaikum, I am interested in a holiday package. Please share some options.',
+    whatsapp: 'Hello, I am interested in a holiday package. Please share some options.',
   },
   {
     slug: 'visa-services',
@@ -268,7 +290,7 @@ export const services = [
       { q: 'Which countries do you handle?', a: 'Many popular destinations. Message us the country and purpose of travel and we will confirm how we can help.' }, // TODO: confirm with client — country list
     ],
     related: ['vfs-appointments', 'passport-services', 'travel-insurance'],
-    whatsapp: 'Assalamu Alaikum, I need help with a visa application.',
+    whatsapp: 'Hello, I need help with a visa application.',
   },
   {
     slug: 'immigration-services',
@@ -314,7 +336,7 @@ export const services = [
       { q: 'Which countries can you help with?', a: 'Message us your destination and goal, and we will confirm how we can help.' },
     ],
     related: ['attestation-of-certificates', 'visa-services', 'vfs-appointments'],
-    whatsapp: 'Assalamu Alaikum, I would like guidance on immigration services.',
+    whatsapp: 'Hello, I would like guidance on immigration services.',
   },
   {
     slug: 'passport-services',
@@ -360,7 +382,7 @@ export const services = [
       { q: 'Do I need to visit the passport office?', a: 'Most applicants attend an appointment in person. We help you book it and prepare.' },
     ],
     related: ['visa-services', 'vfs-appointments', 'attestation-of-certificates'],
-    whatsapp: 'Assalamu Alaikum, I need help with a passport application.',
+    whatsapp: 'Hello, I need help with a passport application.',
   },
   {
     slug: 'travel-insurance',
@@ -400,29 +422,29 @@ export const services = [
       { q: 'Can seniors get travel insurance?', a: 'Many insurers offer plans for older travellers. We will show you suitable options.' },
     ],
     related: ['air-ticketing', 'visa-services', 'holiday-packages'],
-    whatsapp: 'Assalamu Alaikum, I would like a travel insurance quote.',
+    whatsapp: 'Hello, I would like a travel insurance quote.',
   },
   {
     slug: 'hotel-bookings',
     title: 'Hotel Bookings',
     // TODO: confirm with client — hotel booking scope; copy kept deliberately generic
-    short: 'Hotel stays in Makkah, Madinah and other destinations, booked around your plans.',
-    subs: ['Makkah & Madinah hotels', 'Hotels for other trips', 'Family & group stays', 'Help choosing a stay'],
+    short: 'Hotels and resorts worldwide — city breaks, beach stays, family trips and pilgrimage — booked around your plans.',
+    subs: ['Hotels & resorts worldwide', 'City & beach stays', 'Family & group stays', 'Makkah & Madinah hotels'],
     icon: 'bed',
     motif: 'hotel',
     tone: 'dusk',
     image: '/images/services/hotel.webp',
-    kicker: 'Makkah · Madinah · Other destinations',
+    kicker: 'Worldwide · Resorts · City stays',
     heading: { lines: ['Hotel', 'Bookings'], accent: 0 },
     intro: 'Tell us where you are going and what you need — we help you find and book a suitable stay.',
     long: [
-      'We help pilgrims, families and business travellers book hotel stays — in Makkah and Madinah and in other destinations. We look at location, room type and your budget with you.',
+      'We help holidaymakers, families, business travellers and pilgrims book hotel stays around the world. We look at location, room type and your budget with you.',
       'We share your booking details with you and remain available for any changes.',
     ],
     offer: [
-      { icon: 'kaaba', title: 'Makkah & Madinah stays', text: 'Hotel bookings for pilgrims travelling to Makkah and Madinah.' },
+      { icon: 'globe', title: 'Hotels worldwide', text: 'City hotels and resorts for holidays, family visits and business trips.' },
       { icon: 'bed', title: 'Family rooms', text: 'Room types for families, subject to the hotel’s availability.' },
-      { icon: 'globe', title: 'Other destinations', text: 'Hotels for holidays, family visits and business trips.' },
+      { icon: 'mapPin', title: 'Makkah & Madinah stays', text: 'Hotel bookings for pilgrims travelling to Makkah and Madinah.' },
       { icon: 'users', title: 'Group bookings', text: 'Rooms for groups travelling together.' },
       { icon: 'utensils', title: 'Meal options', text: 'Meal options as offered by each hotel.' },
       { icon: 'headset', title: 'Changes & support', text: 'Help with amendments and special requests.' },
@@ -435,12 +457,12 @@ export const services = [
     ],
     documents: ['Guest names as in the passport / ID', 'Passport copy for international stays', 'Contact details', 'Special requests (accessibility, beds, meals)'],
     faqs: [
-      { q: 'How close are the Makkah hotels to the Haram?', a: 'It depends on the hotel. Each option we share mentions its approximate distance so you can compare.' },
       { q: 'Can you book only a hotel, without a package?', a: 'Yes, we book hotels on their own as well as within packages.' },
+      { q: 'How close are the Makkah hotels to the Haram?', a: 'It depends on the hotel. Each option we share mentions its approximate distance so you can compare.' },
       { q: 'Can I request a specific room type?', a: 'Yes. Requests are subject to the hotel’s availability, and we will confirm what is possible.' },
     ],
-    related: ['haj-umrah', 'holiday-packages', 'air-ticketing'],
-    whatsapp: 'Assalamu Alaikum, I would like to book a hotel.',
+    related: ['holiday-packages', 'air-ticketing', 'haj-umrah'],
+    whatsapp: 'Hello, I would like to book a hotel.',
   },
   {
     // Listed on the client's other site as "Private Transfers — Jeddah · Makkah · Madinah".
@@ -452,7 +474,7 @@ export const services = [
     icon: 'bus',
     motif: 'bus',
     tone: 'sand',
-    image: '/images/transport/bus-1.jpg',
+    image: '/images/transport/bus-1.webp',
     kicker: 'Jeddah · Makkah · Madinah',
     heading: { lines: ['Private', 'Transfers'], accent: 1 },
     intro: 'Luxury, fully air-conditioned coaches with comfortable seating, for transfers between Jeddah, Makkah and Madinah.',
@@ -467,7 +489,7 @@ export const services = [
     ],
     routes: ['Jeddah', 'Makkah', 'Madinah'],
     // Gallery — representative photos of luxury AC coaches (TODO: client to supply licensed / own photos)
-    coaches: [1, 2, 3, 4, 5, 6].map((n) => ({ src: `/images/transport/bus-${n}.jpg`, alt: `Luxury air-conditioned coach — photo ${n}`, caption: 'Luxury AC coach' })),
+    coaches: [1, 2].map((n) => ({ src: `/images/transport/bus-${n}.webp`, alt: `Luxury air-conditioned coach — photo ${n}`, caption: 'Luxury AC coach' })),
     offer: [
       { icon: 'bus', title: 'Luxury coaches', text: 'Coaches for transfers between Jeddah, Makkah and Madinah.' },
       { icon: 'sparkle', title: 'Fully air-conditioned', text: 'Every coach is fully air-conditioned.' },
@@ -492,7 +514,7 @@ export const services = [
       { q: 'Are transfers part of your Hajj programme?', a: 'Yes. Hajj 2027 includes private bus transfers during the 5 days of Hajj — see the transfer timeline on the Haj & Umrah page.' },
     ],
     related: ['haj-umrah', 'hotel-bookings', 'air-ticketing'],
-    whatsapp: 'Assalamu Alaikum Al Balagh Tours. I would like details of your private transfers (Jeddah · Makkah · Madinah).',
+    whatsapp: 'Hello Al Balagh Tours. I would like details of your private transfers (Jeddah · Makkah · Madinah).',
   },
   {
     slug: 'attestation-of-certificates',
@@ -532,7 +554,7 @@ export const services = [
       { q: 'Do you need my original certificates?', a: 'Attestation is usually done on original documents. We will tell you exactly what is needed for your case.' },
     ],
     related: ['immigration-services', 'visa-services', 'passport-services'],
-    whatsapp: 'Assalamu Alaikum, I need my certificates attested.',
+    whatsapp: 'Hello, I need my certificates attested.',
   },
   {
     slug: 'vfs-appointments',
@@ -572,9 +594,26 @@ export const services = [
       { q: 'What should I carry to the centre?', a: 'Your passport, appointment confirmation, forms, photos and supporting documents. We will share a full checklist.' },
     ],
     related: ['visa-services', 'passport-services', 'travel-insurance'],
-    whatsapp: 'Assalamu Alaikum, I need help booking a VFS appointment.',
+    whatsapp: 'Hello, I need help booking a VFS appointment.',
   },
 ]
+
+// Display order: international travel first; Haj & Umrah remains one of the core services.
+const SERVICE_ORDER = [
+  'holiday-packages',
+  'air-ticketing',
+  'visa-services',
+  'hotel-bookings',
+  'haj-umrah',
+  'immigration-services',
+  'passport-services',
+  'travel-insurance',
+  'albania-work-visa',
+  'private-transfers',
+  'attestation-of-certificates',
+  'vfs-appointments',
+]
+export const services = SERVICE_ORDER.map((slug) => SERVICE_LIST.find((s) => s.slug === slug)).filter(Boolean)
 
 export const serviceBySlug = Object.fromEntries(services.map((s) => [s.slug, s]))
 /** Link to a service: its own page when it has one (Albania), else /services/:slug. */
@@ -787,38 +826,34 @@ export const atAGlance = {
 }
 
 export const hero = {
-  // Headline words; `accent` is rendered in the green gradient.
+  // Headline words; `accent` is rendered in the gold gradient.
   headline: [
     { text: 'Your' },
-    { text: 'Sacred' },
+    { text: 'Next' },
     { text: 'Journey', accent: true },
     { text: 'Begins' },
     { text: 'Here' },
   ],
-  ayah: 'وَأَذِّن فِي النَّاسِ بِالْحَجِّ يَأْتُوكَ رِجَالًا وَعَلَىٰ كُلِّ ضَامِرٍ',
-  ayahRef: 'سورة الحج ٢٢:٢٧',
-  translation:
-    '“And proclaim to the people the Hajj; they will come to you on foot and on every lean camel…” — Qur’an 22:27',
-  subline: 'Haj & Umrah, flights, visas and every travel document — handled with care from Mehdipatnam, Hyderabad.',
-  finalEyebrow: 'Hajj 2027 · Ziyarath Special Umrah',
-  finalTitle: ['Your pilgrimage,', 'perfectly planned'],
-  route: ['Hyderabad', 'Madinah', 'Makkah'],
+  // revealed by the lantern light
+  secretLine: 'The world is waiting',
+  quote: '“The world is a book, and those who do not travel read only one page.” — attributed to St. Augustine',
+  subline: 'Holidays, flights, visas, hotels and Hajj & Umrah — every journey planned with care from Hyderabad.',
+  finalEyebrow: 'Holidays · Flights · Visas · Hajj & Umrah',
+  finalTitle: ['Your journey,', 'perfectly planned'],
+  route: ['Hyderabad', 'In the air', 'The world'],
 }
 
 // Hero media in /public/images. Missing files fall back to gradients (see components/ui/Photo.jsx).
 export const heroMedia = {
-  headlineFill: '/images/kaaba-night-wide.jpg',
-  door: '/images/madinah-dome-dusk.jpg',
-  clouds: '/images/clouds-aerial.jpg',
-  finale: '/images/kaaba-closeup.jpg',
-  video: '/images/hero.mp4', // optional, plays behind the door when present
+  window: '/images/services/air.webp', // the view through the aircraft window (sunset over the wing)
+  finale: '/images/services/air.webp', // above the clouds, behind the search bar
 }
 
-// Hero footer strip. Only verifiable strengths — no accreditation or pilgrim-count claims
+// Hero footer strip. Only verifiable strengths — no accreditation or traveller-count claims
 // until the client confirms them.
 export const trustBadges = [
-  { top: 'Serving pilgrims', bottom: 'since 2016' }, // TODO: confirm with client (applies to Hyderabad office too?)
-  { top: 'Private bus', bottom: 'during the days of Hajj' },
+  { top: 'Serving travellers', bottom: 'since 2016' }, // TODO: confirm with client (applies to Hyderabad office too?)
+  { top: 'Flights, visas', bottom: '& holidays worldwide' },
   { top: 'Hyderabad', bottom: '& Vijayawada' },
 ]
 
@@ -839,80 +874,143 @@ export const hotelAmenities = [
 ]
 
 /* ------------------------------------------------------------------------------------------
- * DESTINATIONS — the places on the Hajj 2027 and Ziyarath Special Umrah programmes.
- * Only programme facts; `map` = position on the route map (0–100 × 0–62 viewBox units).
- * Destinations without a photo use their `tone` gradient.
+ * DESTINATIONS — popular trips we plan from Hyderabad (flights, visas, hotels, sightseeing),
+ * plus Makkah & Madinah for our Hajj and Umrah programmes.
+ * Copy is deliberately generic: no prices, dates, durations or inclusions are promised.
+ * `map` = position on the route map (0–100 × 0–62 viewBox units, Hyderabad at `hyderabadOnMap`).
+ * `image`: drop a photo at that path (plus a "-640" sibling) — until then the `tone` gradient shows.
+ * TODO: confirm with client — destination list; supply photos for each destination.
  * ---------------------------------------------------------------------------------------- */
+const tripText = (name) => `Hello Al Balagh Tours. I would like to plan a trip to ${name}. Please share some options.`
+
 export const destinations = [
   {
-    slug: 'madinah',
-    name: 'Madinah',
-    full: 'Madinah Al-Munawwarah',
-    region: 'Saudi Arabia',
-    tagline: 'The City of the Prophet ﷺ',
-    image: '/images/madinah.webp',
-    tone: 'emerald',
-    map: [29, 34],
-    text: 'Days of prayer in Masjid an-Nabawi, with the extended Ziyarath programme of our Umrah group and Ziyarath in Madinah on Hajj.',
-    highlights: ['Masjid an-Nabawi', 'Diwan Al Madinah — 150\u00a0m (Umrah group)', 'Extra Madinah Ziyarath — 12 places'],
-    bestFor: ['Umrah', 'Hajj', 'Ziyarath'],
+    slug: 'dubai',
+    name: 'Dubai',
+    full: 'Dubai, United Arab Emirates',
+    region: 'United Arab Emirates',
+    tagline: 'Skylines, desert and sea',
+    image: '/images/destinations/dubai.webp',
+    tone: 'sand',
+    icon: 'palm',
+    map: [40, 25],
+    text: 'Towering skylines, desert safaris, souks and beaches — an easy short-haul favourite for families, shoppers and first-time travellers abroad.',
+    highlights: ['Downtown & the Burj Khalifa', 'Desert safari evenings', 'Dubai Marina & beaches'],
+    bestFor: ['Family holiday', 'Shopping', 'Short break'],
+    whatsapp: tripText('Dubai'),
   },
   {
-    slug: 'makkah',
-    name: 'Makkah',
-    full: 'Makkah Al-Mukarramah',
-    region: 'Saudi Arabia',
-    tagline: 'Home of the Kaaba',
-    image: '/images/makkah-clocktower.webp',
-    tone: 'night',
-    map: [27, 46],
-    text: 'The heart of Hajj and Umrah — Ziyarath in Makkah on the Hajj programme, and a stay 300 metres from the Haram for the Umrah group.',
-    highlights: ['Masjid al-Haram', 'Akaber Al Hijra — 300\u00a0m (Umrah group)', 'Ziyarath in Makkah (Hajj)'],
-    bestFor: ['Hajj', 'Umrah'],
-  },
-  {
-    slug: 'taif',
-    name: 'Taif',
-    full: 'Taif',
-    region: 'Saudi Arabia',
-    tagline: 'Meeqat Umrah & Hajj Ziyarath',
+    slug: 'turkiye',
+    rays: true, // photo with baked-in light rays
+    name: 'Türkiye',
+    full: 'Istanbul & Cappadocia',
+    region: 'Türkiye',
+    tagline: 'Where two continents meet',
+    image: '/images/services/holiday.webp',
     tone: 'dusk',
-    map: [34, 49],
-    text: 'On the Ziyarath Special Umrah group, Taif is where the Meeqat Umrah arrangement takes place. The Hajj 2027 programme includes Ziyarath in Taif.',
-    highlights: ['Taif: Meeqat Umrah (Umrah group)', 'Ziyarath in Taif (Hajj 2027)'],
-    bestFor: ['Umrah', 'Hajj'],
+    icon: 'globe',
+    map: [14, 11],
+    text: 'Istanbul’s bazaars and Bosphorus views, then sunrise balloons over the fairy chimneys of Cappadocia — history, food and landscapes in one trip.',
+    highlights: ['Bosphorus cruise', 'Grand Bazaar & old Istanbul', 'Cappadocia hot-air balloons'],
+    bestFor: ['Culture', 'Honeymoon', 'Family holiday'],
+    whatsapp: tripText('Türkiye'),
   },
   {
-    slug: 'mina-arafat',
-    name: 'Mina & Arafat',
-    full: 'Mina, Arafat & Muzdalifah',
-    region: 'Days of Hajj',
-    tagline: 'Private bus during the 5 days of Hajj',
-    tone: 'sand',
-    image: '/images/tents-mina.jpg',
-    map: [31, 43],
-    text: 'During the 5 days of Hajj, private buses take you from your Makkah hotel to the Mina camp, on to Arafat, Muzdalifah and Jamarat, and back.',
-    highlights: ['Makkah hotel → Mina camp', 'Mina → Arafat → Muzdalifah', 'Muzdalifah → Jamarat'],
-    bestFor: ['Hajj 2027'],
-    programme: 'hajj',
-    note: 'Please plan for walking as well, particularly during the final two days of stoning at Jamarat.',
+    slug: 'maldives',
+    rays: true, // photo with baked-in light rays
+    name: 'Maldives',
+    full: 'The Maldives',
+    region: 'Indian Ocean',
+    tagline: 'Island resorts & turquoise water',
+    image: '/images/destinations/maldives.webp',
+    tone: 'sky',
+    icon: 'palm',
+    map: [57, 57],
+    text: 'Overwater villas, reefs and white-sand islands a short flight from India — made for honeymoons and slow, quiet holidays.',
+    highlights: ['Overwater villas', 'Snorkelling & reefs', 'Island-hopping'],
+    bestFor: ['Honeymoon', 'Beach', 'Relaxation'],
+    whatsapp: tripText('the Maldives'),
   },
   {
-    slug: 'badr',
-    name: 'Badr',
-    full: 'Badr ka Maidan',
-    region: 'Madinah Ziyarath',
-    tagline: 'On the extra Madinah Ziyarath',
+    slug: 'thailand',
+    rays: true, // photo with baked-in light rays
+    name: 'Thailand',
+    full: 'Bangkok, Phuket & Krabi',
+    region: 'Southeast Asia',
+    tagline: 'City lights & island days',
+    image: '/images/destinations/thailand.webp',
+    tone: 'emerald',
+    icon: 'palm',
+    map: [80, 33],
+    text: 'Bangkok’s temples and markets, then the islands of Phuket and Krabi — great value, great food and something for every age.',
+    highlights: ['Bangkok city tours', 'Phuket & Phi Phi islands', 'Krabi beaches'],
+    bestFor: ['Friends', 'Family holiday', 'Beach'],
+    whatsapp: tripText('Thailand'),
+  },
+  {
+    slug: 'malaysia-singapore',
+    name: 'Malaysia & Singapore',
+    full: 'Kuala Lumpur, Langkawi & Singapore',
+    region: 'Southeast Asia',
+    tagline: 'Two countries, one easy trip',
+    image: '/images/destinations/singapore.webp',
+    tone: 'night',
+    icon: 'globe',
+    map: [86, 51],
+    text: 'Kuala Lumpur’s towers, the islands of Langkawi and Singapore’s gardens and waterfront — a popular combination, especially for families.',
+    highlights: ['Petronas Twin Towers', 'Langkawi islands', 'Gardens by the Bay & Sentosa'],
+    bestFor: ['Family holiday', 'City break', 'First trip abroad'],
+    whatsapp: tripText('Malaysia & Singapore'),
+  },
+  {
+    slug: 'azerbaijan',
+    name: 'Azerbaijan',
+    full: 'Baku & Gabala',
+    region: 'Caucasus',
+    tagline: 'The land of fire',
+    image: '/images/destinations/baku.webp',
+    tone: 'dusk',
+    icon: 'mapPin',
+    map: [28, 8],
+    text: 'Baku’s walled Old City and Flame Towers on the Caspian, then the mountains of Gabala — a fresh, increasingly popular choice from India.',
+    highlights: ['Baku Old City', 'Flame Towers & the boulevard', 'Gabala mountains'],
+    bestFor: ['Couples', 'Culture', 'Short break'],
+    whatsapp: tripText('Azerbaijan'),
+  },
+  {
+    slug: 'europe',
+    rays: true, // photo with baked-in light rays
+    name: 'Europe',
+    full: 'Paris, Switzerland & beyond',
+    region: 'Europe',
+    tagline: 'Classic tours, planned your way',
+    image: '/images/destinations/europe.webp',
+    tone: 'night',
+    icon: 'plane',
+    map: [4, 4],
+    text: 'From Paris and the Swiss Alps to Italy and beyond — itineraries, Schengen visa guidance, flights and hotels arranged together.',
+    highlights: ['Paris & the Swiss Alps', 'Schengen visa guidance', 'Flights, hotels & rail in one plan'],
+    bestFor: ['Honeymoon', 'Family holiday', 'Culture'],
+    whatsapp: tripText('Europe'),
+  },
+  {
+    slug: 'makkah-madinah',
+    name: 'Makkah & Madinah',
+    full: 'Hajj & Umrah',
+    region: 'Saudi Arabia',
+    tagline: 'Hajj 2027 & the Ziyarath Special Umrah',
+    image: '/images/makkah-clocktower.webp',
     tone: 'sand',
-    map: [24, 38],
-    text: 'Badr ka Maidan is one of the twelve places on the extra Madinah Ziyarath of the Ziyarath Special Umrah group.',
-    highlights: ['Badr ka Maidan', 'Extra Madinah Ziyarath (Umrah group)'],
-    bestFor: ['Umrah', 'Ziyarath'],
-    programme: 'umrah',
-    note: 'Confirm the final itinerary, access and any additional visits with the office.',
+    icon: 'mapPin',
+    map: [30, 31],
+    text: 'Our pilgrimage programmes: Hajj 2027 with private transfers during the days of Hajj, and the Ziyarath Special Umrah group with direct flights from Hyderabad.',
+    highlights: ['Hajj 2027 programme', 'Ziyarath Special Umrah group', 'Hotels near the Haram & Masjid an-Nabawi'],
+    bestFor: ['Hajj', 'Umrah'],
+    link: '/services/haj-umrah',
+    whatsapp: 'Hello Al Balagh Tours. I would like to know more about your Hajj and Umrah programmes.',
   },
 ]
-export const hyderabadOnMap = [82, 50]
+export const hyderabadOnMap = [66, 42]
 
 /* ------------------------------------------------------------------------------------------
  * ALBANIA WORK PERMIT & JOB VISA — /albania-work-visa
@@ -937,9 +1035,9 @@ export const albania = {
     lines: ['Your job in Europe', 'starts here.'],
     intro: `Thinking about working in Albania? ${ALBANIA_PLACEHOLDER}`,
     photos: [
-      albaniaPhoto('tirana.jpg', 'Tirana, the capital of Albania', 'Tirana'),
-      albaniaPhoto('riviera.jpg', 'The Albanian Riviera', 'Albanian Riviera'),
-      albaniaPhoto('flag.jpg', 'The flag of Albania', 'Albania'),
+      albaniaPhoto('tirana.webp', 'Tirana, the capital of Albania', 'Tirana'),
+      albaniaPhoto('riviera.webp', 'The Albanian Riviera', 'Albanian Riviera'),
+      albaniaPhoto('flag.webp', 'The flag of Albania', 'Albania'),
     ],
   },
   // TODO: confirm exact wording with client
@@ -990,11 +1088,11 @@ export const albania = {
   },
   // TODO: client to provide Albania content — Unsplash / Pexels / Wikimedia Commons, downloaded locally
   gallery: [
-    albaniaPhoto('tirana.jpg', 'Tirana, the capital of Albania', 'Tirana'),
-    albaniaPhoto('skanderbeg-square.jpg', 'Skanderbeg Square, Tirana', 'Skanderbeg Square'),
-    albaniaPhoto('riviera.jpg', 'The Albanian Riviera', 'Albanian Riviera'),
-    albaniaPhoto('mountains.jpg', 'Mountains of Albania', 'Albanian mountains'),
-    albaniaPhoto('flag.jpg', 'The flag of Albania', 'Flag of Albania'),
+    albaniaPhoto('tirana.webp', 'Tirana, the capital of Albania', 'Tirana'),
+    albaniaPhoto('skanderbeg-square.webp', 'Skanderbeg Square, Tirana', 'Skanderbeg Square'),
+    albaniaPhoto('riviera.webp', 'The Albanian Riviera', 'Albanian Riviera'),
+    albaniaPhoto('mountains.webp', 'Mountains of Albania', 'Albanian mountains'),
+    albaniaPhoto('flag.webp', 'The flag of Albania', 'Flag of Albania'),
     albaniaPhoto('delivery-rider.jpg', 'A delivery rider on a scooter', 'On the road'),
   ],
   // TODO: client to provide Albania content
@@ -1010,14 +1108,14 @@ export const albania = {
   form: {
     title: ['Tell us about ', { accent: 'yourself' }],
     lead: 'Share a few details and we will continue the conversation on WhatsApp. Nothing is stored on this website.',
-    intro: 'Assalamu Alaikum Al Balagh Tours. I would like to enquire about the Albania work permit & job visa.',
+    intro: 'Hello Al Balagh Tours. I would like to enquire about the Albania work permit & job visa.',
   },
   cta: {
     prefix: 'Ready to talk about',
     accent: 'Albania',
     lead: `Have questions about working in Albania? ${ALBANIA_PLACEHOLDER}`,
   },
-  whatsapp: 'Assalamu Alaikum Al Balagh Tours. I would like to enquire about the Albania work permit & job visa.',
+  whatsapp: 'Hello Al Balagh Tours. I would like to enquire about the Albania work permit & job visa.',
 }
 
 /* ------------------------------------------------------------------------------------------
@@ -1092,3 +1190,24 @@ export const flyers = {
     },
   ],
 }
+
+/* ------------------------------------------------------------------------------------------
+ * PHOTO CREDITS — downloaded from Wikimedia Commons, converted to WebP (1400px + 640px) and shown
+ * with a warm colour grade. CC BY / CC BY-SA licences require this attribution (listed in the
+ * footer under "Photo credits"); CC0 needs none but is listed for completeness.
+ * ---------------------------------------------------------------------------------------- */
+export const photoCredits = [
+  { file: '/images/destinations/dubai.webp', title: "Dubai skyline unsplash", author: "Robert Bock", license: 'CC0', licenseUrl: 'http://creativecommons.org/publicdomain/zero/1.0/deed.en', source: 'https://commons.wikimedia.org/wiki/File:Dubai_skyline_unsplash.jpg' },
+  { file: '/images/destinations/maldives.webp', title: "Thatched-roof villa in the Maldive Islands", author: "Godot13", license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0', source: 'https://commons.wikimedia.org/wiki/File:Thatched-roof_villa_in_the_Maldive_Islands.jpg' },
+  { file: '/images/destinations/thailand.webp', title: "Isla Phi Phi Lay, Tailandia, 2013-08-19, DD 04", author: "Diego Delso", license: 'CC BY-SA 3.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0', source: 'https://commons.wikimedia.org/wiki/File:Isla_Phi_Phi_Lay,_Tailandia,_2013-08-19,_DD_04.JPG' },
+  { file: '/images/destinations/singapore.webp', title: "Skyline of the Central Business District of Singapore with Esplanade Bridge in the evening", author: "Basile Morin", license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0', source: 'https://commons.wikimedia.org/wiki/File:Skyline_of_the_Central_Business_District_of_Singapore_with_Esplanade_Bridge_in_the_evening.jpg' },
+  { file: '/images/destinations/baku.webp', title: "A view of the Baku bay, Azerbaijan", author: "AlixSaz", license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0', source: 'https://commons.wikimedia.org/wiki/File:A_view_of_the_Baku_bay,_Azerbaijan.jpg' },
+  { file: '/images/destinations/europe.webp', title: "Glarus Kloentalersee", author: "Ikiwaner", license: 'CC BY-SA 3.0', licenseUrl: 'http://creativecommons.org/licenses/by-sa/3.0/', source: 'https://commons.wikimedia.org/wiki/File:Glarus_Kloentalersee.jpg' },
+  { file: '/images/albania/tirana.webp', title: "Palacio de Cultura, Tirana, Albania, 2014-04-17, DD 11", author: "Diego Delso", license: 'CC BY-SA 3.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0', source: 'https://commons.wikimedia.org/wiki/File:Palacio_de_Cultura,_Tirana,_Albania,_2014-04-17,_DD_11.JPG' },
+  { file: '/images/albania/skanderbeg-square.webp', title: "Tirana - Skanderbeg Square (Sheshi Skënderbej) - by Pudelek", author: "Pudelek", license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0', source: 'https://commons.wikimedia.org/wiki/File:Tirana_-_Skanderbeg_Square_(Sheshi_Sk%C3%ABnderbej)_-_by_Pudelek.jpg' },
+  { file: '/images/albania/riviera.webp', title: "Ksamil, Albania (by Pudelek)", author: "Pudelek", license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0', source: 'https://commons.wikimedia.org/wiki/File:Ksamil,_Albania_(by_Pudelek).JPG' },
+  { file: '/images/albania/mountains.webp', title: "Ndërlysaj, Theth - 2018 05", author: "Liridon", license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0', source: 'https://commons.wikimedia.org/wiki/File:Nd%C3%ABrlysaj,_Theth_-_2018_05.jpg' },
+  { file: '/images/albania/flag.webp', title: "Albanian Flag in the wave", author: "Aldo Vukaj", license: 'CC0', licenseUrl: 'http://creativecommons.org/publicdomain/zero/1.0/deed.en', source: 'https://commons.wikimedia.org/wiki/File:Albanian_Flag_in_the_wave.jpg' },
+  { file: '/images/transport/bus-1.webp', title: "Mercedes-Benz O 350 Tourismo 01", author: "Huhu Uet alias Frank Schwichtenberg", license: 'CC BY 3.0', licenseUrl: 'https://creativecommons.org/licenses/by/3.0', source: 'https://commons.wikimedia.org/wiki/File:Mercedes-Benz_O_350_Tourismo_01.jpg' },
+  { file: '/images/transport/bus-2.webp', title: "Setra S416GT-HD bus from Slovakia", author: "High Contrast", license: 'CC BY 3.0 de', licenseUrl: 'https://creativecommons.org/licenses/by/3.0/de/deed.en', source: 'https://commons.wikimedia.org/wiki/File:Setra_S416GT-HD_bus_from_Slovakia.JPG' },
+]

@@ -49,16 +49,16 @@ export default function SeasonBanner() {
     <section ref={root} className="relative py-16 sm:py-24">
       <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-10">
         <div className="sb-card glass-strong relative isolate grid items-center gap-10 overflow-hidden rounded-[36px] p-7 sm:p-12 lg:grid-cols-12">
-          <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_80%_at_85%_40%,rgb(212_175_55/0.2),transparent_70%)]" />
+          <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_80%_at_85%_40%,rgb(200_150_62/0.2),transparent_70%)]" />
           <div className="pattern-overlay absolute inset-0 -z-10 opacity-[0.05]" />
 
           <div className="sb-copy lg:col-span-7">
             <p className="eyebrow">This season</p>
-            <h2 className="mt-5 font-display text-[clamp(2.6rem,5.4vw,4.6rem)] font-semibold italic leading-[0.95] text-cream-50">
+            <h2 className="mt-5 font-display text-[clamp(2.6rem,5.4vw,4.6rem)] font-semibold leading-[0.95] text-cream-50">
               <span className="text-grad-green pr-[0.05em]">Hajj</span> 2027
             </h2>
             <p className="mt-5 max-w-lg text-mist-300">
-              <span className="block font-display text-xl italic text-gold-100">{HAJJ.tagline}</span>
+              <span className="block font-display text-xl text-gold-100">{HAJJ.tagline}</span>
               <span className="mt-3 block">{HAJJ.intro}</span>
             </p>
             <ul className="mt-6 flex flex-wrap gap-2 text-xs">
@@ -88,11 +88,11 @@ export default function SeasonBanner() {
           <div className="relative h-[260px] lg:col-span-5 lg:h-[340px]" aria-hidden="true">
             <svg viewBox="0 0 360 260" className="absolute inset-0 h-full w-full">
               {STARS.map(([x, y, r], i) => (
-                <circle key={i} className="sb-star" cx={x} cy={y} r={r * 1.6} fill="#f3dc8f" />
+                <circle key={i} className="sb-star" cx={x} cy={y} r={r * 1.6} fill="#eed39a" />
               ))}
-              <path className="sb-moon-fill" d="M222 52a78 78 0 1 0 76 108 62 62 0 1 1-76-108z" fill="#d4af37" fillOpacity="0.16" />
-              <path className="sb-moon-line" d="M222 52a78 78 0 1 0 76 108 62 62 0 1 1-76-108z" fill="none" stroke="#e8cf7a" strokeWidth="2" />
-              <g fill="#05190f" stroke="#d4af37" strokeOpacity="0.5">
+              <path className="sb-moon-fill" d="M222 52a78 78 0 1 0 76 108 62 62 0 1 1-76-108z" fill="#c8963e" fillOpacity="0.16" />
+              <path className="sb-moon-line" d="M222 52a78 78 0 1 0 76 108 62 62 0 1 1-76-108z" fill="none" stroke="#e6c285" strokeWidth="2" />
+              <g fill="#1f1510" stroke="#c8963e" strokeOpacity="0.5">
                 <path d="M120 260v-50c0-22 20-34 40-46 20 12 40 24 40 46v50z" />
                 <rect x="96" y="176" width="10" height="84" />
                 <rect x="214" y="176" width="10" height="84" />

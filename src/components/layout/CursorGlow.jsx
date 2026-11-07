@@ -30,8 +30,8 @@ export default function CursorGlow() {
       const hot = e.target.closest('a, button, select, input, textarea, label, [data-cursor]')
       gsap.to(ring.current, {
         scale: hot ? 1.9 : 1,
-        backgroundColor: hot ? 'rgba(212,175,55,0.12)' : 'rgba(212,175,55,0)',
-        borderColor: hot ? 'rgba(243,220,143,0.9)' : 'rgba(212,175,55,0.6)',
+        backgroundColor: hot ? 'rgba(200,150,62,0.12)' : 'rgba(200,150,62,0)',
+        borderColor: hot ? 'rgba(238,211,154,0.9)' : 'rgba(200,150,62,0.6)',
         duration: 0.45,
         ease: 'power3.out',
       })
@@ -57,7 +57,7 @@ export default function CursorGlow() {
       <div
         ref={ring}
         className="invisible absolute left-[-18px] top-[-18px] h-9 w-9 rounded-full border opacity-0"
-        style={{ borderColor: 'rgba(212,175,55,0.6)' }}
+        style={{ borderColor: 'rgba(200,150,62,0.6)' }}
       />
       <div ref={dot} className="invisible absolute left-[-3px] top-[-3px] h-1.5 w-1.5 rounded-full bg-gold-200 opacity-0" />
     </div>

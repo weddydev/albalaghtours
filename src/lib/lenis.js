@@ -12,7 +12,10 @@ export function initLenis() {
   if (lenis || reducedMotion() || touchDevice()) return lenis
   lenis = new Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 0.95 })
   lenis.on('scroll', ScrollTrigger.update)
-  gsap.ticker.add(tick)
+  // prioritized: Lenis scrolls (and ScrollTrigger updates) *before* GSAP renders this frame's tweens.
+  // Otherwise window.scrollTo runs after the style writes and forces a synchronous style recalc
+  // every frame (layout thrash) — the single biggest main-thread cost while scrolling.
+  gsap.ticker.add(tick, false, true)
   gsap.ticker.lagSmoothing(0)
   return lenis
 }

@@ -7,7 +7,7 @@ import Icon from '../ui/Icon'
 import Disclosure from '../ui/Disclosure'
 import { RouteChip, Stars, stepTitle } from './ProgrammeBits'
 
-const FALLBACK = 'radial-gradient(90% 80% at 60% 20%, #3a4a5c 0%, #142233 45%, #050a10 100%)'
+const FALLBACK = 'radial-gradient(90% 80% at 60% 20%, #4a3626 0%, #251a12 45%, #120c09 100%)'
 
 /**
  * Programme details dialog: hero image, "What's included" grid, hotels / programme / documents
@@ -110,10 +110,10 @@ export default function PackageModal({ pkg, search, onClose }) {
 
         <div className="relative -mt-14 px-6 pb-8 sm:px-10 sm:pb-10">
           <p className="pm-in text-xs uppercase tracking-[0.24em] text-gold-300">{pkg.season}</p>
-          <h2 id="pm-title" className="pm-in mt-2 font-display text-4xl font-semibold italic leading-tight text-cream-50 sm:text-5xl">
+          <h2 id="pm-title" className="pm-in mt-2 font-display text-4xl font-semibold leading-tight text-cream-50 sm:text-5xl">
             {pkg.name}
           </h2>
-          <p className="pm-in mt-1 font-display text-lg italic text-gold-100">{pkg.tagline}</p>
+          <p className="pm-in mt-1 font-display text-lg text-gold-100">{pkg.tagline}</p>
           <div className="pm-in mt-4 flex flex-wrap items-end gap-x-6 gap-y-1">
             {/* TODO: confirm with client — price and dates */}
             <p className="font-display text-3xl font-semibold text-gold-100 sm:text-4xl">Contact for price</p>
@@ -121,7 +121,7 @@ export default function PackageModal({ pkg, search, onClose }) {
           </div>
           {pkg.route && <RouteChip route={pkg.route} className="pm-in mt-4" />}
 
-          <h3 className="pm-in mt-9 flex items-center gap-3 font-display text-2xl italic text-cream-50">
+          <h3 className="pm-in mt-9 flex items-center gap-3 font-display text-2xl text-cream-50">
             <span className="h-px w-8 bg-gold-400/60" aria-hidden="true" />
             What’s included
           </h3>

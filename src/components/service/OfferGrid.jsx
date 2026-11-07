@@ -12,12 +12,12 @@ function OfferCard({ item, index }) {
     <li className="of-item h-full">
       <div ref={ref} className="glass group relative h-full overflow-hidden rounded-[24px] p-6 sm:p-7">
         <span className="of-line absolute inset-x-6 top-0 h-px origin-left bg-linear-to-r from-gold-200 via-gold-400/60 to-transparent" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_60%_at_20%_0%,rgb(212_175_55/0.14),transparent)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_60%_at_20%_0%,rgb(200_150_62/0.14),transparent)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
         <div className="relative flex items-start justify-between">
-          <span className="grid h-14 w-12 place-items-center rounded-t-full border border-gold-400/45 bg-ink-950/40 text-gold-200 shadow-[0_0_24px_-8px_rgba(212,175,55,0.6)]">
+          <span className="grid h-14 w-12 place-items-center rounded-t-full border border-gold-400/45 bg-ink-950/40 text-gold-200 shadow-[0_0_24px_-8px_rgba(200,150,62,0.6)]">
             <Icon name={item.icon} className="h-5 w-5" />
           </span>
-          <span className="font-display text-4xl italic leading-none text-gold-400/25">{String(index + 1).padStart(2, '0')}</span>
+          <span className="font-display text-4xl leading-none text-gold-400/25">{String(index + 1).padStart(2, '0')}</span>
         </div>
         <h3 className="relative mt-6 font-display text-[1.45rem] font-semibold leading-tight text-cream-50">{item.title}</h3>
         <p className="relative mt-2 text-sm leading-relaxed text-mist-300">{item.text}</p>

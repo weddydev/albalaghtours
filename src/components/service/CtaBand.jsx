@@ -40,15 +40,15 @@ export default function CtaBand({ service, accent, whatsapp, lead, prefix = 'Rea
 
   return (
     <section ref={root} className="relative isolate overflow-hidden pb-20 pt-24 sm:pb-28 sm:pt-32">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_60%,rgb(212_175_55/0.12),transparent_70%)]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_60%,rgb(200_150_62/0.12),transparent_70%)]" />
       <HangingLantern className="left-[8%] lg:left-[16%]" />
       <HangingLantern className="right-[8%] lg:right-[16%]" />
 
       <div className="relative mx-auto max-w-[760px] px-5 sm:px-8">
         <Parchment className="cta-card" capClassName="h-24 sm:h-32" innerClassName="px-6 pb-14 pt-0 sm:px-12">
           <div className="cta-in relative text-center">
-            <Icon name="mosque" className="mx-auto h-10 w-10 text-gold-500" />
-            <h2 className="mt-4 font-display text-4xl font-semibold italic leading-tight text-ink-800 sm:text-5xl">
+            <Icon name="plane" className="mx-auto h-10 w-10 text-gold-500" />
+            <h2 className="mt-4 font-display text-4xl font-semibold leading-tight text-ink-800 sm:text-5xl">
               {prefix} <span className="text-jade-600">{subject}</span>?
             </h2>
             <p className="mx-auto mt-4 max-w-md text-ink-700">
@@ -63,7 +63,7 @@ export default function CtaBand({ service, accent, whatsapp, lead, prefix = 'Rea
               </a>
               <a
                 href={contact.phones[0].href}
-                className="btn border border-ink-700/40 bg-ink-800 py-2 pl-5 pr-2 text-cream-50 hover:shadow-[0_14px_30px_-12px_rgba(3,17,11,0.8)]"
+                className="btn border border-ink-700/40 bg-ink-800 py-2 pl-5 pr-2 text-cream-50 hover:shadow-[0_14px_30px_-12px_rgba(23,17,13,0.8)]"
               >
                 Call {contact.phones[0].label}
                 <span className="btn-arrow">

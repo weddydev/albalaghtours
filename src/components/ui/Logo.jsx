@@ -1,30 +1,33 @@
 import { useId } from 'react'
 
-/** Mosque-in-arch mark with gold crescent. Stroke paths carry `.logo-stroke` for draw-on animation. */
+/**
+ * Globe with a flight arc and a gold aeroplane.
+ * Stroke paths carry `.logo-stroke` (draw-on animation); the plane + origin dot are `.logo-fill`.
+ */
 export function LogoMark({ className = 'h-11 w-11' }) {
   const id = useId().replace(/:/g, '')
   return (
     <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
       <defs>
         <linearGradient id={`lg-${id}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#fbefc4" />
-          <stop offset="0.5" stopColor="#e2c46a" />
-          <stop offset="1" stopColor="#a8862a" />
+          <stop offset="0" stopColor="#f6e4bf" />
+          <stop offset="0.5" stopColor="#d9a84e" />
+          <stop offset="1" stopColor="#a87b30" />
         </linearGradient>
       </defs>
       <g fill="none" stroke={`url(#lg-${id})`} strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round">
-        <path className="logo-stroke" d="M6 45V22.5C6 14.5 15 10.5 24 3.5c9 7 18 11 18 19V45" />
-        <path className="logo-stroke" d="M10 45V24c0-6 7-9.5 14-15 7 5.5 14 9 14 15v21" opacity="0.55" />
-        <path className="logo-stroke" d="M3 45h42" />
-        <path className="logo-stroke" d="M14.5 45V27.5M33.5 45V27.5M13.6 27.5h1.8l-.9-2.6zM32.6 27.5h1.8l-.9-2.6z" />
+        {/* globe */}
+        <path className="logo-stroke" d="M7 27a15 15 0 1 0 30 0a15 15 0 1 0 -30 0" />
+        <path className="logo-stroke" d="M22 12c-5.4 4-7.6 9.4-7.6 15s2.2 11 7.6 15c5.4-4 7.6-9.4 7.6-15s-2.2-11-7.6-15z" opacity="0.55" />
+        <path className="logo-stroke" d="M8.6 21h26.8M7 27h30M8.6 33h26.8" opacity="0.55" />
+        {/* flight arc */}
+        <path className="logo-stroke" d="M3.5 36.5C11 45 31 43 40.5 14.5" strokeWidth="1.4" />
       </g>
       <g className="logo-fill" fill={`url(#lg-${id})`}>
-        <path d="M17 36.5c0-5.6 3.3-8.2 7-10.2 3.7 2 7 4.6 7 10.2z" />
-        <rect x="16.5" y="36.5" width="15" height="6.5" rx="0.6" />
-        <rect x="23.4" y="23" width="1.2" height="3.6" />
-        <path d="M26.2 18.6a3.4 3.4 0 11-3.7-4.6 2.7 2.7 0 103.7 4.6z" />
+        <circle cx="3.5" cy="36.5" r="1.7" />
+        {/* aeroplane, nose up-right at the end of the arc */}
+        <path transform="translate(33.6 3.2) scale(0.6) rotate(30 12 12)" d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" />
       </g>
-      <path d="M22.3 43v-3.2a1.7 1.7 0 013.4 0V43z" fill="#05190f" />
     </svg>
   )
 }

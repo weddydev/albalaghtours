@@ -15,14 +15,22 @@ export function reportMissing(src) {
 /** Every .webp in /public/images ships with a "-640" sibling for small screens. */
 const srcSetFor = (src) => (src?.endsWith('.webp') ? `${src.replace(/\.webp$/, '-640.webp')} 640w, ${src} 1000w` : undefined)
 
+/** The copy of a photo with soft sunbeams baked into the pixels ("name-rays.webp" + "-640"). */
+const withRays = (src) => (src?.endsWith('.webp') ? src.replace(/\.webp$/, '-rays.webp') : src)
+
+const WARM = { filter: 'sepia(0.58) saturate(0.92) contrast(1.03)' }
+
 /**
  * Full-bleed photo with a gradient (and optional children) underneath.
  * Uses a native lazy <img> (no JS pre-fetch), so off-screen photos are not downloaded up front;
  * phones get the 640px variant via srcSet. If the file is missing the fallback simply stays.
  * `priority`: an above-the-fold image that is likely the LCP — loaded eagerly at high priority.
+ * `rays`: use the version of the photo with light rays baked in (static — part of the image itself,
+ *   no runtime cost). Only some photos have one; see the "-rays.webp" files in /public/images.
+ * `warm`: a light sepia grade so every photo sits in the brown palette (off for client artwork/flyers).
  */
 export default function Photo({
-  src,
+  src: original,
   alt = '',
   fallback,
   children,
@@ -33,7 +41,10 @@ export default function Photo({
   sizes = '(max-width: 1023px) 92vw, 40vw',
   className = '',
   imgClassName = '',
+  rays = false,
+  warm = true,
 }) {
+  const src = rays ? withRays(original) : original
   const [status, setStatus] = useState('loading')
   const img = useRef(null)
 
@@ -60,6 +71,7 @@ export default function Photo({
           loading={eager || priority ? 'eager' : 'lazy'}
           fetchPriority={priority ? 'high' : undefined}
           decoding="async"
+          style={warm ? WARM : undefined}
           onLoad={() => setStatus('ok')}
           onError={() => {
             reportMissing(src)

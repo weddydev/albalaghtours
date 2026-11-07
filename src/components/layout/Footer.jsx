@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap } from '../../lib/gsap'
 import { useNearGSAP } from '../../hooks/useNearGSAP'
-import { brand, contact, mapsLink, nav, servicePath, services, waLink } from '../../data/content'
+import { brand, contact, mapsLink, nav, photoCredits, servicePath, services, waLink } from '../../data/content'
 import Logo from '../ui/Logo'
 import Icon from '../ui/Icon'
 import Skyline from '../ui/Skyline'
@@ -30,8 +30,8 @@ export default function Footer() {
     <footer ref={root} className="relative isolate overflow-hidden bg-ink-950 pt-28 lg:pt-36">
       {/* skyline crest */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-28 lg:h-36" aria-hidden="true">
-        <Skyline variant="far" fill="#0a2a1c" className="ft-sky absolute inset-x-0 bottom-0 h-full w-full" />
-        <Skyline variant="near" fill="#03110b" lights className="ft-sky absolute inset-x-0 bottom-0 h-[78%] w-full" />
+        <Skyline variant="far" fill="#2a1c14" className="ft-sky absolute inset-x-0 bottom-0 h-full w-full" />
+        <Skyline variant="near" fill="#17110d" lights className="ft-sky absolute inset-x-0 bottom-0 h-[78%] w-full" />
       </div>
       <div className="absolute inset-x-0 top-0 -z-10 h-36 bg-ink-900" />
       <div className="pattern-overlay pointer-events-none absolute inset-0 -z-10 opacity-[0.03]" />
@@ -40,12 +40,12 @@ export default function Footer() {
         <div className="ft-col lg:col-span-4">
           <Logo />
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-mist-300">
-            Haj &amp; Umrah, flights, visas and every travel document — handled with care from Mehdipatnam, Hyderabad.
+            Holidays, flights, visas, hotels and Hajj &amp; Umrah — every journey planned with care from Mehdipatnam, Hyderabad.
           </p>
           {/* TODO: confirm with client — contact.since (applies to Hyderabad office too?) */}
           <p className="mt-3 text-xs uppercase tracking-[0.22em] text-gold-300">{contact.since}</p>
           <p className="mt-6 text-xs uppercase tracking-[0.22em] text-mist-500">Your contact</p>
-          <p className="mt-1 font-display text-2xl italic text-cream-50">{contact.person}</p>
+          <p className="mt-1 font-display text-2xl text-cream-50">{contact.person}</p>
           <a
             href={waLink()}
             target="_blank"
@@ -131,11 +131,33 @@ export default function Footer() {
           </p>
           <p>Mehdipatnam, Hyderabad · {contact.branch.area}, {contact.branch.city}</p>
         </div>
+        {/* attribution required by the CC BY / CC BY-SA photo licences */}
+        <details className="mx-auto max-w-[1320px] px-5 pb-6 text-[0.7rem] text-mist-500 sm:px-8 lg:px-10">
+          <summary className="cursor-pointer select-none transition hover:text-cream-100">Photo credits</summary>
+          <ul className="mt-3 grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
+            {photoCredits.map((c) => (
+              <li key={c.file}>
+                <a href={c.source} target="_blank" rel="noopener noreferrer" className="underline-offset-2 hover:text-cream-100 hover:underline">
+                  {c.title}
+                </a>{' '}
+                — {c.author},{' '}
+                {c.licenseUrl ? (
+                  <a href={c.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline-offset-2 hover:underline">
+                    {c.license}
+                  </a>
+                ) : (
+                  c.license
+                )}
+                , via Wikimedia Commons
+              </li>
+            ))}
+          </ul>
+        </details>
       </div>
 
       <p
         aria-hidden="true"
-        className="ft-word pointer-events-none select-none whitespace-nowrap text-center font-display text-[22vw] font-semibold italic leading-[0.8] text-transparent [-webkit-text-stroke:1px_rgba(212,175,55,0.14)]"
+        className="ft-word pointer-events-none select-none whitespace-nowrap text-center font-display text-[22vw] font-semibold leading-[0.8] text-transparent [-webkit-text-stroke:1px_rgba(200,150,62,0.14)]"
       >
         {brand.short}
       </p>

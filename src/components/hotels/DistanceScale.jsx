@@ -16,13 +16,13 @@ function Track({ city, list, icon }) {
         <span className="grid h-10 w-10 place-items-center rounded-full border border-gold-400/50 text-gold-200">
           <Icon name={icon} className="h-5 w-5" />
         </span>
-        <h3 className="font-display text-3xl italic text-cream-50">{city}</h3>
+        <h3 className="font-display text-3xl text-cream-50">{city}</h3>
       </div>
 
       <div className="relative mt-16 h-px sm:mt-20">
         {/* base + progress */}
         <div className="absolute inset-x-0 top-0 h-px bg-gold-400/20" />
-        <div className="ds-progress absolute inset-x-0 top-[-1px] h-[3px] origin-left rounded-full bg-linear-to-r from-jade-400 via-gold-300 to-gold-200 shadow-[0_0_14px_rgba(232,207,122,0.6)]" />
+        <div className="ds-progress absolute inset-x-0 top-[-1px] h-[3px] origin-left rounded-full bg-linear-to-r from-jade-400 via-gold-300 to-gold-200 shadow-[0_0_14px_rgba(230,194,133,0.6)]" />
         {/* ticks */}
         {TICKS.map((t) => (
           <span key={t} className={`absolute top-2 whitespace-nowrap text-[0.6rem] tracking-[0.12em] text-mist-500 ${t === MAX ? '-translate-x-full text-right' : t === 0 ? '' : '-translate-x-1/2'}`} style={{ left: `${(t / MAX) * 100}%` }}>
@@ -42,7 +42,7 @@ function Track({ city, list, icon }) {
           </div>
         ))}
         {/* walker */}
-        <span className="ds-walker absolute left-[-18px] top-[-18px] grid h-9 w-9 place-items-center rounded-full bg-linear-to-b from-jade-400 to-jade-600 text-white shadow-[0_0_24px_rgba(63,191,116,0.8)]">
+        <span className="ds-walker absolute left-[-18px] top-[-18px] grid h-9 w-9 place-items-center rounded-full bg-linear-to-b from-jade-400 to-jade-600 text-white shadow-[0_0_24px_rgba(217,168,78,0.8)]">
           <Icon name="users" className="h-4 w-4" />
         </span>
       </div>
@@ -82,7 +82,7 @@ export default function DistanceScale() {
           )
           track.querySelectorAll('.ds-pin').forEach((pin) => {
             const at = parseFloat(pin.dataset.at)
-            tl.fromTo(pin.querySelector('.ds-dot'), { backgroundColor: '#05190f', color: '#e8cf7a' }, { backgroundColor: '#e8cf7a', color: '#05190f', duration: 0.04 }, at)
+            tl.fromTo(pin.querySelector('.ds-dot'), { backgroundColor: '#1f1510', color: '#e6c285' }, { backgroundColor: '#e6c285', color: '#1f1510', duration: 0.04 }, at)
             const name = pin.querySelector('.ds-name')
             if (name) tl.fromTo(name, { autoAlpha: 0.35, y: 6 }, { autoAlpha: 1, y: 0, duration: 0.06 }, at)
           })
