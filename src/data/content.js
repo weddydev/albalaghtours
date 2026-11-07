@@ -88,6 +88,10 @@ export const nav = [
  * Display order is set by SERVICE_ORDER below the list.
  * `motif` picks the floating SVG on the detail page; `tone` tints the image fallback.
  * ---------------------------------------------------------------------------------------- */
+
+
+
+
 const SERVICE_LIST = [
   {
     slug: 'haj-umrah',
@@ -97,7 +101,7 @@ const SERVICE_LIST = [
     icon: 'kaaba',
     motif: 'kaaba',
     tone: 'night',
-    image: '/images/services/haj-umrah.webp',
+    image: '/images/hajj-umrah/umrah-group-haram.webp',
     kicker: 'Hajj 2027 · Ziyarath Special Umrah',
     heading: { lines: ['Haj &', 'Umrah'], accent: 1 },
     intro:
@@ -740,7 +744,7 @@ const UMRAH = {
   badge: 'Ziyarath Special',
   tagline: 'A journey of faith. Memories to treasure.',
   intro: 'Join Al Balagh Tours for a special Umrah group with direct flights, Makkah and Madinah stays, and an extended Ziyarath programme.',
-  image: '/images/packages/umrah-standard.webp',
+  image: '/images/hajj-umrah/umrah-kaaba-night.webp',
   price: 'Contact the office for price', // TODO: confirm with client
   dates: 'Contact the office for dates', // TODO: confirm with client
   route: {
@@ -770,8 +774,8 @@ const UMRAH = {
   ],
   // TODO: confirm with client — photos are representative stock images, not the actual hotels
   hotels: [
-    { id: 'akaber-al-hijra', city: 'makkah', cityName: 'Makkah', name: 'Akaber Al Hijra', stars: 3, distance: 300, from: 'the Haram', image: '/images/hotel-3.webp' },
-    { id: 'diwan-al-madinah', city: 'madinah', cityName: 'Madinah', name: 'Diwan Al Madinah', stars: 3, distance: 150, from: 'Masjid an-Nabawi', image: '/images/hotel-6.webp' },
+    { id: 'akaber-al-hijra', city: 'makkah', cityName: 'Makkah', name: 'Akaber Al Hijra', stars: 3, distance: 300, from: 'the Haram', image: '/images/hotels/hotel-lobby-1.webp' },
+    { id: 'diwan-al-madinah', city: 'madinah', cityName: 'Madinah', name: 'Diwan Al Madinah', stars: 3, distance: 150, from: 'Masjid an-Nabawi', image: '/images/hotels/hotel-room-1.webp' },
   ],
   programme: {
     eyebrow: 'Group programme · Ziyarath Special',
@@ -872,6 +876,39 @@ export const hotelAmenities = [
   { icon: 'utensils', title: 'Hyderabadi buffet meals', text: 'Buffet meals with tea three times on the Umrah group.' },
   { icon: 'shirt', title: 'Laundry service', text: 'Laundry services in Makkah and Madinah on the Umrah group.' },
 ]
+
+const hotelPhoto = (file, alt, caption) => ({ src: `/images/hotels/${file}`, alt, caption })
+
+export const hotelGallery = [
+  hotelPhoto('hotel-lobby-1.webp', 'Grand hotel lobby with Kaaba tapestry & chandelier', 'Grand Reception & Lobby'),
+  hotelPhoto('hotel-dining-1.webp', 'Hyderabadi buffet dining hall with chafing dishes', 'Hyderabadi Buffet Dining'),
+  hotelPhoto('hotel-room-1.webp', 'Comfortable triple and quad sharing room with amenities', 'Triple & Quad Sharing Room'),
+  hotelPhoto('hotel-room-2.webp', 'Deluxe family room with plush bedding and Holy Haram view artwork', 'Deluxe Family Stay'),
+  hotelPhoto('hotel-dining-2.webp', 'Buffet meal counter with warmers and banquet seating', 'Buffet Spread & Warmers'),
+  hotelPhoto('hotel-lounge-1.webp', 'Coffee shop, beverage cooler and guest seating lounge', 'Tea Lounge & Coffee Shop'),
+  hotelPhoto('hotel-room-4.webp', 'Spacious 5-bed group room with chandelier and clean linens', '5-Bed Group Suite'),
+  hotelPhoto('hotel-room-6.webp', 'Guest room with TV showing live Holy Haram broadcast', 'Room with Makkah Live TV'),
+  hotelPhoto('hotel-room-3.webp', 'Fresh towels, clean bedding and bedside phone', 'Clean Linens & Amenities'),
+  hotelPhoto('hotel-room-5.webp', 'Sharing room with gold drapery and individual beds', 'Comfortable Group Room'),
+  hotelPhoto('hotel-bath-1.webp', 'En-suite bathroom marble vanity with toiletries and hairdryer', 'En-Suite Bathroom & Vanity'),
+  hotelPhoto('hotel-bath-2.webp', 'Private tiled shower and western toilet', 'Private Shower & Restroom'),
+  hotelPhoto('hotel-bath-3.webp', 'Clean hotel restroom with towel rack and amenities', 'Hygienic Bathroom Facilities'),
+]
+
+if (serviceBySlug['hotel-bookings']) serviceBySlug['hotel-bookings'].gallery = hotelGallery
+
+const pilgrimagePhoto = (file, alt, caption) => ({ src: `/images/hajj-umrah/${file}`, alt, caption })
+
+export const hajjUmrahGallery = [
+  pilgrimagePhoto('umrah-kaaba-night.webp', 'Holy Kaaba and Makkah Clock Tower at night with pilgrims', 'Makkah Al-Mukarramah'),
+  pilgrimagePhoto('umrah-group-haram.webp', 'Al Balagh Umrah pilgrim group in Ihram at Masjid al-Haram courtyard', 'Umrah Group at Masjid al-Haram'),
+  pilgrimagePhoto('umrah-flight-arrival.webp', 'Pilgrims in Ihram arriving via direct flight in Jeddah with Al Balagh kits', 'Direct Flight Arrival in Jeddah'),
+  pilgrimagePhoto('umrah-ziyarath-group.webp', 'Pilgrim group during Ziyarath tour with mountain background and pigeons', 'Madinah & Makkah Ziyarath Tour'),
+  pilgrimagePhoto('umrah-buffet-dining.webp', 'Fresh fruit and hot tea buffet spread prepared for our Umrah pilgrims', 'Hyderabadi Buffet Spread'),
+]
+
+if (serviceBySlug['haj-umrah']) serviceBySlug['haj-umrah'].gallery = hajjUmrahGallery
+
 
 /* ------------------------------------------------------------------------------------------
  * DESTINATIONS — popular trips we plan from Hyderabad (flights, visas, hotels, sightseeing),
@@ -1035,9 +1072,9 @@ export const albania = {
     lines: ['Your job in Europe', 'starts here.'],
     intro: `Thinking about working in Albania? ${ALBANIA_PLACEHOLDER}`,
     photos: [
-      albaniaPhoto('tirana.webp', 'Tirana, the capital of Albania', 'Tirana'),
-      albaniaPhoto('riviera.webp', 'The Albanian Riviera', 'Albanian Riviera'),
-      albaniaPhoto('flag.webp', 'The flag of Albania', 'Albania'),
+      albaniaPhoto('albania-arrival-1.webp', 'Candidates arriving at Tirana International Airport', 'Tirana Airport Arrival'),
+      albaniaPhoto('albania-team-1.webp', 'Our successful candidates in Albania', 'Tirana, Albania'),
+      albaniaPhoto('albania-arrival-2.webp', 'Candidates welcomed at Tirana Airport', 'Successful Placement'),
     ],
   },
   // TODO: confirm exact wording with client
@@ -1088,12 +1125,14 @@ export const albania = {
   },
   // TODO: client to provide Albania content — Unsplash / Pexels / Wikimedia Commons, downloaded locally
   gallery: [
-    albaniaPhoto('tirana.webp', 'Tirana, the capital of Albania', 'Tirana'),
-    albaniaPhoto('skanderbeg-square.webp', 'Skanderbeg Square, Tirana', 'Skanderbeg Square'),
-    albaniaPhoto('riviera.webp', 'The Albanian Riviera', 'Albanian Riviera'),
-    albaniaPhoto('mountains.webp', 'Mountains of Albania', 'Albanian mountains'),
-    albaniaPhoto('flag.webp', 'The flag of Albania', 'Flag of Albania'),
-    albaniaPhoto('delivery-rider.jpg', 'A delivery rider on a scooter', 'On the road'),
+    albaniaPhoto('albania-arrival-1.webp', 'Candidates arriving at Tirana Airport', 'Tirana Airport Arrival'),
+    albaniaPhoto('albania-team-1.webp', 'Successful candidate team in Albania', 'Tirana, Albania'),
+    albaniaPhoto('albania-arrival-2.webp', 'Candidates welcomed with visa documentation', 'Visa & Arrival'),
+    albaniaPhoto('albania-living-1.webp', 'Candidates dining and settling in Albania', 'Life in Albania'),
+    albaniaPhoto('albania-team-2.webp', 'Candidate group at Tirana airport terminal', 'Candidate Group'),
+    albaniaPhoto('albania-arrival-3.webp', 'Welcome to Albania airport selfie', 'Welcome to Tirana'),
+    albaniaPhoto('albania-arrival-4.webp', 'Airport pickup with luggage', 'Safe Arrival'),
+    albaniaPhoto('albania-arrival-5.webp', 'Candidates at Tirana airport plaza', 'European Journey'),
   ],
   // TODO: client to provide Albania content
   faqs: [
@@ -1132,9 +1171,9 @@ export const SHOW_SAMPLE_REVIEWS = true
 const SAMPLE_QUOTE = 'Sample review — a guest’s own words about their journey will appear here.'
 const REVIEWS = [
   // Sample — TODO: replace with real customer reviews
-  { type: 'video', name: 'Sample guest', city: 'Hyderabad', src: '/videos/reviews/review-1.mp4', poster: '/images/reviews/poster-1.jpg', quote: '', sample: true },
-  { type: 'video', name: 'Sample guest', city: 'Hyderabad', src: '/videos/reviews/review-2.mp4', poster: '/images/reviews/poster-2.jpg', quote: '', sample: true },
-  { type: 'video', name: 'Sample guest', city: 'Vijayawada', src: '/videos/reviews/review-3.mp4', poster: '/images/reviews/poster-3.jpg', quote: '', sample: true },
+  { type: 'video', name: 'Sample guest', city: 'Hyderabad', src: '/video-section/first%20video%20.mp4', poster: '/images/reviews/poster-1.jpg', quote: '', sample: true },
+  { type: 'video', name: 'Sample guest', city: 'Hyderabad', src: '/video-section/second%20video%20.mp4', poster: '/images/reviews/poster-2.jpg', quote: '', sample: true },
+  { type: 'video', name: 'Sample guest', city: 'Vijayawada', src: '/video-section/third%20video%20.mp4', poster: '/images/reviews/poster-3.jpg', quote: '', sample: true },
   // Sample — TODO: replace with real customer reviews
   ...[1, 2, 3, 4, 5, 6].map((n) => ({
     type: 'photo',

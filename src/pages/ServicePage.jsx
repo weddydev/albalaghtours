@@ -18,6 +18,8 @@ import CoachGallery from '../components/service/CoachGallery'
 import NotFound from './NotFound'
 import AfterFirstPaint from '../components/ui/AfterFirstPaint'
 import FlyerShowcase from '../components/ui/FlyerShowcase'
+import ArchCarousel from '../components/ui/ArchCarousel'
+import SectionHeading from '../components/ui/SectionHeading'
 
 export default function ServicePage() {
   const { slug } = useParams()
@@ -58,6 +60,32 @@ export default function ServicePage() {
         {service.coaches && <CoachGallery service={service} />}
         <HowItWorks service={service} />
         <Documents service={service} />
+        {service.gallery && (
+          <section className="relative py-16 sm:py-24">
+            <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-10">
+              <SectionHeading
+                align="left"
+                eyebrow={slug === 'haj-umrah' ? 'Pilgrimage Gallery' : 'Hotel Gallery'}
+                title={slug === 'haj-umrah' ? ['Moments from our ', { accent: 'pilgrimage groups' }] : ['Inside our ', { accent: 'hotel stays' }]}
+                lead={
+                  slug === 'haj-umrah'
+                    ? 'Real moments of our pilgrims — direct flight arrivals, Haram visits, ziyarath and buffet dining.'
+                    : 'A glimpse of the rooms, buffet dining, reception lobby and amenities arranged for our guests and pilgrims.'
+                }
+                divider={false}
+              />
+              <div className="mt-6">
+                <ArchCarousel
+                  items={service.gallery}
+                  label={slug === 'haj-umrah' ? 'Pilgrimage photos' : 'Hotel photos'}
+                  fallback="radial-gradient(90% 70% at 60% 25%, #6b5a3a 0%, #2a2216 50%, #0a0805 100%)"
+                  icon={slug === 'haj-umrah' ? 'kaaba' : 'bed'}
+                  parallax
+                />
+              </div>
+            </div>
+          </section>
+        )}
         {slug === 'haj-umrah' && <HajjNotes />}
         <Faq service={service} />
         <Related service={service} />

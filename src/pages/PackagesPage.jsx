@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
-import { enquiry, flyers, waLink } from '../data/content'
+import { enquiry, flyers, hajjUmrahGallery, waLink } from '../data/content'
 import { ScrollTrigger } from '../lib/gsap'
 import { scrollToTarget } from '../lib/lenis'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
@@ -15,6 +15,7 @@ import CtaBand from '../components/service/CtaBand'
 import Icon from '../components/ui/Icon'
 import AfterFirstPaint from '../components/ui/AfterFirstPaint'
 import FlyerShowcase from '../components/ui/FlyerShowcase'
+import ArchCarousel from '../components/ui/ArchCarousel'
 
 export default function PackagesPage() {
   const [params] = useSearchParams()
@@ -91,6 +92,21 @@ export default function PackagesPage() {
           whatsapp={enquiry.umrah}
           label="Umrah flyers"
         />
+        <section className="relative py-16 sm:py-24">
+          <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-10">
+            <SectionHeading
+              align="left"
+              eyebrow="Pilgrimage Gallery"
+              title={['Moments from our ', { accent: 'Hajj & Umrah' }, ' groups']}
+              lead="Authentic photos of our pilgrims — direct flight arrivals, Haram visits, extended Ziyarath and Hyderabadi buffet dining."
+              divider={false}
+            />
+            <div className="mt-6">
+              <ArchCarousel items={hajjUmrahGallery} label="Hajj & Umrah photos" fallback="radial-gradient(90% 70% at 60% 25%, #6b5a3a 0%, #2a2216 50%, #0a0805 100%)" icon="kaaba" parallax />
+            </div>
+          </div>
+        </section>
+
         <SeasonBanner />
         <ComparePackages />
         <CtaBand

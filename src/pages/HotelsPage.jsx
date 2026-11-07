@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { gsap } from '../lib/gsap'
 import { useNearGSAP } from '../hooks/useNearGSAP'
 import { scrollToTarget } from '../lib/lenis'
-import { enquiry, hotelAmenities, hotelsNote, waLink } from '../data/content'
+import { enquiry, hotelAmenities, hotelGallery, hotelsNote, waLink } from '../data/content'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import PageHero from '../components/page/PageHero'
 import DistanceRings from '../components/hotels/DistanceRings'
@@ -13,6 +13,7 @@ import SectionHeading from '../components/ui/SectionHeading'
 import CtaBand from '../components/service/CtaBand'
 import Icon from '../components/ui/Icon'
 import AfterFirstPaint from '../components/ui/AfterFirstPaint'
+import ArchCarousel from '../components/ui/ArchCarousel'
 
 const CITIES = ['Dubai', 'Istanbul', 'Kuala Lumpur', 'London', 'Baku', 'Cairo', 'Jeddah', 'Riyadh', 'Singapore', 'Hyderabad']
 
@@ -144,6 +145,21 @@ export default function HotelsPage() {
         </section>
 
         <Amenities />
+
+        <section className="relative py-16 sm:py-24">
+          <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-10">
+            <SectionHeading
+              align="left"
+              eyebrow="Hotel Gallery"
+              title={['Inside our ', { accent: 'hotel stays' }]}
+              lead="A glimpse of the rooms, buffet dining, reception lobby and amenities arranged for our guests and pilgrims."
+              divider={false}
+            />
+            <div className="mt-6">
+              <ArchCarousel items={hotelGallery} label="Hotel photos" fallback="radial-gradient(90% 70% at 60% 25%, #6b5a3a 0%, #2a2216 50%, #0a0805 100%)" icon="bed" parallax />
+            </div>
+          </div>
+        </section>
         <DistanceScale />
         <Worldwide />
         <CtaBand

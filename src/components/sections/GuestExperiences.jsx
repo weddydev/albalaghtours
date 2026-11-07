@@ -43,8 +43,9 @@ function VideoModal({ review, onClose }) {
               src={review.src}
               poster={review.poster || undefined}
               controls
+              autoPlay
               playsInline
-              preload="none"
+              preload="metadata"
               onError={() => setFailed(true)}
               className="absolute inset-0 h-full w-full bg-ink-950 object-contain"
             >

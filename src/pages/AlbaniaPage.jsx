@@ -100,7 +100,13 @@ export default function AlbaniaPage() {
 
         <section className="relative py-16 sm:py-24">
           <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-10">
-            <SectionHeading align="left" eyebrow="Gallery" title={['Glimpses of ', { accent: 'Albania' }]} divider={false} />
+            <SectionHeading
+              align="left"
+              eyebrow="Candidate Gallery"
+              title={['Glimpses of our candidates in ', { accent: 'Albania' }]}
+              lead="Arrivals and real moments of candidates placed in Albania through Al Balagh Tours & Travels."
+              divider={false}
+            />
             <div className="mt-6">
               <ArchCarousel items={gallery} label="Albania photos" fallback={GALLERY_FALLBACK} icon="globe" parallax />
             </div>
