@@ -173,7 +173,7 @@ export default function GuestExperiences() {
   const videos = reviews.filter((r) => r.type === 'video')
   const photos = reviews.filter((r) => r.type === 'photo')
   const quotes = reviews.filter((r) => r.type === 'text')
-  const photoItems = photos.map((r) => ({ src: r.src, alt: `Photo from ${byline(r)}`, caption: byline(r) }))
+  const photoItems = photos.map((r) => ({ src: r.src, alt: r.alt || `Photo from ${byline(r)}`, caption: byline(r) }))
 
   useNearGSAP(
     () => {
@@ -220,7 +220,7 @@ export default function GuestExperiences() {
                     type="button"
                     onClick={() => setPhoto(i)}
                     aria-label={`Open ${photoItems[i].alt}`}
-                    className={`group relative block w-full overflow-hidden rounded-[22px] border border-gold-400/25 transition-colors hover:border-gold-300/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-200 ${ASPECTS[i % ASPECTS.length]}`}
+                    className={`group relative block w-full overflow-hidden rounded-[22px] border border-gold-400/25 transition-colors hover:border-gold-300/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-200 ${r.aspect || ASPECTS[i % ASPECTS.length]}`}
                   >
                     <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
                       <Photo src={r.src} alt={photoItems[i].alt} fallback={FALLBACKS[(i + 1) % 3]} sizes="(max-width: 639px) 46vw, (max-width: 1023px) 30vw, 400px">
