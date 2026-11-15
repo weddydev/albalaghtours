@@ -104,7 +104,7 @@ export default function AlbaniaPage() {
               align="left"
               eyebrow="Candidate Gallery"
               title={['Glimpses of our candidates in ', { accent: 'Albania' }]}
-              lead="Arrivals and real moments of candidates placed in Albania through Al Balagh Tours & Travels."
+              lead="Arrivals and real moments of candidates placed in Albania through Al Balaagh Travels."
               divider={false}
             />
             <div className="mt-6">

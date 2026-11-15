@@ -8,7 +8,7 @@ import Icon from '../components/ui/Icon'
 
 export default function NotFound() {
   const root = useRef(null)
-  useDocumentMeta('Page not found', 'This page could not be found. Explore Al Balagh Tours & Travels services in Hyderabad.')
+  useDocumentMeta('Page not found', 'This page could not be found. Explore Al Balaagh Travels services in Hyderabad.')
 
   const { context: gsapCtx } = useGSAP(
     () => {

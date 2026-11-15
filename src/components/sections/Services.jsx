@@ -43,18 +43,6 @@ export default function Services() {
           scrollTrigger: { trigger: q('.svc-aside')[0], start: 'top 85%', once: true },
         })
       })
-
-      // the two halves of the bento drift against each other while scrolling
-      mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
-        const grid = q('.svc-grid')[0]
-        const cells = q('.svc-cell')
-        const half = grid.offsetWidth / 2
-        const right = cells.filter((c) => c.offsetLeft + c.offsetWidth / 2 > half && c.offsetWidth < half * 1.5)
-        const left = cells.filter((c) => !right.includes(c))
-        const st = { trigger: grid, start: 'top bottom', end: 'bottom top', scrub: 0.8 }
-        gsap.fromTo(right, { y: 50 }, { y: -50, ease: 'none', scrollTrigger: st })
-        gsap.fromTo(left, { y: -12 }, { y: 12, ease: 'none', scrollTrigger: { ...st } })
-      })
     },
     { scope: root },
   )

@@ -23,10 +23,24 @@ let refreshTimer = 0
 
 const rIC = (fn) => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 1200 }) : setTimeout(() => fn({ timeRemaining: () => 8 }), 60))
 
-// one ScrollTrigger refresh after a burst of late setups (SplitText can move lines by a pixel)
+// One ScrollTrigger refresh after a burst of late setups (SplitText can move lines by a pixel).
+// A refresh re-measures every trigger and invalidates the hero timeline — a long frame — so it
+// never runs mid-scroll (that was felt as the page "sticking"); it waits for the scroll to settle.
+let waitingForStill = false
+function refreshWhenStill() {
+  if (!ScrollTrigger.isScrolling()) return ScrollTrigger.refresh()
+  if (waitingForStill) return
+  waitingForStill = true
+  const onEnd = () => {
+    ScrollTrigger.removeEventListener('scrollEnd', onEnd)
+    waitingForStill = false
+    scheduleRefresh()
+  }
+  ScrollTrigger.addEventListener('scrollEnd', onEnd)
+}
 function scheduleRefresh() {
   clearTimeout(refreshTimer)
-  refreshTimer = setTimeout(() => rIC(() => ScrollTrigger.refresh()), 250)
+  refreshTimer = setTimeout(() => rIC(refreshWhenStill), 250)
 }
 
 function runJob(job) {

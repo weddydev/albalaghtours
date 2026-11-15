@@ -26,9 +26,14 @@ export default function CursorGlow() {
       dx(e.clientX)
       dy(e.clientY)
     }
+    let wasHot = false
     const onOver = (e) => {
-      const hot = e.target.closest('a, button, select, input, textarea, label, [data-cursor]')
+      const hot = !!e.target.closest('a, button, select, input, textarea, label, [data-cursor]')
+      // pointerover fires on every element boundary: only animate when the state changes
+      if (hot === wasHot) return
+      wasHot = hot
       gsap.to(ring.current, {
+        overwrite: 'auto',
         scale: hot ? 1.9 : 1,
         backgroundColor: hot ? 'rgba(200,150,62,0.12)' : 'rgba(200,150,62,0)',
         borderColor: hot ? 'rgba(238,211,154,0.9)' : 'rgba(200,150,62,0.6)',

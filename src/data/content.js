@@ -1,11 +1,11 @@
 // Single source of truth for all copy, contact details and placeholders.
 // Anything marked `TODO: confirm with client` is a placeholder and must be
-// verified by Al Balagh Tours & Travels before going live.
+// verified by Al Balaagh Travels before going live.
 
 export const brand = {
-  name: 'Al Balagh Tours & Travels',
-  short: 'Al Balagh',
-  tagline: 'Tours & Travels',
+  name: 'Al Balaagh Travels',
+  short: 'Al Balaagh',
+  tagline: 'Travels',
 }
 
 export const contact = {
@@ -35,7 +35,7 @@ export const waLink = (text = 'Hello, I would like to enquire about your service
 
 // Prefilled WhatsApp text for the two pilgrimage programmes (client wording).
 export const enquiry = {
-  hajj: 'Hello Al Balagh Tours. Please share the Hajj 2027 package details, total price, dates and hotel arrangements.',
+  hajj: 'Hello Al Balaagh Travels. Please share the Hajj 2027 package details, total price, dates and hotel arrangements.',
   umrah:
     'Hello. Please share details of your Ziyarath Special Umrah group, including departure dates, duration, price, availability and Riyazul Jannah arrangements.',
 }
@@ -59,7 +59,7 @@ export const tripEnquiry = ({ destination, type, month, travellers } = {}) => {
   const kind = tripTypes.find((t) => t.id === type)?.label.toLowerCase() ?? 'trip'
   const where = destination?.trim()
   return [
-    `Hello Al Balagh Tours. I would like help planning a ${kind}${where ? ` to ${where}` : ''}.`,
+    `Hello Al Balaagh Travels. I would like help planning a ${kind}${where ? ` to ${where}` : ''}.`,
     month && `Preferred departure: ${month}.`,
     travellers && `Travellers: ${travellers}.`,
   ]
@@ -96,8 +96,8 @@ const SERVICE_LIST = [
   {
     slug: 'haj-umrah',
     title: 'Haj & Umrah Packages',
-    short: 'Hajj 2027 and the Ziyarath Special Umrah group — thoughtful dining, laundry, Ziyarath and private Hajj transfers.',
-    subs: ['Hajj 2027 programme', 'Ziyarath Special Umrah group', 'Private bus during the days of Hajj', 'Direct Umrah flights from Hyderabad'],
+    short: 'Hajj 2027 and the Ziyarath Special Umrah group — good food, laundry, Ziyarath visits and private transport for Hajj.',
+    subs: ['Hajj 2027 programme', 'Ziyarath Special Umrah group', 'Private buses for the 5 days of Hajj', 'Direct Umrah flights from Hyderabad'],
     icon: 'kaaba',
     motif: 'kaaba',
     tone: 'night',
@@ -105,40 +105,40 @@ const SERVICE_LIST = [
     kicker: 'Hajj 2027 · Ziyarath Special Umrah',
     heading: { lines: ['Haj &', 'Umrah'], accent: 1 },
     intro:
-      'Two programmes, planned with care: Hajj 2027 with private transfers during the days of Hajj, and a Ziyarath Special Umrah group with direct flights.',
+      'Two journeys, each planned with care: Hajj 2027 with private transport through the days of Hajj, and a Ziyarath Special Umrah group flying direct.',
     long: [
-      'Prepare for your Hajj with thoughtful dining, laundry, Ziyarath and private bus arrangements during the days of Hajj.',
-      'Or join Al Balagh Tours for a special Umrah group with direct flights, Makkah and Madinah stays, and an extended Ziyarath programme.',
+      'Make your Hajj easier with quality meals, laundry, Ziyarath visits and private buses arranged for the days of Hajj.',
+      'Or travel with Al Balaagh Travels on a special Umrah group — direct flights, stays in Makkah and Madinah, and an extended Ziyarath programme.',
     ],
     offer: [
-      { icon: 'utensils', title: 'Thoughtful dining', text: 'A platinum Indian set menu on Hajj; Hyderabadi buffet meals with tea three times on the Umrah group.' },
-      { icon: 'shirt', title: 'Laundry', text: 'Unlimited laundry on Hajj; laundry services in Makkah and Madinah on the Umrah group.' },
-      { icon: 'luggage', title: 'Hajj & baggage kits', text: 'A premium Hajj kit for your pilgrimage, and a baggage kit for the Umrah group.' },
-      { icon: 'mosque', title: 'Riyazul Jannah', text: 'Separate permit arrangements for men and women on Hajj, subject to availability.' },
-      { icon: 'mapPin', title: 'Ziyarath', text: 'Makkah, Madinah and Taif on Hajj, and an extra Madinah Ziyarath on the Umrah group.' },
-      { icon: 'bus', title: 'Transfers & flights', text: 'Private buses during the 5 days of Hajj; direct Hyderabad–Jeddah and Madinah–Hyderabad Umrah flights.' },
+      { icon: 'utensils', title: 'Good food', text: 'A platinum Indian set menu on Hajj; Hyderabadi buffet meals, with tea served three times, on the Umrah group.' },
+      { icon: 'shirt', title: 'Laundry', text: 'Unlimited laundry on Hajj; laundry in both Makkah and Madinah on the Umrah group.' },
+      { icon: 'luggage', title: 'Hajj & baggage kits', text: 'A premium kit prepared for your Hajj, and a baggage kit for every Umrah pilgrim.' },
+      { icon: 'mosque', title: 'Riyazul Jannah', text: 'On Hajj, separate permits are arranged for men and women, as availability allows.' },
+      { icon: 'mapPin', title: 'Ziyarath', text: 'Sacred sites of Makkah, Madinah and Taif on Hajj, plus extra Madinah Ziyarath on the Umrah group.' },
+      { icon: 'bus', title: 'Transport & flights', text: 'Private buses through the 5 days of Hajj; direct Umrah flights Hyderabad–Jeddah and Madinah–Hyderabad.' },
     ],
     steps: [
-      { title: 'Choose your journey', text: 'Hajj 2027 or the Ziyarath Special Umrah group — tell us which one you are planning.' },
-      { title: 'Get the details', text: 'The office confirms the total price, dates, hotel arrangements and final booking terms.' },
-      { title: 'Submit documents', text: 'For Hajj: original passport, PAN card, Aadhaar card and a passport-size photograph.' },
-      { title: 'Prepare to travel', text: 'For Hajj, the day-by-day itinerary and dos and don’ts are shared two weeks before departure.' },
+      { title: 'Pick your programme', text: 'Hajj 2027 or the Ziyarath Special Umrah group — let us know which one you have in mind.' },
+      { title: 'Get the full picture', text: 'The office shares the total price, dates, hotel arrangements and final booking terms.' },
+      { title: 'Hand in documents', text: 'For Hajj: your original passport, PAN card, Aadhaar card and one passport-size photograph.' },
+      { title: 'Get ready to travel', text: 'For Hajj, you receive the day-by-day itinerary and dos and don’ts two weeks before departure.' },
     ],
     documentsTitle: 'Documents for Hajj 2027',
-    documentsNote: 'Contact the office for submission instructions and document checks.',
+    documentsNote: 'The office will guide you on how to submit them and check every document for you.',
     documents: ['Original passport', 'PAN card', 'Aadhaar card', 'Passport-size photograph'],
     faqs: [
-      { q: 'When does the Umrah group depart?', a: 'Contact the office for upcoming departure dates, duration and availability.' },
-      { q: 'Which flight routes are included?', a: 'Direct Hyderabad–Jeddah and Madinah–Hyderabad flights. Ask the team for airline, timing and baggage allowance.' },
-      { q: 'What is the package price?', a: 'Contact the office for the current total price, room-sharing options and complete inclusions and exclusions.' },
-      { q: 'How do I book Hajj 2027?', a: 'Contact the office for the total package price, travel dates, hotel arrangements and final booking terms.' },
+      { q: 'When does the next Umrah group leave?', a: 'Ask the office for upcoming departure dates, trip length and seats available.' },
+      { q: 'Which flights are included?', a: 'Direct flights from Hyderabad to Jeddah, and back from Madinah to Hyderabad. The team shares the airline, timings and baggage allowance.' },
+      { q: 'How much does the package cost?', a: 'The office will share the current total price, room-sharing options and the full list of inclusions and exclusions.' },
+      { q: 'How do I book Hajj 2027?', a: 'Speak to the office for the total package price, travel dates, hotel arrangements and final booking terms.' },
       {
-        q: 'How can I enquire?',
-        a: 'Call +91 90302 29940 or +91 90305 86777, or use the WhatsApp button. Offices: Hyderabad (Mehdipatnam) and Vijayawada (Panja Center).',
+        q: 'How can I get in touch?',
+        a: 'Call +91 90302 29940 or +91 90305 86777, or tap the WhatsApp button. Visit us in Hyderabad (Mehdipatnam) or Vijayawada (Panja Center).',
       },
     ],
     related: ['air-ticketing', 'visa-services', 'hotel-bookings'],
-    whatsapp: 'Hello Al Balagh Tours. Please share details of your Hajj 2027 and Ziyarath Special Umrah programmes.',
+    whatsapp: 'Hello Al Balaagh Travels. Please share details of your Hajj 2027 and Ziyarath Special Umrah programmes.',
   },
   {
     // Has its own page (`path`) — the rest of the page copy lives in the `albania` block below.
@@ -157,7 +157,7 @@ const SERVICE_LIST = [
     heading: { lines: ['Albania', 'Work Visa'], accent: 1 },
     intro: 'Details coming soon — contact our team.',
     related: ['visa-services', 'attestation-of-certificates', 'air-ticketing'],
-    whatsapp: 'Hello Al Balagh Tours. I would like to enquire about the Albania work permit & job visa.',
+    whatsapp: 'Hello Al Balaagh Travels. I would like to enquire about the Albania work permit & job visa.',
   },
   {
     slug: 'air-ticketing',
@@ -518,7 +518,7 @@ const SERVICE_LIST = [
       { q: 'Are transfers part of your Hajj programme?', a: 'Yes. Hajj 2027 includes private bus transfers during the 5 days of Hajj — see the transfer timeline on the Haj & Umrah page.' },
     ],
     related: ['haj-umrah', 'hotel-bookings', 'air-ticketing'],
-    whatsapp: 'Hello Al Balagh Tours. I would like details of your private transfers (Jeddah · Makkah · Madinah).',
+    whatsapp: 'Hello Al Balaagh Travels. I would like details of your private transfers (Jeddah · Makkah · Madinah).',
   },
   {
     slug: 'attestation-of-certificates',
@@ -649,7 +649,7 @@ const HAJJ = {
   name: 'Hajj 2027',
   badge: 'Hajj 2027',
   tagline: 'A sacred calling. A journey of a lifetime.',
-  intro: 'Prepare for your Hajj with thoughtful dining, laundry, Ziyarath and private bus arrangements during the days of Hajj.',
+  intro: 'Get ready for Hajj with quality meals, laundry, Ziyarath visits and private buses arranged for the days of Hajj.',
   image: '/images/packages/hajj-premium.webp',
   price: 'Contact the office for price', // TODO: confirm with client
   dates: 'Contact the office for dates', // TODO: confirm with client
@@ -663,73 +663,73 @@ const HAJJ = {
     { icon: 'bus', label: 'Private bus during Hajj' },
   ],
   inclusions: [
-    { icon: 'utensils', title: 'Platinum Indian dining', text: 'A lavish Indian set menu with snacks, fruits, bakery items and juices.' },
-    { icon: 'shirt', title: 'Premium laundry', text: 'Unlimited laundry services included in the package.' },
-    { icon: 'luggage', title: 'Premium Hajj kit', text: 'A dedicated Hajj kit for your pilgrimage.' },
-    { icon: 'mosque', title: 'Riyazul Jannah', text: 'Separate permit arrangements for men and women, subject to availability.' },
-    { icon: 'mapPin', title: 'Ziyarath visits', text: 'Ziyarath in Makkah, Madinah and Taif.' },
+    { icon: 'utensils', title: 'Platinum Indian dining', text: 'A rich Indian set menu, with snacks, fresh fruit, bakery items and juices.' },
+    { icon: 'shirt', title: 'Premium laundry', text: 'Unlimited laundry, included in your package.' },
+    { icon: 'luggage', title: 'Premium Hajj kit', text: 'Your own kit, prepared for the pilgrimage.' },
+    { icon: 'mosque', title: 'Riyazul Jannah', text: 'Separate permits arranged for men and women, as availability allows.' },
+    { icon: 'mapPin', title: 'Ziyarath visits', text: 'Visits to the sacred sites of Makkah, Madinah and Taif.' },
   ],
-  cta: { title: 'Travel with a clear plan', text: 'Speak to our team about your Hajj arrangements and the details you need before booking.' },
+  cta: { title: 'Go with a clear plan', text: 'Talk to our team about your Hajj plans and everything you should know before you book.' },
   hotels: [],
-  hotelsNote: 'Makkah & Madinah hotel details shared by the office at booking', // TODO: confirm with client
+  hotelsNote: 'Makkah & Madinah hotels confirmed by the office at booking', // TODO: confirm with client
   programme: {
     eyebrow: 'Special services',
-    title: 'Private bus transfers during the 5 days of Hajj',
+    title: 'Private buses through the 5 days of Hajj',
     steps: [
-      { from: 'Makkah hotel', to: 'Mina camp', text: 'Beginning the Hajj journey' },
+      { from: 'Makkah hotel', to: 'Mina camp', text: 'Setting out for Hajj' },
       { from: 'Mina', to: 'Arafat' },
       { from: 'Arafat', to: 'Muzdalifah' },
       { from: 'Muzdalifah', to: 'Jamarat' },
-      { from: 'Jamarat', to: 'Makkah hotel', text: 'Return to the hotel' },
-      { from: 'Tawaf-e-Ziyarath', to: 'Mina camp', text: 'Return transfer to Mina' },
-      { from: 'Mina', to: 'Makkah hotel', text: 'Last-day transfer' },
+      { from: 'Jamarat', to: 'Makkah hotel', text: 'Back to the hotel' },
+      { from: 'Tawaf-e-Ziyarath', to: 'Mina camp', text: 'Back to Mina' },
+      { from: 'Mina', to: 'Makkah hotel', text: 'Final-day transfer' },
     ],
-    note: 'Your detailed day-wise itinerary will be shared before departure. Please plan for walking as well, particularly during the final two days of stoning at Jamarat.',
+    note: 'A detailed day-wise plan reaches you before departure. Expect some walking too — mostly on the last two days of stoning at Jamarat.',
   },
-  booking: 'Contact the office for the total package price, travel dates, hotel arrangements and final booking terms.',
+  booking: 'Ask the office for the full package price, travel dates, hotel arrangements and final booking terms.',
   documents: ['Original passport', 'PAN card', 'Aadhaar card', 'Passport-size photograph'],
-  documentsNote: 'Contact the office for submission instructions and document checks.',
+  documentsNote: 'The office will guide you on how to submit them and check every document for you.',
   notes: [
     {
-      title: 'Before departure & your Umrah',
+      title: 'Before you fly & your Umrah',
       points: [
-        'A day-by-day itinerary and dos and don’ts are provided two weeks before departure.',
-        'One Umrah is included before Hajj, after reaching Aziziya on 5 Dhul Hijjah, per the programme.',
-        'Walking is expected, especially during the final two days of stoning at Jamarat, despite the transport arrangements.',
+        'You receive a day-by-day itinerary, with dos and don’ts, two weeks before departure.',
+        'Your programme includes one Umrah before Hajj, performed once you reach Aziziya on 5 Dhul Hijjah.',
+        'Even with transport arranged, be ready to walk — especially on the last two days of stoning at Jamarat.',
       ],
     },
     {
-      title: 'Passport handling & Nusuk card',
+      title: 'Passports & the Nusuk card',
       points: [
-        'Passports are collected after arrival at the hotels in Makkah and Madinah, per the programme. Confirm the custody, receipt and return procedure with the office.',
-        'Confirm the current Nusuk card and ID requirements with the office — do not assume the card replaces a passport for every purpose.',
+        'Passports are collected once you arrive at your hotel in Makkah and Madinah. Ask the office how they are kept, receipted and returned.',
+        'Check the latest Nusuk card and ID rules with the office — the card may not stand in for your passport in every situation.',
       ],
     },
     {
-      title: 'Early return to India',
-      points: ['Hajis who choose to return early for any reason must arrange their own return tickets at their own expense.'],
+      title: 'Returning to India early',
+      points: ['If a Haji decides to return early for any reason, the return ticket is booked and paid for by the Haji.'],
     },
     {
-      title: 'Luggage collection & hotel delivery',
+      title: 'Luggage to your hotel',
       points: [
-        'Checked luggage is transferred to the hotel in Makkah or Madinah using company stickers and hanging tags.',
-        'Confirm the arrival and baggage procedure for your flight with the office.',
+        'Your checked bags travel to the hotel in Makkah or Madinah marked with company stickers and hanging tags.',
+        'Check with the office how baggage is handled on arrival for your flight.',
       ],
     },
     {
       title: 'Packing, tags & tracking',
       points: [
-        'Attach the company sticker and hanging tag to each bag and follow the office’s wrapping instructions.',
-        'Take clear photos of your packed luggage and labels at check-in.',
-        'A luggage tracker is recommended — confirm the device and airline rules.',
-        'Check the airline’s baggage and prohibited-item rules. The office’s note flags power banks, cash, gold and coconut; ask the team for item-by-item guidance.',
+        'Put the company sticker and hanging tag on every bag, and wrap it the way the office advises.',
+        'Photograph your packed bags and their labels at check-in.',
+        'We suggest carrying a luggage tracker — check the device against airline rules first.',
+        'Read the airline’s rules on baggage and restricted items. The office specially flags power banks, cash, gold and coconut — ask the team about any item you are unsure of.',
       ],
     },
     {
-      title: 'Luggage responsibility & expenses',
+      title: 'Your luggage, your responsibility',
       points: [
-        'Responsibility for luggage is the traveller’s. The company can guide you if a bag is missing, and expenses incurred in locating and collecting luggage are borne by the traveller.',
-        'Confirm the final written terms before booking.',
+        'Each traveller looks after their own luggage. If a bag goes missing the company will guide you, but any cost of tracing and collecting it is paid by the traveller.',
+        'Please confirm the final written terms before you book.',
       ],
     },
   ],
@@ -743,19 +743,19 @@ const UMRAH = {
   name: 'Ziyarath Special Umrah',
   badge: 'Ziyarath Special',
   tagline: 'A journey of faith. Memories to treasure.',
-  intro: 'Join Al Balagh Tours for a special Umrah group with direct flights, Makkah and Madinah stays, and an extended Ziyarath programme.',
+  intro: 'Travel with Al Balaagh Travels on a special Umrah group — direct flights, stays in Makkah and Madinah, and an extended Ziyarath programme.',
   image: '/images/hajj-umrah/umrah-kaaba-night.webp',
   price: 'Contact the office for price', // TODO: confirm with client
   dates: 'Contact the office for dates', // TODO: confirm with client
   route: {
     label: 'Hyderabad → Jeddah · Madinah → Hyderabad',
-    note: 'Both direct flights',
+    note: 'Direct flights both ways',
     legs: [
-      { from: 'Hyderabad', to: 'Jeddah', label: 'Outbound direct flight' },
-      { from: 'Madinah', to: 'Hyderabad', label: 'Return direct flight' },
+      { from: 'Hyderabad', to: 'Jeddah', label: 'Direct flight out' },
+      { from: 'Madinah', to: 'Hyderabad', label: 'Direct flight home' },
     ],
   },
-  groupNote: 'Please confirm the departure dates, total duration, airline, current availability and complete package price with the office.',
+  groupNote: 'Ask the office for the departure dates, total duration, airline, seats available and the full package price.',
   highlights: [
     { icon: 'utensils', label: 'Hyderabadi buffet meals' },
     { icon: 'bus', label: 'Round-trip transportation' },
@@ -765,12 +765,12 @@ const UMRAH = {
     { icon: 'mapPin', label: 'Extra Madinah Ziyarath' },
   ],
   inclusions: [
-    { icon: 'utensils', title: 'Hyderabadi buffet meals', text: 'Buffet meals with tea three times.' },
-    { icon: 'bus', title: 'Round-trip transportation', text: 'Included in the programme.' },
-    { icon: 'shirt', title: 'Laundry services', text: 'In Makkah and Madinah.' },
-    { icon: 'luggage', title: 'Baggage kit', text: 'Included.' },
-    { icon: 'kaaba', title: 'Four Umrah arrangements', text: 'Including guidance with a Muallim.' },
-    { icon: 'mapPin', title: 'Extra Madinah Ziyarath', text: 'Twelve places in and around Madinah — see the list below.' },
+    { icon: 'utensils', title: 'Hyderabadi buffet meals', text: 'Buffet meals, with tea served three times.' },
+    { icon: 'bus', title: 'Round-trip transportation', text: 'Transport both ways, part of the programme.' },
+    { icon: 'shirt', title: 'Laundry services', text: 'In both Makkah and Madinah.' },
+    { icon: 'luggage', title: 'Baggage kit', text: 'A kit for every pilgrim.' },
+    { icon: 'kaaba', title: 'Four Umrah arrangements', text: 'With a Muallim to guide you.' },
+    { icon: 'mapPin', title: 'Extra Madinah Ziyarath', text: 'Twelve sites in and around Madinah — listed below.' },
   ],
   // TODO: confirm with client — photos are representative stock images, not the actual hotels
   hotels: [
@@ -781,12 +781,12 @@ const UMRAH = {
     eyebrow: 'Group programme · Ziyarath Special',
     title: 'Four Umrah arrangements',
     steps: [
-      { title: 'From India', text: 'With Muallim' },
-      { title: 'Joarana', text: 'Umrah arrangement' },
-      { title: 'Taif: Meeqat Umrah', text: 'Umrah arrangement' },
-      { title: 'Sulh Hudaybiyyah', text: 'Umrah arrangement' },
+      { title: 'From India', text: 'Guided by a Muallim' },
+      { title: 'Joarana', text: 'Umrah from Joarana' },
+      { title: 'Taif: Meeqat Umrah', text: 'Umrah from the Taif Meeqat' },
+      { title: 'Sulh Hudaybiyyah', text: 'Umrah from Hudaybiyyah' },
     ],
-    note: 'The office will explain the sequence, guidance and final schedule before departure.',
+    note: 'Before you leave, the office walks you through the order, the guidance provided and the final schedule.',
   },
   ziyarath: {
     title: 'Extra Ziyarath in Madinah',
@@ -804,10 +804,10 @@ const UMRAH = {
       'Jabl-e-Malaika',
       'Wadi-e-Jinn',
     ],
-    note: 'Confirm the final itinerary, access and any additional visits with the office.',
+    note: 'The final itinerary, site access and any extra visits are confirmed by the office.',
   },
   riyazulJannah:
-    'Contact the team to confirm the permit and slot arrangements applicable to your booking. Entry remains subject to the applicable permissions and availability.',
+    'Entry depends on permits and available slots. Our team confirms the arrangements that apply to your booking.',
   whatsapp: enquiry.umrah,
 }
 
@@ -818,12 +818,12 @@ export const programmes = [HAJJ, UMRAH]
 export const atAGlance = {
   columns: [HAJJ, UMRAH],
   rows: [
-    { icon: 'utensils', label: 'Dining', values: ['Platinum Indian set menu', 'Hyderabadi buffet, tea three times'] },
-    { icon: 'shirt', label: 'Laundry', values: ['Unlimited laundry', 'In Makkah & Madinah'] },
+    { icon: 'utensils', label: 'Dining', values: ['Platinum Indian set menu', 'Hyderabadi buffet + tea three times'] },
+    { icon: 'shirt', label: 'Laundry', values: ['Unlimited laundry', 'Makkah & Madinah'] },
     { icon: 'luggage', label: 'Kit', values: ['Premium Hajj kit', 'Baggage kit'] },
-    { icon: 'mosque', label: 'Riyazul Jannah', values: ['Separate permits for men & women, subject to availability', null] },
-    { icon: 'mapPin', label: 'Ziyarath', values: ['Makkah, Madinah & Taif', 'Extra Madinah Ziyarath (12 places)'] },
-    { icon: 'bus', label: 'Transport', values: ['Private bus, 5 days of Hajj', 'Round-trip transportation · direct flights'] },
+    { icon: 'mosque', label: 'Riyazul Jannah', values: ['Separate permits for men & women, as available', null] },
+    { icon: 'mapPin', label: 'Ziyarath', values: ['Makkah, Madinah & Taif', 'Extra Madinah Ziyarath · 12 sites'] },
+    { icon: 'bus', label: 'Transport', values: ['Private buses, 5 days of Hajj', 'Transport both ways · direct flights'] },
     { icon: 'bed', label: 'Hotels', values: [null, 'Akaber Al Hijra (300\u00a0m) · Diwan Al Madinah (150\u00a0m)'] }, // TODO: confirm with client — Hajj hotels
     { icon: 'certificate', label: 'Documents', values: ['Original passport, PAN, Aadhaar & photo', null] },
   ],
@@ -901,14 +901,14 @@ const pilgrimagePhoto = (file, alt, caption) => ({ src: `/images/hajj-umrah/${fi
 
 export const hajjUmrahGallery = [
   pilgrimagePhoto('umrah-kaaba-night.webp', 'Holy Kaaba and Makkah Clock Tower at night with pilgrims', 'Makkah Al-Mukarramah'),
-  pilgrimagePhoto('umrah-group-haram.webp', 'Al Balagh Umrah pilgrim group in Ihram at Masjid al-Haram courtyard', 'Umrah Group at Masjid al-Haram'),
-  pilgrimagePhoto('umrah-flight-arrival.webp', 'Pilgrims in Ihram arriving via direct flight in Jeddah with Al Balagh kits', 'Direct Flight Arrival in Jeddah'),
+  pilgrimagePhoto('umrah-group-haram.webp', 'Al Balaagh Umrah pilgrim group in Ihram at Masjid al-Haram courtyard', 'Umrah Group at Masjid al-Haram'),
+  pilgrimagePhoto('umrah-flight-arrival.webp', 'Pilgrims in Ihram arriving via direct flight in Jeddah with Al Balaagh kits', 'Direct Flight Arrival in Jeddah'),
   pilgrimagePhoto('umrah-ziyarath-group.webp', 'Pilgrim group during Ziyarath tour with mountain background and pigeons', 'Madinah & Makkah Ziyarath Tour'),
   pilgrimagePhoto('umrah-buffet-dining.webp', 'Fresh fruit and hot tea buffet spread prepared for our Umrah pilgrims', 'Hyderabadi Buffet Spread'),
 ]
 
 if (serviceBySlug['haj-umrah']) serviceBySlug['haj-umrah'].gallery = hajjUmrahGallery
-
+
 
 /* ------------------------------------------------------------------------------------------
  * DESTINATIONS — popular trips we plan from Hyderabad (flights, visas, hotels, sightseeing),
@@ -918,7 +918,7 @@ if (serviceBySlug['haj-umrah']) serviceBySlug['haj-umrah'].gallery = hajjUmrahGa
  * `image`: drop a photo at that path (plus a "-640" sibling) — until then the `tone` gradient shows.
  * TODO: confirm with client — destination list; supply photos for each destination.
  * ---------------------------------------------------------------------------------------- */
-const tripText = (name) => `Hello Al Balagh Tours. I would like to plan a trip to ${name}. Please share some options.`
+const tripText = (name) => `Hello Al Balaagh Travels. I would like to plan a trip to ${name}. Please share some options.`
 
 export const destinations = [
   {
@@ -1044,7 +1044,7 @@ export const destinations = [
     highlights: ['Hajj 2027 programme', 'Ziyarath Special Umrah group', 'Hotels near the Haram & Masjid an-Nabawi'],
     bestFor: ['Hajj', 'Umrah'],
     link: '/services/haj-umrah',
-    whatsapp: 'Hello Al Balagh Tours. I would like to know more about your Hajj and Umrah programmes.',
+    whatsapp: 'Hello Al Balaagh Travels. I would like to know more about your Hajj and Umrah programmes.',
   },
 ]
 export const hyderabadOnMap = [66, 42]
@@ -1063,8 +1063,8 @@ const albaniaPhoto = (file, alt, caption) => ({ src: `/images/albania/${file}`, 
 
 export const albania = {
   meta: {
-    title: 'Albania Work Permit & Job Visa — Al Balagh Tours & Travels',
-    description: 'Albania work permit and job visa enquiries with Al Balagh Tours & Travels, Mehdipatnam, Hyderabad.',
+    title: 'Albania Work Permit & Job Visa — Al Balaagh Travels',
+    description: 'Albania work permit and job visa enquiries with Al Balaagh Travels, Mehdipatnam, Hyderabad.',
   },
   // TODO: client to provide Albania content
   hero: {
@@ -1147,14 +1147,14 @@ export const albania = {
   form: {
     title: ['Tell us about ', { accent: 'yourself' }],
     lead: 'Share a few details and we will continue the conversation on WhatsApp. Nothing is stored on this website.',
-    intro: 'Hello Al Balagh Tours. I would like to enquire about the Albania work permit & job visa.',
+    intro: 'Hello Al Balaagh Travels. I would like to enquire about the Albania work permit & job visa.',
   },
   cta: {
     prefix: 'Ready to talk about',
     accent: 'Albania',
     lead: `Have questions about working in Albania? ${ALBANIA_PLACEHOLDER}`,
   },
-  whatsapp: 'Hello Al Balagh Tours. I would like to enquire about the Albania work permit & job visa.',
+  whatsapp: 'Hello Al Balaagh Travels. I would like to enquire about the Albania work permit & job visa.',
 }
 
 /* ------------------------------------------------------------------------------------------
@@ -1180,7 +1180,7 @@ const REVIEWS = [
     name: 'Umrah Pilgrims',
     city: 'Jeddah Flight Arrival',
     src: '/images/reviews/guest-pilgrims-arrival.webp',
-    alt: 'Al Balagh Umrah pilgrims arriving on direct flight in Jeddah with travel kits',
+    alt: 'Al Balaagh Umrah pilgrims arriving on direct flight in Jeddah with travel kits',
     aspect: 'aspect-[3/4]',
   },
   {
@@ -1188,7 +1188,7 @@ const REVIEWS = [
     name: 'Pilgrimage Group',
     city: 'Makkah Ziyarath Tour',
     src: '/images/reviews/guest-makkah-ziyarath.webp',
-    alt: 'Al Balagh pilgrim family group at holy Ziyarath site in Makkah with flock of pigeons',
+    alt: 'Al Balaagh pilgrim family group at holy Ziyarath site in Makkah with flock of pigeons',
     aspect: 'aspect-[4/3]',
   },
   {
@@ -1196,7 +1196,7 @@ const REVIEWS = [
     name: 'Guest Travellers',
     city: 'Tour Dining Experience',
     src: '/images/reviews/guest-tour-dining.webp',
-    alt: 'Happy Al Balagh guests enjoying lunch and dining together on tour',
+    alt: 'Happy Al Balaagh guests enjoying lunch and dining together on tour',
     aspect: 'aspect-[4/3]',
   },
   {
@@ -1204,7 +1204,7 @@ const REVIEWS = [
     name: 'Work & Travel Candidates',
     city: 'Tirana International Airport',
     src: '/images/reviews/guest-tirana-airport.webp',
-    alt: 'Al Balagh travelers arriving outside Tirana International Airport in Albania with luggage',
+    alt: 'Al Balaagh travelers arriving outside Tirana International Airport in Albania with luggage',
     aspect: 'aspect-[4/3]',
   },
   {
@@ -1212,7 +1212,7 @@ const REVIEWS = [
     name: 'European Tour Guests',
     city: 'Albania Arrival',
     src: '/images/reviews/guest-albania-arrival.webp',
-    alt: 'Al Balagh travel group outside airport terminal building arriving in Albania',
+    alt: 'Al Balaagh travel group outside airport terminal building arriving in Albania',
     aspect: 'aspect-[16/10]',
   },
   // Sample — TODO: replace with real customer reviews
@@ -1224,8 +1224,8 @@ export const reviews = REVIEWS.filter((r) => SHOW_SAMPLE_REVIEWS || !r.sample)
 
 /* OFFICE PHOTOS — "Visit our office" on the contact page. TODO: client to supply photos. */
 export const officePhotos = [
-  { src: '/images/office/office-1.jpg', alt: 'Al Balagh Tours & Travels office, Mawin Zam Zam Plaza, Mehdipatnam' },
-  { src: '/images/office/office-2.jpg', alt: 'Inside the Al Balagh Tours & Travels office' },
+  { src: '/images/office/office-1.jpg', alt: 'Al Balaagh Travels office, Mawin Zam Zam Plaza, Mehdipatnam' },
+  { src: '/images/office/office-2.jpg', alt: 'Inside the Al Balaagh Travels office' },
 ]
 
 /* ------------------------------------------------------------------------------------------

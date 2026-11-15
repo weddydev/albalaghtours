@@ -65,7 +65,7 @@ export default function MapCard() {
               <circle cy="-27" r="5" fill="#1f1510" />
               <rect x="-38" y="-70" width="76" height="22" rx="11" fill="#1f1510" stroke="#c8963e" strokeOpacity="0.6" />
               <text y="-55" textAnchor="middle" fontSize="12" fill="#f3e9d8" fontFamily="Cormorant Garamond, serif" fontStyle="italic">
-                Al Balagh
+                Al Balaagh
               </text>
             </g>
           </g>

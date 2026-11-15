@@ -8,7 +8,7 @@ export function reportMissing(src) {
   missing.add(src)
   clearTimeout(reportTimer)
   reportTimer = setTimeout(() => {
-    console.info(`[Al Balagh] Missing media, using fallbacks: ${[...missing].join(', ')}`)
+    console.info(`[Al Balaagh] Missing media, using fallbacks: ${[...missing].join(', ')}`)
   }, 400)
 }
 

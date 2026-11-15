@@ -21,7 +21,7 @@ export function PackageCard({ pkg, onDetails, search }) {
       <div className="relative h-60 sm:h-80 lg:col-span-5 lg:h-auto lg:min-h-[480px]">
         <ArchFrame className="h-full w-full" innerClassName="bg-ink-900" finial={false}>
           <div className="absolute inset-0 transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105">
-            <Photo src={pkg.image} alt={`${pkg.name} — Al Balagh Tours & Travels`} fallback={FALLBACK} width={1000} height={667} sizes="(max-width: 1023px) 92vw, 520px">
+            <Photo src={pkg.image} alt={`${pkg.name} — Al Balaagh Travels`} fallback={FALLBACK} width={1000} height={667} sizes="(max-width: 1023px) 92vw, 520px">
               <Icon name={pkg.type === 'umrah' ? 'mosque' : 'kaaba'} strokeWidth={0.7} className="absolute left-1/2 top-[30%] h-1/2 w-1/2 -translate-x-1/2 text-gold-200 opacity-20" />
             </Photo>
           </div>
@@ -88,7 +88,7 @@ export function PackageCard({ pkg, onDetails, search }) {
 /**
  * Hajj / Umrah tab switch (Flip-animated indicator) + the programme card, which slides like a
  * carousel when the tab changes (arrow keys on the tabs, or a horizontal swipe on the card).
- * Listens for the hero search bar's `albalagh:search` event to preselect a tab; the search
+ * Listens for the hero search bar's `albalaagh:search` event to preselect a tab; the search
  * choices (month, travellers) are carried into the WhatsApp text when given.
  */
 export default function PackageShowcase({ initial = 'hajj', search: initialSearch }) {
@@ -136,8 +136,8 @@ export default function PackageShowcase({ initial = 'hajj', search: initialSearc
       if (e.detail.travellers) setSearch({ month: e.detail.month, travellers: e.detail.travellers })
       change(t)
     }
-    window.addEventListener('albalagh:search', onSearch)
-    return () => window.removeEventListener('albalagh:search', onSearch)
+    window.addEventListener('albalaagh:search', onSearch)
+    return () => window.removeEventListener('albalaagh:search', onSearch)
   })
 
   useLayoutEffect(() => {

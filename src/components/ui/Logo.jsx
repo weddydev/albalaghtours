@@ -37,8 +37,8 @@ export default function Logo({ className = '', compact = false }) {
     <span className={`inline-flex items-center gap-3 ${className}`}>
       <LogoMark className={compact ? 'h-9 w-9' : 'h-11 w-11'} />
       <span className="flex flex-col whitespace-nowrap leading-none">
-        <span className="font-display text-[1.55rem] font-semibold tracking-wide text-cream-50">Al Balagh</span>
-        <span className="mt-1 text-[0.58rem] font-medium tracking-[0.34em] text-gold-200">TOURS &amp; TRAVELS</span>
+        <span className="font-display text-[1.55rem] font-semibold tracking-wide text-cream-50">Al Balaagh</span>
+        <span className="mt-1 text-[0.58rem] font-medium tracking-[0.34em] text-gold-200">TRAVELS</span>
       </span>
     </span>
   )

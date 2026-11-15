@@ -40,17 +40,17 @@ export default function Preloader({ onDone }) {
       className="fixed inset-0 z-[100] grid place-items-center bg-ink-950"
       style={{ clipPath: 'inset(0% 0% 0% 0%)' }}
       role="status"
-      aria-label="Loading Al Balagh Tours & Travels"
+      aria-label="Loading Al Balaagh Travels"
     >
       <div className="pattern-overlay absolute inset-0 opacity-[0.04]" />
       <div className="relative flex flex-col items-center">
         <div className="pre-glow invisible absolute left-1/2 top-12 h-72 w-72 -translate-x-1/2 -translate-y-1/2 scale-50 rounded-full bg-[radial-gradient(closest-side,rgb(246_214_130/0.35),transparent)] opacity-0" />
         <LogoMark className="relative h-24 w-24" />
         <div className="mt-6 overflow-hidden">
-          <p className="pre-word font-display text-4xl font-semibold text-cream-50">Al Balagh</p>
+          <p className="pre-word font-display text-4xl font-semibold text-cream-50">Al Balaagh</p>
         </div>
         <div className="overflow-hidden">
-          <p className="pre-word mt-1 text-[0.65rem] tracking-[0.5em] text-gold-200">TOURS &amp; TRAVELS</p>
+          <p className="pre-word mt-1 text-[0.65rem] tracking-[0.5em] text-gold-200">TRAVELS</p>
         </div>
         <div className="pre-bar mt-8 h-px w-48 origin-left bg-linear-to-r from-transparent via-gold-200 to-transparent" />
       </div>

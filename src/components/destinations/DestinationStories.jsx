@@ -129,8 +129,8 @@ export default function DestinationStories() {
 
   useEffect(() => {
     const onJump = (e) => jump.current(e.detail)
-    window.addEventListener('albalagh:destination', onJump)
-    return () => window.removeEventListener('albalagh:destination', onJump)
+    window.addEventListener('albalaagh:destination', onJump)
+    return () => window.removeEventListener('albalaagh:destination', onJump)
   }, [])
 
   useEffect(() => {

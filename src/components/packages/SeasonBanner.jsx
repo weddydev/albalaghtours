@@ -33,7 +33,6 @@ export default function SeasonBanner() {
           .from(q('.sb-star'), { scale: 0, transformOrigin: '50% 50%', stagger: 0.06, duration: 0.6, ease: 'back.out(3)' }, 0.8)
           .from(q('.sb-copy > *'), { y: 20, autoAlpha: 0, stagger: 0.08, duration: 0.9 }, 0.4)
           .from(q('.sb-lantern'), { y: -160, duration: 1.6, ease: 'bounce.out' }, 0.5)
-        gsap.to(q('.sb-star'), { opacity: 0.25, duration: () => gsap.utils.random(0.8, 1.8), repeat: -1, yoyo: true, ease: 'sine.inOut', stagger: { each: 0.3, from: 'random' } })
         gsap.fromTo(q('.sb-rig'), { rotation: -5 }, { rotation: 5, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, transformOrigin: '50% 0%' })
       })
     },
@@ -41,7 +40,7 @@ export default function SeasonBanner() {
   )
 
   const showHajj = () => {
-    window.dispatchEvent(new CustomEvent('albalagh:search', { detail: { type: 'Hajj' } }))
+    window.dispatchEvent(new CustomEvent('albalaagh:search', { detail: { type: 'Hajj' } }))
     scrollToTarget('#pk-section')
   }
 

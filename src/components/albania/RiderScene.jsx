@@ -29,7 +29,6 @@ export default function RiderScene({ className = '' }) {
           gsap.to(q('.rs-wheel'), { rotation: 360, transformOrigin: '50% 50%', duration: 0.55, ease: 'none', repeat: -1 }),
           gsap.to(q('.rs-bounce'), { y: -2.5, duration: 0.22, ease: 'sine.inOut', yoyo: true, repeat: -1 }),
           gsap.fromTo(q('.rs-speed'), { scaleX: 0.35, opacity: 0.2, transformOrigin: '100% 50%' }, { scaleX: 1, opacity: 0.85, duration: 0.32, stagger: 0.09, ease: 'sine.inOut', yoyo: true, repeat: -1 }),
-          gsap.to(q('.rs-window'), { opacity: 0.2, duration: () => gsap.utils.random(1.2, 2.6), ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: { each: 0.35, from: 'random' } }),
         ]
         // only animate while the scene is on screen (works the same with native scroll and Lenis)
         // a fast scroll can queue several entries: the last one is the current state

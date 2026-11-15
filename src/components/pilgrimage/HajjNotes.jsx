@@ -28,7 +28,7 @@ export default function HajjNotes() {
       <div className="mx-auto grid max-w-[1320px] gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:px-10">
         <div className="lg:col-span-4">
           <SectionHeading align="left" eyebrow="Hajj 2027" title={['Important ', { accent: 'notes' }]} />
-          <p className="mt-6 text-mist-300">Please read these before you book. Confirm the final written terms with the office.</p>
+          <p className="mt-6 text-mist-300">Worth reading before you book — and do confirm the final written terms with the office.</p>
           <a href={waLink(hajj.whatsapp)} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex min-h-[44px] items-center gap-2 text-sm text-jade-300 hover:text-jade-400">
             <Icon name="whatsapp" className="h-4 w-4" /> Ask the office a question
           </a>

@@ -26,7 +26,7 @@ export default function FloatingActions() {
         onClick={toTop}
         aria-label="Back to top"
         tabIndex={showTop ? 0 : -1}
-        className={`hidden h-11 w-11 place-items-center rounded-full border border-gold-400/50 sm:grid bg-ink-950/80 text-gold-200 backdrop-blur transition-all duration-500 hover:border-gold-200 hover:text-cream-50 ${
+        className={`hidden h-11 w-11 place-items-center rounded-full border border-gold-400/50 sm:grid bg-ink-950/90 text-gold-200 transition-[opacity,transform,border-color,color] duration-500 hover:border-gold-200 hover:text-cream-50 ${
           showTop ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
         }`}
       >
@@ -36,7 +36,7 @@ export default function FloatingActions() {
         href={waLink()}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat with Al Balagh on WhatsApp"
+        aria-label="Chat with Al Balaagh on WhatsApp"
         className="relative grid h-14 w-14 place-items-center rounded-full border border-gold-300/60 bg-linear-to-b from-jade-400 to-jade-600 text-white shadow-[0_12px_30px_-8px_rgba(217,168,78,0.8)] transition-transform hover:scale-105"
       >
         <span className="absolute inset-0 animate-ping rounded-full bg-jade-400/40 motion-reduce:hidden" aria-hidden="true" />

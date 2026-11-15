@@ -247,7 +247,7 @@ export default function GuestExperiences() {
 
         <p className="mt-10 text-center text-sm text-mist-300">
           Travelled with us?{' '}
-          <a href={waLink('Hello Al Balagh Tours. I would like to share my travel experience.')} target="_blank" rel="noopener noreferrer" className="text-jade-300 underline-offset-4 hover:underline">
+          <a href={waLink('Hello Al Balaagh Travels. I would like to share my travel experience.')} target="_blank" rel="noopener noreferrer" className="text-jade-300 underline-offset-4 hover:underline">
             Share your experience on WhatsApp
           </a>
         </p>

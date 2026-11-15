@@ -227,11 +227,11 @@ export default function Navbar({ show }) {
       <header ref={bar} className={`fixed inset-x-0 top-0 z-50 transition-[padding] duration-500 ${scrolled ? 'py-2.5' : 'py-4 lg:py-6'} ${show ? '' : 'invisible'}`}>
         <div className="px-3">
           <div
-            className={`relative mx-auto flex max-w-[1320px] items-center justify-between gap-6 rounded-full px-4 transition-all duration-500 sm:px-6 ${
+            className={`relative mx-auto flex max-w-[1320px] items-center justify-between gap-6 rounded-full px-4 transition-[padding,border-color,box-shadow] duration-500 sm:px-6 ${
               scrolled || mega ? 'glass-strong py-2 lg:max-w-[1240px]' : 'border border-transparent py-1'
             }`}
           >
-            <Link to="/" onClick={onHomeClick} aria-label="Al Balagh Tours & Travels — home">
+            <Link to="/" onClick={onHomeClick} aria-label="Al Balaagh Travels — home">
               <Logo compact={scrolled} />
             </Link>
 

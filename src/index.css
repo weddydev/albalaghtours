@@ -246,11 +246,6 @@
   background-size: 96px 96px;
 }
 
-/* Static film grain */
-.grain {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
 /* ---------- Type ---------- */
 /* Accent words: a warm candle-gold gradient (class names kept from the earlier green theme) */
 .text-grad-green,
@@ -280,19 +275,18 @@
 }
 
 /* ---------- Surfaces ---------- */
+/* Near-opaque warm fills instead of backdrop-filter blur. A backdrop blur is recomputed on every
+   frame whenever anything behind it moves (scrolling, the hero scene, the fixed navbar over the
+   page) and was a main source of jank on mid/low-end GPUs; at these opacities it looks the same. */
 .glass {
-  background: linear-gradient(160deg, rgb(51 36 26 / 0.55), rgb(31 21 16 / 0.62));
-  backdrop-filter: blur(16px) saturate(120%);
-  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  background: linear-gradient(160deg, rgb(45 32 23 / 0.93), rgb(31 21 16 / 0.95));
   border: 1px solid rgb(243 233 216 / 0.08);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.05),
     0 20px 60px -20px rgb(0 0 0 / 0.6);
 }
 .glass-strong {
-  background: linear-gradient(160deg, rgb(51 36 26 / 0.82), rgb(23 17 13 / 0.86));
-  backdrop-filter: blur(22px) saturate(125%);
-  -webkit-backdrop-filter: blur(22px) saturate(125%);
+  background: linear-gradient(160deg, rgb(43 30 22 / 0.95), rgb(23 17 13 / 0.97));
   border: 1px solid rgb(243 233 216 / 0.1);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.06),
@@ -338,9 +332,8 @@
 .btn-ghost {
   padding: 0.5rem 0.55rem 0.5rem 1.4rem;
   color: var(--color-cream-100);
-  background: rgb(31 21 16 / 0.5);
+  background: rgb(31 21 16 / 0.72);
   border: 1px solid rgb(243 233 216 / 0.16);
-  backdrop-filter: blur(10px);
 }
 .btn::before {
   content: '';
@@ -441,25 +434,15 @@
 .h-door {
   will-change: opacity, transform;
 }
-
-/* Touch devices: backdrop blur on fixed/large surfaces and a full-screen blended grain layer
-   are re-composited on every scroll frame and cause visible jank on phones. Swap them for
-   near-opaque fills, which look almost identical at this size. Desktop is untouched. */
-@media (hover: none), (pointer: coarse) {
-  .glass,
-  .glass-strong {
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-  .glass {
-    background: linear-gradient(160deg, rgb(45 32 23 / 0.95), rgb(31 21 16 / 0.97));
-  }
-  .glass-strong {
-    background: linear-gradient(160deg, rgb(43 30 22 / 0.97), rgb(23 17 13 / 0.98));
-  }
-  .grain {
-    display: none;
-  }
+/* Pieces moved/scaled *inside* those layers. Without their own layer, every scroll frame repainted
+   the whole window (photo + sepia filter + blend) or the whole full-screen headline, and a JS-driven
+   scale re-rasterized it on every frame. */
+.h-word,
+.h-door-view,
+.h-shade,
+.h-plane,
+.h-final-item {
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {

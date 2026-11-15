@@ -34,7 +34,7 @@ function SkySilhouette() {
   )
 }
 
-function WindowView({ blurred = false }) {
+function WindowView() {
   return (
     <Photo
       src={heroMedia.window}
@@ -44,7 +44,7 @@ function WindowView({ blurred = false }) {
       eager
       sizes="(max-width: 1023px) 64vw, 460px"
       rays
-      imgClassName={`object-[80%_50%] ${blurred ? 'scale-110' : ''}`}
+      imgClassName="object-[80%_50%]"
     >
       <SkySilhouette />
     </Photo>
@@ -101,12 +101,10 @@ export default function WindowScene() {
           }}
         >
           {/* the opening */}
-          <div className="relative isolate h-full w-full overflow-hidden rounded-[46%/27%] bg-ink-950 shadow-[0_0_0_1.5px_rgb(230_194_133/0.7)] lg:drop-shadow-[0_0_10px_rgba(200,150,62,0.45)]">
+          {/* glow is a box-shadow (painted once), not a drop-shadow filter re-run as the window scales */}
+          <div className="relative isolate h-full w-full overflow-hidden rounded-[46%/27%] bg-ink-950 shadow-[0_0_0_1.5px_rgb(230_194_133/0.7)] lg:shadow-[0_0_0_1.5px_rgb(230_194_133/0.7),0_0_14px_rgb(200_150_62/0.4)]">
             <div className="h-door-view absolute inset-0">
               <WindowView />
-              <div className="h-door-blur absolute inset-0 scale-110 blur-[7px] max-lg:hidden">
-                <WindowView blurred />
-              </div>
               {/* warm grade so the photo sits in the palette */}
               <div className="absolute inset-0 bg-[#c8963e] opacity-30 mix-blend-color" />
               <DistantPlane />

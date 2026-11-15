@@ -13,7 +13,7 @@ import AfterFirstPaint from '../components/ui/AfterFirstPaint'
 export default function DestinationsPage() {
   useDocumentMeta(
     'Top Destinations',
-    'Dubai, Türkiye, the Maldives, Thailand, Malaysia & Singapore, Azerbaijan, Europe and Makkah & Madinah — trips planned end to end by Al Balagh Tours & Travels, Hyderabad.',
+    'Dubai, Türkiye, the Maldives, Thailand, Malaysia & Singapore, Azerbaijan, Europe and Makkah & Madinah — trips planned end to end by Al Balaagh Travels, Hyderabad.',
   )
 
   return (
@@ -31,7 +31,7 @@ export default function DestinationsPage() {
                 <Icon name="arrowRight" className="h-4 w-4" />
               </span>
             </button>
-            <a href={waLink('Hello Al Balagh Tours. I would like help choosing a destination for my next trip.')} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+            <a href={waLink('Hello Al Balaagh Travels. I would like help choosing a destination for my next trip.')} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
               Help me choose
               <span className="btn-arrow">
                 <Icon name="whatsapp" className="h-4 w-4" />

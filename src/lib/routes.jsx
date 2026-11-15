@@ -27,7 +27,7 @@ export function preloadRoute(key) {
         (m) => {
           modules.set(key, m.default)
           try {
-            if (sessionStorage.getItem('albalagh:chunk-retry') === key) sessionStorage.removeItem('albalagh:chunk-retry')
+            if (sessionStorage.getItem('albalaagh:chunk-retry') === key) sessionStorage.removeItem('albalaagh:chunk-retry')
           } catch {
             /* storage unavailable */
           }
@@ -70,8 +70,8 @@ function routeComponent(key) {
     preloadRoute(key).catch((err) => {
       let retried = false
       try {
-        retried = sessionStorage.getItem('albalagh:chunk-retry') === key
-        sessionStorage.setItem('albalagh:chunk-retry', key)
+        retried = sessionStorage.getItem('albalaagh:chunk-retry') === key
+        sessionStorage.setItem('albalaagh:chunk-retry', key)
       } catch {
         /* storage unavailable */
       }

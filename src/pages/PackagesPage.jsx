@@ -52,7 +52,7 @@ export default function PackagesPage() {
                 <Icon name="arrowRight" className="h-4 w-4" />
               </span>
             </button>
-            <a href={waLink('Hello Al Balagh Tours. I would like to speak to your team about a package.')} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+            <a href={waLink('Hello Al Balaagh Travels. I would like to speak to your team about a package.')} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
               Ask our team
               <span className="btn-arrow">
                 <Icon name="whatsapp" className="h-4 w-4" />
@@ -112,7 +112,7 @@ export default function PackagesPage() {
         <CtaBand
           prefix="Ready to travel with"
           accent="a clear plan"
-          whatsapp={'Hello Al Balagh Tours. I would like to speak to your team about a holiday or pilgrimage package.'}
+          whatsapp={'Hello Al Balaagh Travels. I would like to speak to your team about a holiday or pilgrimage package.'}
           lead="Speak to our team about the price, dates, hotel arrangements and the details you need before booking."
         />
       </AfterFirstPaint>

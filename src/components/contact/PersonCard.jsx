@@ -57,7 +57,7 @@ export default function PersonCard() {
         <ArchFrame className="h-full w-full" innerClassName="bg-ink-900" borderClassName="drop-shadow-[0_0_12px_rgba(200,150,62,0.45)]">
           <div className="pc-reveal absolute inset-0">
             <div className="pc-zoom absolute inset-0">
-              <Photo src={contact.photo} alt={`${contact.person}, ${contact.role} at Al Balagh Tours & Travels`} fallback={FALLBACK} width={800} height={1000}>
+              <Photo src={contact.photo} alt={`${contact.person}, ${contact.role} at Al Balaagh Travels`} fallback={FALLBACK} width={800} height={1000}>
                 <div className="pattern-overlay absolute inset-0 opacity-[0.08]" />
                 <span className="absolute inset-0 grid place-items-center font-display text-[7rem] font-semibold text-gold-200/40">{initials}</span>
               </Photo>

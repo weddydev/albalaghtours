@@ -11,7 +11,7 @@ import Icon from '../components/ui/Icon'
 import AfterFirstPaint from '../components/ui/AfterFirstPaint'
 
 export default function ContactPage() {
-  useDocumentMeta('Contact', `Call, WhatsApp or visit Al Balagh Tours & Travels at Mawin Zam Zam Plaza, Mehdipatnam, Hyderabad. Contact ${contact.person}.`)
+  useDocumentMeta('Contact', `Call, WhatsApp or visit Al Balaagh Travels at Mawin Zam Zam Plaza, Mehdipatnam, Hyderabad. Contact ${contact.person}.`)
 
   return (
     <>

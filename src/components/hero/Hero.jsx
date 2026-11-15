@@ -121,14 +121,19 @@ export default function Hero({ start }) {
         const ly = gsap.quickTo(light, 'y', { duration: 0.45, ease: 'power3.out' })
         const gx = gsap.quickSetter(glow, 'x', 'px')
         const gy = gsap.quickSetter(glow, 'y', 'px')
-        const pushX = chars.map((c) => gsap.quickTo(c, 'x', { duration: 0.7, ease: 'power3.out' }))
-        const pushY = chars.map((c) => gsap.quickTo(c, 'y', { duration: 0.7, ease: 'power3.out' }))
+        // letters dodging the light: desktop mouse only (on phones the 7px nudge was invisible but
+        // cost 2 tweens per letter every frame)
+        const canPush = fine && desktop
+        const pushX = canPush ? chars.map((c) => gsap.quickTo(c, 'x', { duration: 0.7, ease: 'power3.out' })) : []
+        const pushY = canPush ? chars.map((c) => gsap.quickTo(c, 'y', { duration: 0.7, ease: 'power3.out' })) : []
         let centers = []
         let pushOn = false
-        const pushRadius = desktop ? 260 : 150
-        const pushMax = desktop ? 16 : 7
+        const pushRadius = 260
+        const pushMax = 16
         let tx = -1
         let ty = -1
+        let drawnX = NaN
+        let drawnY = NaN
 
         const measure = () => {
           W = stage.clientWidth
@@ -137,10 +142,12 @@ export default function Hero({ start }) {
             h.style.width = `${W * 2}px`
             h.style.height = `${H * 2}px`
           })
-          centers = chars.map((c) => {
-            const o = offsetWithin(c, stage)
-            return { x: o.x + c.offsetWidth / 2, y: o.y + c.offsetHeight / 2 }
-          })
+          if (canPush)
+            centers = chars.map((c) => {
+              const o = offsetWithin(c, stage)
+              return { x: o.x + c.offsetWidth / 2, y: o.y + c.offsetHeight / 2 }
+            })
+          drawnX = NaN // force a redraw at the new size
         }
         measure()
         ScrollTrigger.addEventListener('refresh', measure)
@@ -155,11 +162,15 @@ export default function Hero({ start }) {
             lx(nx)
             ly(ny)
           }
+          // once the light has settled, stop touching the DOM (no style writes = no compositor work)
+          if (Math.abs(light.x - drawnX) < 0.1 && Math.abs(light.y - drawnY) < 0.1) return
+          drawnX = light.x
+          drawnY = light.y
           const tr = `translate3d(${light.x - W}px, ${light.y - H}px, 0)`
           for (const h of holes) h.style.transform = tr
           gx(light.x)
           gy(light.y)
-          if (!pushOn) return
+          if (!pushOn || !canPush) return
           for (let i = 0; i < chars.length; i++) {
             const dx = centers[i].x - light.x
             const dy = centers[i].y - light.y
@@ -177,8 +188,8 @@ export default function Hero({ start }) {
           if (on) gsap.ticker.add(tick)
           else {
             gsap.ticker.remove(tick)
-            chars.forEach((_, i) => {
-              pushX[i](0)
+            pushX.forEach((to, i) => {
+              to(0)
               pushY[i](0)
             })
           }
@@ -209,12 +220,11 @@ export default function Hero({ start }) {
         })
 
         /* ---------- Ambient loops ---------- */
-        // mobile: a still photo inside the blended headline avoids re-compositing it every frame
-        if (desktop) gsap.fromTo(q('.h-fill'), { xPercent: -5, yPercent: -2, scale: 1.08 }, { xPercent: 5, yPercent: 2, scale: 1.16, duration: 18, ease: 'sine.inOut', yoyo: true, repeat: -1 })
-        else gsap.set(q('.h-fill'), { scale: 1.08 })
+        // Only the two that read on screen: the lantern's sway and its small flame. The slow drift of
+        // the headline's gold fill and the flicker of the big blended glows were barely visible but
+        // re-composited full-screen layers every frame.
         gsap.fromTo(q('.h-lantern-rig'), { rotation: -5 }, { rotation: 5, duration: 2.8, ease: 'sine.inOut', yoyo: true, repeat: -1 })
-        gsap.to(q(desktop ? '.h-lantern-halo, .lantern-flame, .h-glow-core' : '.lantern-flame'), { opacity: 'random(0.75, 1)', duration: 0.18, ease: 'sine.inOut', repeat: -1, repeatRefresh: true })
-        gsap.fromTo(q('.h-pin-ring'), { scale: 1, opacity: 0.9, transformOrigin: '50% 50%' }, { scale: 2.6, opacity: 0, duration: 1.8, ease: 'power1.out', repeat: -1 })
+        gsap.to(q('.lantern-flame'), { opacity: 'random(0.75, 1)', duration: 0.18, ease: 'sine.inOut', repeat: -1, repeatRefresh: true })
 
         /* ---------- Stage 1: intro (plays after the preloader) ---------- */
         gsap.set(chars, { autoAlpha: 0, yPercent: 45 })
@@ -258,7 +268,11 @@ export default function Hero({ start }) {
             trigger: root.current,
             start: 'top top',
             end: 'bottom bottom',
-            scrub: desktop ? 1.1 : 0.8,
+            // Mouse/trackpad already scrolls through Lenis, which smooths the scroll itself; a second
+            // 1.1s scrub lag on top made the scene trail far behind the page and keep "catching up"
+            // after a reverse scroll (the stuck feeling). Follow Lenis 1:1 there; touch (native
+            // scroll) gets a short lag only to absorb dropped frames.
+            scrub: fine ? true : 0.35,
             invalidateOnRefresh: true,
             onUpdate: (self) => setStage1(self.progress < (desktop ? 0.1 : 0.02)),
           },
@@ -269,9 +283,11 @@ export default function Hero({ start }) {
             .to(q(`.h-pin-${i} .h-pin-core`), { opacity: 1, duration: 0.3 }, t)
             .to(q(`.h-pin-label-${i}`), { color: '#eed39a', duration: 0.4 }, t)
 
-        s.to(q('.h-dark'), { autoAlpha: 0, duration: 1.1, ease: 'power1.in' }, 0)
-          .to(q('.h-secret'), { autoAlpha: 0, duration: 0.9 }, 0)
-          .to(q('.h-glow'), { autoAlpha: 0, duration: 0.8 }, 0)
+        // opacity (not autoAlpha) for these big layers, so they keep their GPU tiles and come back
+        // instantly on the way back up
+        s.to(q('.h-dark'), { opacity: 0, duration: 1.1, ease: 'power1.in' }, 0)
+          .to(q('.h-secret'), { opacity: 0, duration: 0.9 }, 0)
+          .to(q('.h-glow'), { opacity: 0, duration: 0.8 }, 0)
           .to(q('.h-intro'), { autoAlpha: 0, y: -40, duration: 0.7 }, 0)
           .to(q('.h-stats'), { autoAlpha: 0, duration: 0.4 }, 0)
           .to(q('.h-door-glow'), { autoAlpha: 1, duration: 1 }, 0.3)
@@ -282,7 +298,6 @@ export default function Hero({ start }) {
           .to(q('.h-shade'), { yPercent: -101, duration: 2.6, ease: 'power2.inOut' }, 1.0)
           .fromTo(q('.h-plane'), { xPercent: 0, autoAlpha: 0 }, { xPercent: 560, autoAlpha: 1, duration: 3.4, ease: 'power1.inOut' }, 1.6)
           .fromTo(q('.h-door-view'), { scale: 1.3 }, { scale: 1, duration: 5 }, 1.0)
-          .to(q('.h-door-blur'), { autoAlpha: 0, duration: 2.4 }, 2.8)
           .to(q('.h-lantern-out'), { autoAlpha: 0, y: -60, duration: 1 }, 2.2)
           .to(door, { scale: doorScale, duration: 3.6, ease: 'power2.in' }, 2.6)
           .fromTo(q('.h-clouds'), { autoAlpha: 0, yPercent: 40, scale: 1 }, { autoAlpha: 1, yPercent: -5, scale: 1.45, duration: 2.2, ease: 'power1.in' }, 3.9)
@@ -294,8 +309,11 @@ export default function Hero({ start }) {
         lightPin(0, 0.45)
         lightPin(1, 3.9)
         lightPin(2, 6.9)
-        s.set(q('.h-head'), { autoAlpha: 0 }, 3.7) // headline has left the screen
-          .set(q('.h-door-root'), { autoAlpha: 0 }, 8.2) // the finale fully covers the door by now
+        // Hide covered layers with opacity, not visibility: visibility:hidden lets the browser drop
+        // their GPU tiles, and re-rasterizing the full-screen headline / 10× window in one frame
+        // was the hitch felt when scrolling back up into the hero.
+        s.set(q('.h-head'), { opacity: 0 }, 3.7) // headline has left the screen
+          .set(q('.h-door-root'), { opacity: 0 }, 8.2) // the finale fully covers the door by now
         s.to({}, { duration: 1.5 }, 8.6) // hold the final frame before releasing
 
         return () => {

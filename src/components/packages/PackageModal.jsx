@@ -89,7 +89,7 @@ export default function PackageModal({ pkg, search, onClose }) {
         className="glass-strong relative max-h-[92svh] w-full max-w-3xl overflow-y-auto overscroll-contain rounded-t-[32px] !bg-ink-900/95 sm:rounded-[32px]"
       >
         <div className="pm-media relative h-56 overflow-hidden sm:h-72">
-          <Photo src={pkg.image} alt={`${pkg.name} — Al Balagh Tours & Travels`} fallback={FALLBACK} eager width={1000} height={667} sizes="(max-width: 768px) 100vw, 768px">
+          <Photo src={pkg.image} alt={`${pkg.name} — Al Balaagh Travels`} fallback={FALLBACK} eager width={1000} height={667} sizes="(max-width: 768px) 100vw, 768px">
             <Icon name="kaaba" strokeWidth={0.6} className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 text-gold-200 opacity-20" />
           </Photo>
           <div className="absolute inset-0 bg-linear-to-t from-ink-900 via-ink-900/30 to-transparent" />

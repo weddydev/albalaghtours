@@ -55,7 +55,6 @@ export function RouteLine({ className = '', lit = false }) {
           <g key={x} className={`h-pin-${i}`} transform={`translate(${x} 14)`}>
             <g className="h-pin-glow" style={{ opacity: lit ? 1 : 0 }}>
               <circle r="13" fill="#e6c285" opacity="0.18" />
-              <circle className="h-pin-ring" r="7" fill="none" stroke="#e6c285" strokeWidth="1" />
             </g>
             <circle r="5" fill="#1f1510" stroke="#e6c285" strokeWidth="1.3" />
             <circle className="h-pin-core" r="2.2" fill="#eed39a" style={{ opacity: lit ? 1 : 0.25 }} />

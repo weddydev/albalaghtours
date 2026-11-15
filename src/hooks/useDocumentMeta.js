@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-const SITE = 'Al Balagh Tours & Travels'
+const SITE = 'Al Balaagh Travels'
 
 /** Sets <title> and <meta name="description"> for the current page. `exact` uses the title as given. */
 export function useDocumentMeta(title, description, { exact = false } = {}) {

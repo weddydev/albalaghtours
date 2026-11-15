@@ -14,7 +14,7 @@ function resetScroll() {
 function afterSwap() {
   resetScroll()
   ScrollTrigger.refresh()
-  window.dispatchEvent(new Event('albalagh:page'))
+  window.dispatchEvent(new Event('albalaagh:page'))
 }
 
 function Panel({ side }) {

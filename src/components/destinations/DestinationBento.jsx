@@ -33,7 +33,7 @@ export default function DestinationBento() {
 
   const open = (slug) => (e) => {
     e.preventDefault()
-    window.dispatchEvent(new CustomEvent('albalagh:destination', { detail: slug }))
+    window.dispatchEvent(new CustomEvent('albalaagh:destination', { detail: slug }))
   }
 
   return (
