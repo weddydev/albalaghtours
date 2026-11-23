@@ -32,14 +32,35 @@ export function destroyLenis() {
 
 export const getLenis = () => lenis
 
+/*
+ * While scrolling is locked a full-screen layer (menu drawer, dialog, preloader) covers the page.
+ * Animated scenes underneath (the home hero) subscribe here and rest until it is released, so the
+ * phone is not compositing an invisible animation behind the overlay every frame.
+ */
+let locked = false
+const lockListeners = new Set()
+function setLocked(next) {
+  if (next === locked) return
+  locked = next
+  lockListeners.forEach((fn) => fn(locked))
+}
+export const isScrollLocked = () => locked
+/** Subscribe to lock / unlock. Returns an unsubscribe function. */
+export function onScrollLock(fn) {
+  lockListeners.add(fn)
+  return () => lockListeners.delete(fn)
+}
+
 /** Freeze / release page scrolling (menus, dialogs, preloader) with or without Lenis. */
 export function lockScroll() {
   if (lenis) lenis.stop()
   else document.documentElement.style.overflow = 'hidden'
+  setLocked(true)
 }
 export function unlockScroll() {
   if (lenis) lenis.start()
   else document.documentElement.style.overflow = ''
+  setLocked(false)
 }
 
 /** Smooth-scroll to a y position, selector or element. Returns false if the target is missing. */

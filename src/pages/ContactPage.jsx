@@ -1,6 +1,7 @@
 import { contact, waLink } from '../data/content'
 import { scrollToTarget } from '../lib/lenis'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
+import { useSeo } from '../hooks/useDocumentMeta'
+import { metaFor } from '../data/seo'
 import PageHero from '../components/page/PageHero'
 import PersonCard from '../components/contact/PersonCard'
 import Channels from '../components/contact/Channels'
@@ -11,7 +12,7 @@ import Icon from '../components/ui/Icon'
 import AfterFirstPaint from '../components/ui/AfterFirstPaint'
 
 export default function ContactPage() {
-  useDocumentMeta('Contact', `Call, WhatsApp or visit Al Balaagh Travels at Mawin Zam Zam Plaza, Mehdipatnam, Hyderabad. Contact ${contact.person}.`)
+  useSeo(metaFor('/contact'))
 
   return (
     <>

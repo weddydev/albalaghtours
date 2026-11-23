@@ -65,12 +65,17 @@ export default function ServiceHero({ service }) {
                 </Link>
               </li>
               <li aria-hidden="true">/</li>
-              <li>
-                <Link to={{ pathname: '/', hash: '#services' }} className="transition hover:text-gold-200">
-                  Services
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
+              {/* `crumbParent`: a landing page's own parent (null = none); service pages sit under Services */}
+              {service.crumbParent !== null && (
+                <>
+                  <li>
+                    <Link to={service.crumbParent?.to ?? { pathname: '/', hash: '#services' }} className="transition hover:text-gold-200">
+                      {service.crumbParent?.label ?? 'Services'}
+                    </Link>
+                  </li>
+                  <li aria-hidden="true">/</li>
+                </>
+              )}
               <li aria-current="page" className="text-gold-200">
                 {service.title}
               </li>

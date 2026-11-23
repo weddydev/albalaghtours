@@ -3,7 +3,8 @@ import { useLocation } from 'react-router-dom'
 import { ScrollTrigger } from '../lib/gsap'
 import { scrollToTarget } from '../lib/lenis'
 import { useAppReady } from '../lib/appState'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
+import { useSeo } from '../hooks/useDocumentMeta'
+import { metaFor } from '../data/seo'
 import Hero from '../components/hero/Hero'
 import Services from '../components/sections/Services'
 import GuestExperiences from '../components/sections/GuestExperiences'
@@ -12,10 +13,7 @@ import AfterFirstPaint from '../components/ui/AfterFirstPaint'
 export default function Home() {
   const ready = useAppReady()
   const { hash } = useLocation()
-  useDocumentMeta(
-    null,
-    'Al Balaagh Travels, Mehdipatnam, Hyderabad — tailor-made holidays worldwide, air ticketing, visas, hotels, travel insurance, passport and immigration services, and Hajj & Umrah packages.',
-  )
+  useSeo(metaFor('/'))
 
   // arriving from another page with /#section: scroll once the doors have opened
   useEffect(() => {

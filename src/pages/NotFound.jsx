@@ -2,13 +2,14 @@ import { useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap, loopsOnlyWhenVisible, useGSAP } from '../lib/gsap'
 import { servicePath, services } from '../data/content'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
+import { useSeo } from '../hooks/useDocumentMeta'
+import { notFoundMeta } from '../data/seo'
 import { ArchFrame, LanternSVG } from '../components/ui/Ornaments'
 import Icon from '../components/ui/Icon'
 
 export default function NotFound() {
   const root = useRef(null)
-  useDocumentMeta('Page not found', 'This page could not be found. Explore Al Balaagh Travels services in Hyderabad.')
+  useSeo(notFoundMeta)
 
   const { context: gsapCtx } = useGSAP(
     () => {

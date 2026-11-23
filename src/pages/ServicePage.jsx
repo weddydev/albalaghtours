@@ -4,7 +4,8 @@ import { ScrollTrigger } from '../lib/gsap'
 import { scrollToTarget } from '../lib/lenis'
 import { useAppReady } from '../lib/appState'
 import { enquiry, flyers, serviceBySlug } from '../data/content'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
+import { useSeo } from '../hooks/useDocumentMeta'
+import { metaFor, notFoundMeta } from '../data/seo'
 import ServiceHero from '../components/service/ServiceHero'
 import OfferGrid from '../components/service/OfferGrid'
 import HowItWorks from '../components/service/HowItWorks'
@@ -26,7 +27,7 @@ export default function ServicePage() {
   const service = serviceBySlug[slug]
   const ready = useAppReady()
   const { hash } = useLocation()
-  useDocumentMeta(service ? service.title : 'Page not found', service?.short)
+  useSeo(service ? metaFor(`/services/${slug}`) : notFoundMeta)
 
   // arriving with #section (e.g. the Hajj transfer timeline): scroll once the doors have opened
   useEffect(() => {

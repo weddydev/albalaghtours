@@ -272,10 +272,10 @@ export default function Navbar({ show }) {
             </nav>
 
             <div className="flex items-center gap-2">
-              <span className="hidden items-center gap-1.5 rounded-full border border-gold-400/30 px-3 py-1.5 text-xs text-cream-100 sm:inline-flex lg:hidden xl:inline-flex" aria-label="Language: English">
+              {/* <span className="hidden items-center gap-1.5 rounded-full border border-gold-400/30 px-3 py-1.5 text-xs text-cream-100 sm:inline-flex lg:hidden xl:inline-flex" aria-label="Language: English">
                 <Icon name="globe" className="h-3.5 w-3.5 text-gold-200" />
                 EN
-              </span>
+              </span> */}
               <Link to="/contact" className="btn btn-primary hidden whitespace-nowrap py-1.5 pl-5 text-sm md:inline-flex">
                 Enquire Now
                 <span className="btn-arrow h-8 w-8">
@@ -306,7 +306,7 @@ export default function Navbar({ show }) {
           aria-modal="true"
           aria-label="Menu"
           data-lenis-prevent
-          className="fixed inset-0 z-[75] flex flex-col overflow-y-auto bg-ink-950/96 px-6 pb-10 pt-6 backdrop-blur-xl lg:hidden"
+          className="fixed inset-0 z-[75] flex flex-col overflow-y-auto bg-ink-950 px-6 pb-10 pt-6 lg:hidden"
         >
           <div className="pattern-overlay pointer-events-none absolute inset-0 opacity-[0.05]" />
           <div className="relative flex items-center justify-between">

@@ -3,7 +3,8 @@ import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { enquiry, flyers, hajjUmrahGallery, waLink } from '../data/content'
 import { ScrollTrigger } from '../lib/gsap'
 import { scrollToTarget } from '../lib/lenis'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
+import { useSeo } from '../hooks/useDocumentMeta'
+import { metaFor } from '../data/seo'
 import PageHero from '../components/page/PageHero'
 import TierFan from '../components/packages/TierFan'
 import PackageShowcase from '../components/packages/PackageShowcase'
@@ -22,10 +23,7 @@ export default function PackagesPage() {
   const { state } = useLocation()
   const initial = params.get('type') === 'umrah' ? 'umrah' : 'hajj'
   const search = state?.search // set by the hero search bar on the home page
-  useDocumentMeta(
-    'Holiday, Hajj & Umrah Packages',
-    'Tailor-made holidays worldwide, plus Hajj 2027 and the Ziyarath Special Umrah group from Hyderabad — flights, visas, hotels and transfers planned together.',
-  )
+  useSeo(metaFor('/packages'))
 
   // arriving from the hero search: bring the programme card into view once the doors have opened
   useEffect(() => {

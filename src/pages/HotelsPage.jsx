@@ -4,7 +4,8 @@ import { gsap } from '../lib/gsap'
 import { useNearGSAP } from '../hooks/useNearGSAP'
 import { scrollToTarget } from '../lib/lenis'
 import { enquiry, hotelAmenities, hotelGallery, hotelsNote, waLink } from '../data/content'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
+import { useSeo } from '../hooks/useDocumentMeta'
+import { metaFor } from '../data/seo'
 import PageHero from '../components/page/PageHero'
 import DistanceRings from '../components/hotels/DistanceRings'
 import HotelPicker from '../components/hotels/HotelPicker'
@@ -104,10 +105,7 @@ function Worldwide() {
 }
 
 export default function HotelsPage() {
-  useDocumentMeta(
-    'Hotels in Makkah & Madinah',
-    'Ziyarath Special Umrah group stays: Akaber Al Hijra (3-star, 300 m from the Haram) and Diwan Al Madinah (3-star, 150 m from Masjid an-Nabawi).',
-  )
+  useSeo(metaFor('/hotels'))
 
   return (
     <>

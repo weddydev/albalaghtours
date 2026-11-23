@@ -435,9 +435,9 @@
   will-change: opacity, transform;
 }
 /* Pieces moved/scaled *inside* those layers. Without their own layer, every scroll frame repainted
-   the whole window (photo + sepia filter + blend) or the whole full-screen headline, and a JS-driven
-   scale re-rasterized it on every frame. */
-.h-word,
+   the whole window (photo + sepia filter + blend), and a JS-driven scale re-rasterized it on every
+   frame. (Not the headline words: promoting them split the blended headline into extra full-screen
+   compositor blend passes, which made the first screen heavier on phones.) */
 .h-door-view,
 .h-shade,
 .h-plane,

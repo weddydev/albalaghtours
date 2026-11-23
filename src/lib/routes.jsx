@@ -1,4 +1,5 @@
 import { lazy } from 'react'
+import { seoLinkBySlug } from '../data/seo'
 
 /*
  * Route chunks. The home page ships in the main bundle; every other page is its own chunk,
@@ -12,6 +13,7 @@ const loaders = {
   destinations: () => import('../pages/DestinationsPage'),
   contact: () => import('../pages/ContactPage'),
   albania: () => import('../pages/AlbaniaPage'),
+  seo: () => import('../pages/SeoLandingPage'),
 }
 
 const pending = new Map()
@@ -46,6 +48,7 @@ export function preloadRoute(key) {
 /** Which chunk a pathname needs (null = it is in the main bundle). */
 export function routeKey(pathname) {
   if (pathname.startsWith('/services/')) return 'service'
+  if (seoLinkBySlug[pathname.slice(1)]) return 'seo' // Hyderabad landing pages
   return { '/packages': 'packages', '/hotels': 'hotels', '/destinations': 'destinations', '/contact': 'contact', '/albania-work-visa': 'albania' }[pathname] ?? null
 }
 
@@ -93,3 +96,4 @@ export const HotelsPage = routeComponent('hotels')
 export const DestinationsPage = routeComponent('destinations')
 export const ContactPage = routeComponent('contact')
 export const AlbaniaPage = routeComponent('albania')
+export const SeoLandingPage = routeComponent('seo')

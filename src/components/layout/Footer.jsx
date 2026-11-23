@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { gsap } from '../../lib/gsap'
 import { useNearGSAP } from '../../hooks/useNearGSAP'
 import { brand, contact, mapsLink, nav, photoCredits, servicePath, services, waLink } from '../../data/content'
+import { seoLinks, seoPath } from '../../data/seo'
 import Logo from '../ui/Logo'
 import Icon from '../ui/Icon'
 import Skyline from '../ui/Skyline'
@@ -123,6 +124,22 @@ export default function Footer() {
           </ul>
         </address>
       </div>
+
+      <nav aria-label="Popular in Hyderabad" className="ft-col relative mx-auto max-w-[1320px] px-5 pb-12 sm:px-8 lg:px-10">
+        <h2 className="text-xs uppercase tracking-[0.24em] text-gold-300">Popular in Hyderabad</h2>
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {seoLinks.map((p) => (
+            <li key={p.slug}>
+              <Link
+                to={seoPath(p)}
+                className="inline-flex min-h-[40px] items-center rounded-full border border-gold-400/25 px-4 text-sm text-mist-300 transition hover:border-gold-200 hover:text-cream-50"
+              >
+                {p.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
       <div className="relative border-t border-gold-400/15">
         <div className="mx-auto flex max-w-[1320px] flex-col items-center justify-between gap-3 px-5 py-6 text-xs text-mist-500 sm:flex-row sm:px-8 lg:px-10">

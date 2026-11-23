@@ -2,7 +2,8 @@ import { useRef } from 'react'
 import { gsap, ScrollTrigger } from '../lib/gsap'
 import { useNearGSAP } from '../hooks/useNearGSAP'
 import { albania, flyers, serviceBySlug } from '../data/content'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
+import { useSeo } from '../hooks/useDocumentMeta'
+import { metaFor } from '../data/seo'
 import AlbaniaHero from '../components/albania/AlbaniaHero'
 import AlbaniaEnquiry from '../components/albania/AlbaniaEnquiry'
 import OfferGrid from '../components/service/OfferGrid'
@@ -63,7 +64,7 @@ function WhyAlbania() {
 }
 
 export default function AlbaniaPage() {
-  useDocumentMeta(albania.meta.title, albania.meta.description, { exact: true })
+  useSeo(metaFor('/albania-work-visa'))
   const { help, steps, documents, gallery, faqs, cta } = albania
 
   return (

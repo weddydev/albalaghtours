@@ -12,7 +12,8 @@ import CursorGlow from './CursorGlow'
 import PageTransition from './PageTransition'
 import Home from '../../pages/Home'
 import NotFound from '../../pages/NotFound'
-import { AlbaniaPage, ContactPage, DestinationsPage, HotelsPage, PackagesPage, prefetchAllRoutes, routeKey, ServicePage } from '../../lib/routes'
+import { AlbaniaPage, ContactPage, DestinationsPage, HotelsPage, PackagesPage, prefetchAllRoutes, routeKey, SeoLandingPage, ServicePage } from '../../lib/routes'
+import { seoLinks, seoPath } from '../../data/seo'
 import { startDeferredSetups } from '../../hooks/useNearGSAP'
 
 /** Mounts with the routed page; after a cold direct visit to a lazy page, re-measure every trigger. */
@@ -73,6 +74,9 @@ export default function Layout() {
                 <Route path="/destinations" element={<DestinationsPage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/albania-work-visa" element={<AlbaniaPage />} />
+                {seoLinks.map((p) => (
+                  <Route key={p.slug} path={seoPath(p)} element={<SeoLandingPage slug={p.slug} />} />
+                ))}
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

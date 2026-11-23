@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { gsap, ScrollTrigger, SplitText, loopsOnlyWhenVisible, useGSAP } from '../../lib/gsap'
-import { getLenis, scrollToTarget } from '../../lib/lenis'
+import { getLenis, isScrollLocked, onScrollLock, scrollToTarget } from '../../lib/lenis'
 import { useReducedMotion } from '../../hooks/useMediaQuery'
 import { useMagnetic } from '../../hooks/useMagnetic'
 import { hero, trustBadges, waLink } from '../../data/content'
@@ -181,12 +181,29 @@ export default function Hero({ start }) {
           }
         }
 
-        let ticking = false
+        // Jump the light straight to where it should be. Used when the lantern loop restarts: the
+        // light was frozen while it was off, and easing it back made the hole visibly sweep across
+        // the screen just as the darkness returned (the glitch when scrolling back to the top).
+        const snapLight = () => {
+          const live = performance.now() - pointer.t < (fine ? 4000 : 2500)
+          tx = gsap.utils.clamp(0, W, live ? pointer.x : anchor.x)
+          ty = gsap.utils.clamp(0, H, live ? pointer.y : anchor.y)
+          light.x = tx
+          light.y = ty
+          lx(tx, tx)
+          ly(ty, ty)
+          drawnX = NaN
+        }
+
+        let ticking = false // stage 1 is on screen
+        let covered = isScrollLocked() // a menu / dialog / the preloader covers the page
         const setStage1 = (on) => {
           if (on === ticking) return
           ticking = on
-          if (on) gsap.ticker.add(tick)
-          else {
+          if (on) {
+            snapLight()
+            if (!covered) gsap.ticker.add(tick)
+          } else {
             gsap.ticker.remove(tick)
             pushX.forEach((to, i) => {
               to(0)
@@ -223,8 +240,30 @@ export default function Hero({ start }) {
         // Only the two that read on screen: the lantern's sway and its small flame. The slow drift of
         // the headline's gold fill and the flicker of the big blended glows were barely visible but
         // re-composited full-screen layers every frame.
-        gsap.fromTo(q('.h-lantern-rig'), { rotation: -5 }, { rotation: 5, duration: 2.8, ease: 'sine.inOut', yoyo: true, repeat: -1 })
-        gsap.to(q('.lantern-flame'), { opacity: 'random(0.75, 1)', duration: 0.18, ease: 'sine.inOut', repeat: -1, repeatRefresh: true })
+        const sway = gsap.fromTo(q('.h-lantern-rig'), { rotation: -5 }, { rotation: 5, duration: 2.8, ease: 'sine.inOut', yoyo: true, repeat: -1 })
+        const flicker = gsap.to(q('.lantern-flame'), { opacity: 'random(0.75, 1)', duration: 0.18, ease: 'sine.inOut', repeat: -1, repeatRefresh: true })
+
+        // While the mobile menu (or any dialog) covers the page, the whole scene rests. It used to
+        // keep animating underneath, which made the menu and its dropdown stutter on the home page only.
+        const pausedByCover = new Set()
+        const offCover = onScrollLock((on) => {
+          covered = on
+          if (on) {
+            gsap.ticker.remove(tick)
+            for (const t of [roam, sway, flicker]) {
+              if (t.paused()) continue
+              t.pause()
+              pausedByCover.add(t)
+            }
+          } else {
+            pausedByCover.forEach((t) => t.resume())
+            pausedByCover.clear()
+            if (ticking) {
+              snapLight()
+              gsap.ticker.add(tick)
+            }
+          }
+        })
 
         /* ---------- Stage 1: intro (plays after the preloader) ---------- */
         gsap.set(chars, { autoAlpha: 0, yPercent: 45 })
@@ -258,6 +297,7 @@ export default function Hero({ start }) {
         // push far enough that the window's rounded opening (not the cabin wall) fills the screen
         const doorScale = () => Math.max(W / (0.6 * door.offsetWidth), H / (0.42 * door.offsetHeight)) * 1.15
 
+        let stage1Until = 0.12 // replaced below once the timeline's length is known
         gsap.set(q('.h-final-item, .h-route'), { autoAlpha: 0 })
         gsap.set(q('.h-route-line'), { drawSVG: '0%' })
         gsap.set(q('.h-pin-glow'), { autoAlpha: 0, scale: 0.3, transformOrigin: '50% 50%' })
@@ -274,7 +314,8 @@ export default function Hero({ start }) {
             // scroll) gets a short lag only to absorb dropped frames.
             scrub: fine ? true : 0.35,
             invalidateOnRefresh: true,
-            onUpdate: (self) => setStage1(self.progress < (desktop ? 0.1 : 0.02)),
+            // keep the lantern light running for as long as the darkness is still visible
+            onUpdate: (self) => setStage1(self.progress < stage1Until),
           },
         })
         const lightPin = (i, t) =>
@@ -315,8 +356,11 @@ export default function Hero({ start }) {
         s.set(q('.h-head'), { opacity: 0 }, 3.7) // headline has left the screen
           .set(q('.h-door-root'), { opacity: 0 }, 8.2) // the finale fully covers the door by now
         s.to({}, { duration: 1.5 }, 8.6) // hold the final frame before releasing
+        // the darkness (`.h-dark`) is fully gone at 1.1 on the timeline; run the light a touch past that
+        stage1Until = 1.2 / s.duration()
 
         return () => {
+          offCover()
           setStage1(false)
           ScrollTrigger.removeEventListener('refresh', measure)
           stage.removeEventListener('pointermove', onPointer)

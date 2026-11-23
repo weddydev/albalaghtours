@@ -55,7 +55,11 @@ export default function OfferGrid({ service }) {
       <div className="mx-auto grid max-w-[1320px] gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-16 lg:px-10">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-32">
-            <SectionHeading align="left" eyebrow="What we offer" title={['How we help with ', { accent: service.heading.lines.join(' ') }]} />
+            <SectionHeading
+              align="left"
+              eyebrow="What we offer"
+              title={service.offerHeading ?? ['How we help with ', { accent: service.heading.lines.join(' ') }]}
+            />
             <div className="of-copy mt-8 space-y-4 text-[0.98rem] leading-relaxed text-mist-300">
               {service.long.map((p) => (
                 <p key={p.slice(0, 24)}>{p}</p>

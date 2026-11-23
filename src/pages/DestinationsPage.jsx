@@ -1,6 +1,7 @@
 import { scrollToTarget } from '../lib/lenis'
 import { waLink } from '../data/content'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
+import { useSeo } from '../hooks/useDocumentMeta'
+import { metaFor } from '../data/seo'
 import PageHero from '../components/page/PageHero'
 import RouteMap from '../components/destinations/RouteMap'
 import DestinationBento from '../components/destinations/DestinationBento'
@@ -11,10 +12,7 @@ import Icon from '../components/ui/Icon'
 import AfterFirstPaint from '../components/ui/AfterFirstPaint'
 
 export default function DestinationsPage() {
-  useDocumentMeta(
-    'Top Destinations',
-    'Dubai, Türkiye, the Maldives, Thailand, Malaysia & Singapore, Azerbaijan, Europe and Makkah & Madinah — trips planned end to end by Al Balaagh Travels, Hyderabad.',
-  )
+  useSeo(metaFor('/destinations'))
 
   return (
     <>
